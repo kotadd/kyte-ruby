@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Kyte</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+     <!-- Compiled and minified CSS -->
+ 	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	 <!-- Compiled and minified JavaScript -->
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+  </head>
+  <body>
+    <header>
+      <ul id="dropdown" class="dropdown-content">
+        <li><a href="#!">プロフィールの編集</a></li>
+        <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
+      </ul>
+
+      <nav>
+        <div class="nav-wrapper">
+          <div class="header-logo">
+            <% if @current_user %>
+              <%= link_to("Kyte", "/posts/index") %>
+            <% else %>
+              <%= link_to("Kyte", "/") %>
+            <% end %>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          </div>
+          <div class="header-menus">
+            <ul class="right hide-on-med-and-down">
+              <% if @current_user %>
+                <li>
+                  <%= link_to("イベントを探す", "/posts/index") %>
+                </li>
+                <% if @current_user.name == 'admin' %>                
+                  <li>
+                    <%= link_to("ユーザー一覧", "/users/index") %>
+                  </li>
+                <% end %>
+                <li>
+                  <a class="dropdown-button" href="#!" data-activates="dropdown">
+                    <img class="icon-img" src="<%= "/user_images/#{@current_user.image_name}" %>">
+                  </a>
+                </li>
+
+              <% else %>
+                <li>
+                  <%= link_to("Kyteとは", "/about") %>
+                </li>
+                <li>
+                  <%= link_to("新規登録", "/signup") %>
+                </li>
+                <li>
+                  <%= link_to("ログイン", "/login") %>
+                </li>
+              <% end %>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <% if @current_user %>
+                <li>
+                  <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+                </li>
+                <li>
+                  <%= link_to("イベントを作る", "/posts/new") %>
+                </li>
+                <li>
+                  <%= link_to("イベントを探す", "/posts/index") %>
+                </li>
+                <% if @current_user.name == 'admin' %>
+                  <li>
+                    <%= link_to("ユーザー一覧", "/users/index") %>
+                  </li>
+                <% end %>
+                <li>
+                  <%= link_to("ログアウト", "/logout", {method: :post}) %>
+                </li>
+              <% else %>
+                <li>
+                  <%= link_to("Kyteとは", "/about") %>
+                </li>
+                <li>
+                  <%= link_to("新規登録", "/signup") %>
+                </li>
+                <li>
+                  <%= link_to("ログイン", "/login") %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+  <div class="fixed-action-btn">
+    <a class="tooltipped btn-floating btn-large red" data-position="top" data-tooltip="イベントを作る" href="<%= "/posts/new" %>">
+      <i class="large material-icons">add</i>
+    </a>
+  </div>
+
+
+    <% if flash[:notice] %>
+      <div class="flash">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+
+      <%= yield %>    
+
+  <script>
+    $(".button-collapse").sideNav();
+  </script>
+
+  <script>
+  $(document).ready(function() {
+    $('.card-flex').mousewheel(function(e, delta) {
+        this.scrollLeft -= (delta * 1);
+        e.preventDefault();
+    });
+  });
+  </script>
+  <script>
+    // ヘッダーのドロップダウンメニューをいい感じの配置にする
+    $(".dropdown-button").dropdown({ hover: true, constrainWidth: false, belowOrigin: true });
+
+    // flashがずっと出ているのがうざいので、2秒で消す
+    $('document').ready(function() {
+      setTimeout(function() {
+        $('.flash').slideUp();
+      }, 2000);
+    });
+  </script>
+  </body>
+</html>
