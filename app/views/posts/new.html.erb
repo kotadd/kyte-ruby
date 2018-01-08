@@ -1,19 +1,171 @@
 <div class="main posts-new">
   <div class="container">
-    <h1 class="form-heading">投稿する</h1>
-    <%= form_tag("/posts/create") do %>
-      <div class="form">
-        <div class="form-body">
-          <% @post.errors.full_messages.each do |message| %>
-            <div class="form-error">
-              <%= message %>
+    <!-- <h1 class="form-heading">投稿する</h1> -->
+
+    <div class="row">
+      <%= form_tag("/posts/create", {multipart:true}) do %>
+        <div class="form">
+          <div class="form-body">
+            <% @post.errors.full_messages.each do |message| %>
+              <div class="form-error">
+                <%= message %>
+              </div>
+            <% end %>
+            <div class="input-field col s12">
+              <input placeholder="タイトルを入力してください" id="title" name="title" type="text" class="validate" data-length="20" value="<%= @post.title %>">
+              <label for="title" class="active">タイトル<span class="required">*</span></label>
             </div>
-          <% end %>
-          
-          <textarea name="content"><%= @post.content %></textarea>
-          <input type="submit" value="投稿">
+            <div class="input-field col s6">
+              <input id="date" name="date" placeholder="2018-01-10" type="text" class="validate datepicker" value="<%= @post.date %>">
+              <!-- <i class="fa fa-calendar" aria-hidden="true"></i> -->
+              <label for="date" class="active">日付<span class="required">*</span></label>
+
+            </div>
+            <div class="input-field col s3">
+              <input id="time_from" name="time_from" placeholder="13:00" type="text" class="validate timepicker" value="<%= @time_from %>">
+              <label for="time_from" class="active">何時から</label>
+            </div>
+            <div class="input-field col s3">
+              <input id="time_to" name="time_to" placeholder="15:00" type="text" class="validate timepicker" value="<%= @time_to %>">
+              <label for="time_to" class="active">何時まで</label>
+            </div>
+
+            <div class="col s12">
+              <p>詳細</p>
+              <div class="input-field col s12">
+                <input id="place" name="place" placeholder="20F大会議室2" data-length="32" type="text" class="validate" data-length="50" value="<%= @post.place %>">
+                <label for="place" class="active">場所</label>
+              </div>
+              <div class="input-field col s12">
+                <input id="budget" name="budget" placeholder="500" type="number" class="validate" value="<%= @post.budget %>" min="0" max="10000">
+                <label for="budget" class="active">予算（円）</label>
+              </div>
+
+              <label for="image">画像</label>
+              <div class="input-field col s12">
+                <div class="upload-box">
+                <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+                
+                <div id="drop_zone">
+                  画像をドロップするかここをクリックしてアップロードしてください。
+                </div>
+                <div id="preview"></div>
+                </div>
+              </div>
+
+              <div class="input-field col s12">
+                <input id="max_member" name="max_member" placeholder="10" type="number" class="validate" value="<%= @post.max_member %>" min="1" max="100">
+                <label for="max_member" class="active">参加可能な最大人数（人）</label>
+              </div>
+              <div class="input-field col s12">
+              <%= select_tag 'genre_id', options_from_collection_for_select(@genre, :id, :title) %>      
+              <!--
+                こいつを生成している。                           
+                <select name="genre_id">
+                  <option value="1">スカンクワーク</option>
+                  <option value="2">英語</option>
+                  <option value="3">遊び</option>
+                  <option value="4">その他</option>
+                </select>
+              -->
+                <label for="genre">イベントの種類</label>
+              </div>
+              <!--
+              <div class="input-field col s12">
+                <input id="genre" name="genre" placeholder="スカンクワーク" type="text" class="validate">
+                <label for="genre">イベントの種類</label>
+              </div>
+              -->
+              <div class="input-field col s12">
+                <textarea id="detail-content" name="content" data-length="400"  class="materialize-textarea"><%= @post.content %></textarea>
+                <label for="detail-content" class="active">イベントの詳細</label>
+              </div>
+            </div>
+
+          <!-- 一旦保留
+            <div class="col s3">
+              <p>メンバー</p>
+
+            </div>
+          -->
+          <button class="waves-effect waves-light btn pull-right" type="submit">投稿</button>
+
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+    <script>
+    // 画像アップロード
+    $("#drop_zone").on("click", function() {
+      $("input[type=file]").click();
+    });
+    $('#image').change(function() {
+      var fr = new FileReader();
+      fr.onload = function() {
+        var img = $('<img>').attr('src', fr.result);
+        $('#preview').append(img);
+      };
+      fr.readAsDataURL(this.files[0]);
+    });
+
+    var formData = new FormData();
+    var dropZone = document.getElementById("drop_zone");
+
+    dropZone.addEventListener("dragover", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.style.background = "#ff3399";
+    }, false);
+
+    dropZone.addEventListener("dragleave", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.style.background = "#ffffff";
+    }, false);
+
+    dropZone.addEventListener("drop", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.style.background = "#ffffff";
+
+      var files = e.dataTransfer.files;
+      for (var i = 0; i < files.length; i++) {
+        (function() {
+          var fr = new FileReader();
+          fr.onload = function() {
+            var div = document.createElement('div');
+
+            var img = document.createElement('img');
+            img.setAttribute('src', fr.result);
+            div.appendChild(img);
+
+            var preview = document.getElementById("preview");
+            preview.appendChild(div);
+          };
+          fr.readAsDataURL(files[i]);
+        })();
+
+        formData.append("file", files[i]);
+      }
+    }, false);
+
+    var postButton = document.getElementById("post");
+    postButton.addEventListener("click", function() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "POST_URL");
+      request.send(formData);
+    });
+    </script>

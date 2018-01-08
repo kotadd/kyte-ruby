@@ -4,9 +4,7 @@ class PagesController < ApplicationController
   def about
   end
 
-  def contact
-  end
-
   def top
+   @genre = Genre.all
   end
 end

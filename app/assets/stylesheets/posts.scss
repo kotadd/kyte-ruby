@@ -1,3 +1,4 @@
+
 /* posts/index ================================ */
 .posts-index-item {
   padding: 20px 30px;
@@ -45,12 +46,18 @@
   overflow: hidden;
 }
 
-.posts-show-item img {
-  width: 60px;
-  height: 60px;
+.posts-show-item .post-img img {
+  width: 100%;
+  max-height: 240px;
+  vertical-align: middle;
+  object-fit: cover;
+}
+
+.posts-show-item .post-user-img img {
+  width: 50px;
+  height: 50px;
   border-radius: 40%;
   box-shadow: 0 2px 6px #c1ced7;
-  vertical-align: middle;
   object-fit: cover;
 }
 
@@ -61,8 +68,13 @@
 }
 
 .posts-show-item p {
-  font-size: 24px;
+  font-size: 14px;
   margin: 20px 0;
+}
+
+.posts-show-item p.post-detail-label {
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .post-time {
@@ -78,6 +90,15 @@
   color: #ff2581;
 }
 
+.posts-show-item .post-title {
+  font-size: 20px;
+}
+
+.posts-show-item .post-lest {
+  font-size: 14px;
+  margin-top: 8px;
+}
+
 .posts-show-item .fa {
   font-size: 16px;
   margin-right: 3px;
@@ -88,10 +109,13 @@
 }
 
 .post-menus a, .post-menus input {
+  /*
   color: #8899a6;
   text-decoration: underline;
   font-size: 14px;
+  */
 }
+
 
 /* posts/new ================================ */
 .posts-new textarea {
@@ -111,17 +135,18 @@
 .hashtag {
   font-size: 17px;
   color: #7f7f7f;
-
+  margin-top: 16px;
 }
 
 .card {
   min-width: 200px;
   max-width: 200px;
-  background: #fff;
-  border-radius: 5px;
+  min-height: 300px;
+  max-height: 300px;
   box-shadow: 0 2px 5px #ccc;
   overflow: hidden;
 }
+
 .card:hover {
   opacity: 0.8;
 }
@@ -131,40 +156,33 @@
   height: auto;
   background-size: cover;
 }
-.card-content {
-  padding: 20px;
-}
-.card-title {
-  font-size: 20px;
-  margin-bottom: 20px;
-  text-align: center;
-  color: #333;
+.card-container  {
+  padding-top: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+  position: relative;
 }
 .card-text {
   color: #777;
-  font-size: 14px;
   line-height: 1.5;
 }
-.card-link {
-  text-align: center;
-  border-top: 1px solid #eee;
-  padding: 20px;
+.card-text-head {
+  font-size: 17px;
+  position: absolute;
 }
-.card-link a {
-  text-decoration: none;
-  color: #0bd;
-  margin: 0 10px;
-}
-.card-link a:hover {
-  color: #0090aa;
+.card-date {
+  position: absolute;
+  top: 96px;
+  left: 110px;
 }
 
 .card-flex {
   display:flex;
-  width: 900px;
+  max-width: 1122px;
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  // border: 1px dashed #e4e5e6;
 }
 .demo-card-square.mdl-card {
   width: 320px;
@@ -175,6 +193,45 @@
   background: bottom right 15% no-repeat #46B6AC;
 }
 
+.required {
+  color: red;
+}
 
+.upload-box {
+  position: relative;
+}
 
+button {
+  width: 100px;
+  height: 100px;
+  border: none;
+  background-color: #7f7f7f;
+  color: #cccccc;
+}
 
+input[type=file] {
+  height: 0px;
+  visibility: hidden;
+  position: absolute;
+}
+
+#drop_zone {
+  border: 5px dashed #000000;
+  padding: 50px;
+  margin: 20px;
+  font-size: 24px;
+  color: #000000;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+#preview {
+  overflow: hidden;
+}
+
+#preview img {
+  width: 100px;
+  float: left;
+  margin: 10px;
+  cursor: move;
+}

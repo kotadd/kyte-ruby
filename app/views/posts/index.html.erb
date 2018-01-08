@@ -2,13 +2,19 @@
   <div class="container">
     <% if @posts_skunk.count > 0 %>
       <div class="hashtag">#SkunkWork</div>
-      <div class="card-flex">
+      <div id="cards-skunk" class="card-flex">
         <% @posts_skunk.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
           <section class="card">
-            <img class="card-img" src="<%= "/user_images/#{post.user.image_name}" %>">
-            <div class="card-content">
-              <%= post.content %>
+            <img class="card-img" src="/genre_images/skunk.png">
+            <div class="card-container">
+              <div class="card-text card-text-head">
+                <%= post.title %>
+              </div>
+              <div class="card-date">
+                開催日
+                <%= post.date %>
+              </div>
             </div>
           </section>
         </a>
@@ -17,13 +23,40 @@
     <% end %>
     <% if @posts_english.count > 0 %>
       <div class="hashtag">#英語</div>
-      <div class="card-flex">
+      <div id="cards-english" class="card-flex">
         <% @posts_english.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
           <section class="card">
-            <img class="card-img" src="<%= "/user_images/#{post.user.image_name}" %>">
-            <div class="card-content">
-              <%= post.content %>
+            <img class="card-img" src="/genre_images/english.jpg">
+            <div class="card-container">
+              <div class="card-text card-text-head">
+                <%= post.title %>
+              </div>
+              <div class="card-date">
+                開催日
+                <%= post.date %>
+              </div>
+            </div>
+          </section>
+        </a>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @posts_party.count > 0 %>
+      <div class="hashtag">#遊び</div>
+      <div id="cards-party" class="card-flex">
+        <% @posts_party.each do |post| %>
+        <a href="<%= "/posts/#{post.id}" %>">
+          <section class="card">
+            <img class="card-img" src="/genre_images/party.jpg">
+            <div class="card-container">
+              <div class="card-text card-text-head">
+                <%= post.title %>
+              </div>
+              <div class="card-date">
+                開催日
+                <%= post.date %>
+              </div>
             </div>
           </section>
         </a>
@@ -32,37 +65,25 @@
     <% end %>
     <% if @posts_others.count > 0 %>
       <div class="hashtag">#その他</div>
-      <div class="card-flex">
+      <div id="cards-others" class="card-flex">
         <% @posts_others.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
           <section class="card">
-            <img class="card-img" src="<%= "/user_images/#{post.user.image_name}" %>">
-            <div class="card-content">
-              <%= post.content %>
+            <img class="card-img" src="/genre_images/others.png">
+            <div class="card-container">
+              <div class="card-text card-text-head">
+                <%= post.title %>
+              </div>
+              <div class="card-date">
+                開催日
+                <%= post.date %>
+              </div>
             </div>
           </section>
         </a>
         <% end %>
       </div>
     <% end %>
-
-    <% if @posts.count > 0 %>
-      <div class="hashtag">#テスト用の全件出し</div>
-      <div class="card-flex">
-        <% @posts.each do |post| %>
-        <a href="<%= "/posts/#{post.id}" %>">
-          <section class="card">
-            <img class="card-img" src="<%= "/user_images/#{post.user.image_name}" %>">
-            <div class="card-content">
-              <%= post.content %>
-            </div>
-          </section>
-        </a>
-        <% end %>
-      </div>
-    <% end %>
-
-
 
 
   </div>

@@ -1,32 +1,170 @@
 <div class="main posts-show">
   <div class="container">
-    <div class="posts-show-item">
-      <div class="post-user-name">
-        <img src="<%= "/user_images/#{@user.image_name}" %>">
-        <%= link_to(@user.name, "/users/#{@user.id}") %>
-      </div>
-      <p>
-        <%= @post.content %>
-      </p>
-      <div class="post-time">
-        <%= @post.created_at %>
-      </div>
-      <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
-        <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
-          <span class="fa fa-heart like-btn-unlike"></span>
-        <% end %>
-      <% else %>
-        <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
-          <span class="fa fa-heart like-btn"></span>
-        <% end %>
-      <% end %>
-      <%= @likes_count %>
-      <% if @post.user_id == @current_user.id %>
-        <div class="post-menus">
-          <%= link_to("編集", "/posts/#{@post.id}/edit") %>
-          <%= link_to("削除", "/posts/#{@post.id}/destroy", {method: "post"}) %>
+
+
+    <div class="row">
+
+      <div class="row">
+        <div class="col s12">
+          <div class="posts-show-item">
+            <div class="col s10">
+              <div class="post-title">
+                <%= @post.title %>
+                <br>
+                <%= link_to(@user.name, "/users/#{@user.id}") %>
+              </div>
+            </div>
+             <div class="col s2">
+              <% if @post.user_id != @current_user.id %>
+                <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
+                  <%= link_to("/members/#{@post.id}/destroy", {method: "post"}) do %>
+                    <span class="waves-effect waves-light btn">参加をやめる</span>
+                  <% end %>
+                <% else %>
+                  <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
+                    <span class="waves-effect waves-light btn">参加する</span>
+                  <% end %>
+                <% end %>
+              <% else %>
+                あなたが主催者です
+              <% end %>
+              <br>
+              <% if @post.max_member %>
+                <div class="post-lest">残り<%= @post.max_member - @members.count %> 人</div>
+              <% else %>
+                何名でも参加可能です
+              <% end %>
+            </div>     
+          </div>
         </div>
-      <% end %>
+      </div>
+
+
+      <div class="row">
+        <div class="col s9">
+          <div class="posts-show-item">
+            <div class="row">
+
+              <div class="col s12">
+                <% if @post.image_name %>
+                  <div class="post-img">
+                    <img src="<%= "/post_images/#{@post.image_name}" %>">
+                  </div>
+                <% end %>
+                <div class="post-detail">
+                  <p class="post-detail-label">詳細</p>
+                  <p>
+                    <%= @post.content %>
+                  </p>
+                    
+                </div>
+      
+                <div class="post-detail">
+                  <p class="post-detail-label">参加者(<%= @members.count %>人)</p>
+                    <div class="post-user-img">
+                    <% @member_users.each do |member| %>
+                      <img src="<%= "/user_images/#{member.image_name}" %>">
+                    <% end %>
+                    </div>
+                </div>
+                
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col s3">
+          <div class="posts-show-item">
+
+            <label>日時</label>
+            <div class="post-time">
+             <%= @post.date %> 
+             <%= @time_from %>
+             <% if @time_from && @time_to %>
+               〜
+             <% end %>
+
+             <%= @time_to %>
+            </div>
+            <label>場所</label>
+            <div class="post-time">
+             <%= @post.place %>
+            </div>
+            <div id="map-canvas"></div>   
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col s9">
+          <!-- 更新日時-->
+          <div class="post-time">
+              <%= @post.updated_at %>
+          </div>
+
+          <!-- いいね：ここではいらん-->
+          <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
+            <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn-unlike"></span>
+            <% end %>
+          <% else %>
+            <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+              <span class="fa fa-heart like-btn"></span>
+            <% end %>
+          <% end %>
+          <%= @likes_count %>
+          <% if @post.user_id == @current_user.id %>
+            <div class="post-menus">
+              <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn"}) %>
+              <%= link_to("削除", "/posts/#{@post.id}/destroy", {method: "post", class: "waves-effect waves-light btn modal-trigger"}) %>
+            </div>
+          <% end %>
+
+        </div>       
+      </div>
+
+    <div id="modal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>この投稿を削除します</h4>
+        <p>この操作は元に戻せません。本当によろしいですか？</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">はい</a>
+      </div>
     </div>
+
+
   </div>
 </div>
+<script>
+    $(document).ready(function(){
+    $('.modal').modal();
+  });
+
+</script>
+
+<!--
+  <script src="https://maps.googleapis.com/maps/api/js"></script>
+  <script>
+    function initialize() {
+      var mapCanvas = document.getElementById('map-canvas');
+      var mapOptions = {
+        center: new google.maps.LatLng(34.698937, 135.49468),
+        zoom: 14,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      }
+      var map = new google.maps.Map(mapCanvas, mapOptions);
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(34.698937, 135.49468),
+        title: "Here is Melbourne!"
+      });
+
+      marker.setMap(map);
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>

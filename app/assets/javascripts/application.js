@@ -15,3 +15,5 @@
 //= require_tree .
 //= require jquery/dist/jquery
 //= require jquery-mousewheel/jquery.mousewheel
+//= require materialize-css/dist/js/materialize
+

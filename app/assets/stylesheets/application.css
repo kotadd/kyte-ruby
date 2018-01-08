@@ -12,19 +12,48 @@
  *
  *= require_tree .
  *= require_self
+ *= require materialize-css/dist/css/materialize.css
+ *= require font-awesome
+ *= 
  */
-
+ 
 .nav-wrapper {
-	background-color: #fafafa;
-	color: black;
-}
+  background-color: #fafafa;
+  color: black; }
 
 .nav-wrapper .hide-on-med-and-down li * {
-	color: black;
-}
+  color: black; }
 
 .icon-img {
   width: 60px;
   height: 60px;
-  border-radius:  50%;
+  border-radius: 50%; }
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
+
+main {
+  flex: 1 0 auto; }
+
+footer.page-footer {
+  z-index: 0;
+  background-color: #64b5f6;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 0;
+  width: 100%;
+  padding-top: 0; }
+
+#map-canvas {
+  width: 100%;
+  height: 400px;
+}
+.dropdown {
+  z-index: 3;
+}
+.btn-floating:hover {
+  opacity: 0.9;
+  cursor: pointer;
 }
