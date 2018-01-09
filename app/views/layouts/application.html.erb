@@ -13,10 +13,12 @@
   </head>
   <body>
     <header>
-      <ul id="dropdown" class="dropdown-content">
-        <li><a href="#!">プロフィールの編集</a></li>
-        <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
-      </ul>
+      <% if @current_user %>
+        <ul id="dropdown" class="dropdown-content">
+          <li><%= link_to("ダッシュボード", "/users/#{@current_user.id}") %>
+          <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
+        </ul>
+      <% end %>
 
       <nav>
         <div class="nav-wrapper">
@@ -50,10 +52,10 @@
                   <%= link_to("Kyteとは", "/about") %>
                 </li>
                 <li>
-                  <%= link_to("アカウントを作る", "/signup") %>
+                  <a data-target="account-modal" class="modal-trigger">アカウントを作る</a> 
                 </li>
                 <li>
-                  <%= link_to("ログインする", "/login") %>
+                  <a data-target="login-modal" class="modal-trigger">ログイン</a> 
                 </li>
               <% end %>
             </ul>
@@ -81,10 +83,10 @@
                   <%= link_to("Kyteとは", "/about") %>
                 </li>
                 <li>
-                  <%= link_to("アカウントを作る", "/signup") %>
+                  <a data-target="account-modal" class="modal-trigger">アカウントを作る</a> 
                 </li>
                 <li>
-                  <%= link_to("ログインする", "/login") %>
+                  <a data-target="login-modal" class="modal-trigger">ログイン</a> 
                 </li>
               <% end %>
             </ul>
@@ -92,6 +94,60 @@
         </div>
       </nav>
     </header>
+
+
+    <div id="account-modal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <% if @error_message %>
+          <div class="form-error">
+            <%= @error_message %>
+          </div>
+        <% end %>
+        <%= form_tag("/users/create") do %>
+        <div class="input-field col s12">
+          <input id="name" name="name" type="text" class="validate" value="">
+          <label for="name" class="active">ユーザー名<span class="required">*</span></label>
+        </div>
+        <div class="input-field col s12">
+          <input id="email" name="email" type="text" class="validate" value="">
+          <label for="email" class="active">メールアドレス<span class="required">*</span></label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate" value="">
+          <label for="password" class="active">パスワード<span class="required">*</span></label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="waves-effect waves-light btn pull-right" type="submit">作成</button>
+      </div>
+        <% end %>
+    </div>
+
+    <div id="login-modal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <% if @error_message %>
+          <div class="form-error">
+            <%= @error_message %>
+          </div>
+        <% end %>
+        <%= form_tag("/login") do %>
+        <div class="input-field col s12">
+          <input id="email" name="email" type="text" class="validate" value="">
+          <label for="email" class="active">メールアドレス<span class="required">*</span></label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" name="password" type="password" class="validate" value="">
+          <label for="password" class="active">パスワード<span class="required">*</span></label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="waves-effect waves-light btn pull-right" type="submit">ログイン</button>
+      </div>
+        <% end %>
+    </div>
+
+
+
 
       <% if session[:user_id] %>
         <div class="fixed-action-btn">
@@ -149,9 +205,14 @@
     $(document).ready(function(){
       $('.tooltipped').tooltip({delay: 50});
     });
-
     </script>
   
+    <script>
+    $(document).ready(function(){
+      $('.modal').modal();
+    })
+    </script>
+
     <script>
     // card枚数が5枚を超えたら横スクロールする
     $(document).ready(function() {
@@ -190,7 +251,7 @@
       $('document').ready(function() {
         setTimeout(function() {
           $('.flash').slideUp();
-        }, 2000);
+        }, 700);
       });
     </script>
 
@@ -232,3 +293,70 @@
 
   </body>
 </html>
+
+
+<script>
+      // 画像アップロード
+    $("#drop_zone").on("click", function() {
+      $("input[type=file]").click();
+    });
+    $('#image').change(function() {
+      var fr = new FileReader();
+      fr.onload = function() {
+        var img = $('<img>').attr('src', fr.result);
+        $('#preview').append(img);
+      };
+      fr.readAsDataURL(this.files[0]);
+    });
+
+    var formData = new FormData();
+    var dropZone = document.getElementById("drop_zone");
+
+    dropZone.addEventListener("dragover", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.style.background = "#ff3399";
+    }, false);
+
+    dropZone.addEventListener("dragleave", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.style.background = "#ffffff";
+    }, false);
+
+    dropZone.addEventListener("drop", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      this.style.background = "#ffffff";
+
+      var files = e.dataTransfer.files;
+      for (var i = 0; i < files.length; i++) {
+        (function() {
+          var fr = new FileReader();
+          fr.onload = function() {
+            var div = document.createElement('div');
+
+            var img = document.createElement('img');
+            img.setAttribute('src', fr.result);
+            div.appendChild(img);
+
+            var preview = document.getElementById("preview");
+            preview.appendChild(div);
+          };
+          fr.readAsDataURL(files[i]);
+        })();
+
+        formData.append("file", files[i]);
+      }
+    }, false);
+
+    var postButton = document.getElementById("post");
+    postButton.addEventListener("click", function() {
+      var request = new XMLHttpRequest();
+      request.open("POST", "POST_URL");
+      request.send(formData);
+    });  
+</script>

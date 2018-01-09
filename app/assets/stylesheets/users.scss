@@ -74,8 +74,6 @@
 }
 
 .user a {
-  color: #8899a6;
-  text-decoration: underline;
   font-weight: 200;
 }
 
@@ -86,7 +84,6 @@
 }
 
 .user-tabs {
-  margin-top: 40px;
   background-color: white;
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
@@ -114,3 +111,20 @@
 .users-form input {
   margin-bottom: 15px;
 }
+
+.btn-empty {
+  border: 1px solid #66757f;
+  color: #66757f;
+  border-radius: 18px;
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 2rem;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.btn-empty:hover {
+  opacity: 0.8;
+}
+

@@ -1,22 +1,41 @@
 <div class="main users-edit">
   <div class="container">
-    <div class="form-heading">アカウント編集</div>
     <div class="form users-form">
       <div class="form-body">
         <% @user.errors.full_messages.each do |message| %>
           <div class="form-error">
             <%= message %>
           </div>
-        <% end %>
-      
+        <% end %>     
         <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
-          <p>ユーザー名</p>
-          <input name="name" value="<%= @user.name %>">
-          <p>画像</p>
-          <input name="image" type="file">
-          <p>メールアドレス</p>
-          <input name="email" value="<%= @user.email %>">
-          <input type="submit" value="保存">
+          <div class="input-field col s12">
+            <input id="name" name="name" type="text" class="validate" value="<%= @user.name %>">
+            <label for="name" class="active">ユーザー名<span class="required">*</span></label>
+          </div>
+          <div class="input-field col s12">
+            <input id="email" name="email" type="text" class="validate" value="<%= @user.email %>">
+            <label for="email" class="active">メールアドレス<span class="required">*</span></label>
+          </div>
+          <div class="input-field col s12">
+            <label for="image" class="active">画像</label>
+            <div class="input-field col s12">
+              <div class="upload-box">
+              <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+              
+              <div id="drop_zone">
+                画像をドロップするかここをクリックしてアップロードしてください。
+              </div>
+              <div id="preview"></div>
+              </div>
+            </div>
+          </div>
+          <!--
+          <div class="input-field col s12">
+            <input id="password" name="password" type="password" class="validate" value="">
+            <label for="password" class="active">パスワード<span class="required">*</span></label>
+          </div>
+        -->
+          <button class="waves-effect waves-light btn pull-right" type="submit">保存</button>
         <% end %>
       </div>
     </div>

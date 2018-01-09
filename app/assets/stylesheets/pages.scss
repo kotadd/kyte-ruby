@@ -164,8 +164,18 @@ header {
   margin-bottom: 20px;
 }
 
-.top-main p {
+.top-main .sub-message {
   font-size: 24px;
+  color: white;
+}
+
+.top-main p {
+  font-size: 17px;
+  color: black;
+}
+
+.input-field {
+  color: black;
 }
 
 /* about ================================ */

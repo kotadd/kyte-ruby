@@ -10,11 +10,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
   end
-  
-  def new
-    @user = User.new
-  end
-  
+    
   def create
     @user = User.new(
       name: params[:name],
@@ -27,7 +23,7 @@ class UsersController < ApplicationController
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")
     else
-      render("users/new")
+      # render("users/new")
     end
   end
   
@@ -53,10 +49,7 @@ class UsersController < ApplicationController
       render("users/edit")
     end
   end
-  
-  def login_form
-  end
-  
+    
   def login
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
@@ -67,7 +60,7 @@ class UsersController < ApplicationController
       @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
       @password = params[:password]
-      render("users/login_form")
+      # render("users/login_form")
     end
   end
   
@@ -80,6 +73,13 @@ class UsersController < ApplicationController
   def likes
     @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id)
+    @likes_count = @likes.count
+  end
+
+  def joins
+    @user = User.find_by(id: params[:id])
+    @joins = Member.where(user_id: @user.id)
+    @joins_count = @joins.count
   end
   
   def ensure_correct_user

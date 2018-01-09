@@ -107,21 +107,20 @@
               <%= @post.updated_at %>
           </div>
 
-          <!-- いいね：ここではいらん-->
           <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
             <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
-              <span class="fa fa-heart like-btn-unlike"></span>
+              <span class="fa fa-thumbs-up">いいね！を取り消す</span>
             <% end %>
           <% else %>
             <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
-              <span class="fa fa-heart like-btn"></span>
+              <span class="fa fa-thumbs-o-up">いいね！</span>
             <% end %>
           <% end %>
           <%= @likes_count %>
           <% if @post.user_id == @current_user.id %>
             <div class="post-menus">
               <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn"}) %>
-              <%= link_to("削除", "/posts/#{@post.id}/destroy", {method: "post", class: "waves-effect waves-light btn modal-trigger"}) %>
+                <button data-target="modal" class="waves-effect waves-light btn modal-trigger">削除</button> 
             </div>
           <% end %>
 
@@ -134,19 +133,14 @@
         <p>この操作は元に戻せません。本当によろしいですか？</p>
       </div>
       <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">はい</a>
+        <button class="modal-action modal-close waves-effect waves-green btn-flat">キャンセル</button>
+        <%= link_to("はい", "/posts/#{@post.id}/destroy", {method: "post", class: "modal-action modal-close waves-effect waves-green btn-flat"}) %>
       </div>
     </div>
 
 
   </div>
 </div>
-<script>
-    $(document).ready(function(){
-    $('.modal').modal();
-  });
-
-</script>
 
 <!--
   <script src="https://maps.googleapis.com/maps/api/js"></script>

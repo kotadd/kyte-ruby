@@ -5,7 +5,7 @@
       <div id="cards-skunk" class="card-flex">
         <% @posts_skunk.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
-          <section class="card">
+          <section class="card card-clickable">
             <img class="card-img" src="/genre_images/skunk.png">
             <div class="card-container">
               <div class="card-text card-text-head">
@@ -26,7 +26,7 @@
       <div id="cards-english" class="card-flex">
         <% @posts_english.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
-          <section class="card">
+          <section class="card card-clickable">
             <img class="card-img" src="/genre_images/english.jpg">
             <div class="card-container">
               <div class="card-text card-text-head">
@@ -47,7 +47,7 @@
       <div id="cards-party" class="card-flex">
         <% @posts_party.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
-          <section class="card">
+          <section class="card card-clickable">
             <img class="card-img" src="/genre_images/party.jpg">
             <div class="card-container">
               <div class="card-text card-text-head">
@@ -68,7 +68,7 @@
       <div id="cards-others" class="card-flex">
         <% @posts_others.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
-          <section class="card">
+          <section class="card card-clickable">
             <img class="card-img" src="/genre_images/others.png">
             <div class="card-container">
               <div class="card-text card-text-head">
