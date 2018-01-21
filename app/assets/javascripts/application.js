@@ -16,5 +16,4 @@
 //= require jquery
 //= require jquery.mousewheel
 //= require materialize
-//= require cropperjs/dist/cropper
 
