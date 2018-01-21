@@ -7,23 +7,30 @@ Rails.application.routes.draw do
   post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
   post "users/create" => "users#create"
+  get "users/create" => "users#new"
+  get "signup" => "users#new"
   get "users/index" => "users#index"
   get "users/:id" => "users#show"
   post "login" => "users#login"
   post "logout" => "users#logout"
+  get "login" => "users#login_form"
   get "users/:id/joins" => "users#joins"
   get "users/:id/likes" => "users#likes"
 
+  get "posts/:id/index" => "posts#detail"
   get "posts/index" => "posts#index"
   get "posts/new" => "posts#new"
-  get "posts/:id" => "posts#show"
   post "posts/create" => "posts#create"
   get "posts/:id/edit" => "posts#edit"
   post "posts/:id/update" => "posts#update"
   post "posts/:id/destroy" => "posts#destroy"
+  get "posts/create" => "posts#new"
+  get "posts/:id/update" => "posts#edit"
+  get "posts/:id" => "posts#show"
 
   get "/" => "pages#top"
   get 'about' => 'pages#about'
   get 'contact' => 'pages#contact'
+  get 'genre' => 'pages#genre'
 
 end

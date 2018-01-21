@@ -21,13 +21,34 @@
               <label for="date" class="active">日付<span class="required">*</span></label>
 
             </div>
+
             <div class="input-field col s3">
-              <input id="time_from" name="time_from" placeholder="13:00" type="text" class="validate timepicker" value="<%= @time_from %>">
-              <label for="time_from" class="active">何時から</label>
+              <select name="time_from" id="time_from">
+                <% @time_ranges.each do |time_range| %>
+                  <% if @time_from == time_range %>
+                    <option selected="selected" value="<%= time_range %>"><%= time_range %></option>
+                  <% elsif @target_from_time == time_range && !@time_from %>
+                    <option selected="selected" value="<%= time_range %>"><%= time_range %></option>
+                  <% else %>
+                    <option value="<%= time_range %>"><%= time_range %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              <label>何時から</label>
             </div>
             <div class="input-field col s3">
-              <input id="time_to" name="time_to" placeholder="15:00" type="text" class="validate timepicker" value="<%= @time_to %>">
-              <label for="time_to" class="active">何時まで</label>
+              <select name="time_to" id="time_to">
+                <% @time_ranges.each do |time_range| %>
+                  <% if @time_to == time_range %>
+                    <option selected="selected" value="<%= time_range %>"><%= time_range %></option>
+                  <% elsif @target_to_time == time_range && !@time_to %>
+                    <option selected="selected" value="<%= time_range %>"><%= time_range %></option>
+                  <% else %>
+                    <option value="<%= time_range %>"><%= time_range %></option>
+                  <% end %>
+                <% end %>
+              </select>
+             <label>何時まで</label>
             </div>
 
             <div class="col s12">
@@ -41,17 +62,19 @@
                 <label for="budget" class="active">予算（円）</label>
               </div>
 
-              <label for="image">画像</label>
-              <div class="input-field col s12">
-                <div class="upload-box">
-                <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+              <div class="file-field input-field col s12">
+                <label for="image" class="active">画像（781.5×271)</label>
+                <div class="btn">
+                  <span>アップロード</span>
+                  <input id="image-user" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
                 
-                <div id="drop_zone">
-                  画像をドロップするかここをクリックしてアップロードしてください。
-                </div>
                 <div id="preview"></div>
-                </div>
               </div>
+              <!-- <div class="get-data-area"></div> -->
 
               <div class="input-field col s12">
                 <input id="max_member" name="max_member" placeholder="10" type="number" class="validate" value="<%= @post.max_member %>" min="1" max="100">
@@ -96,76 +119,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-    <script>
-    // 画像アップロード
-    $("#drop_zone").on("click", function() {
-      $("input[type=file]").click();
-    });
-    $('#image').change(function() {
-      var fr = new FileReader();
-      fr.onload = function() {
-        var img = $('<img>').attr('src', fr.result);
-        $('#preview').append(img);
-      };
-      fr.readAsDataURL(this.files[0]);
-    });
-
-    var formData = new FormData();
-    var dropZone = document.getElementById("drop_zone");
-
-    dropZone.addEventListener("dragover", function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-
-      this.style.background = "#ff3399";
-    }, false);
-
-    dropZone.addEventListener("dragleave", function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-
-      this.style.background = "#ffffff";
-    }, false);
-
-    dropZone.addEventListener("drop", function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-
-      this.style.background = "#ffffff";
-
-      var files = e.dataTransfer.files;
-      for (var i = 0; i < files.length; i++) {
-        (function() {
-          var fr = new FileReader();
-          fr.onload = function() {
-            var div = document.createElement('div');
-
-            var img = document.createElement('img');
-            img.setAttribute('src', fr.result);
-            div.appendChild(img);
-
-            var preview = document.getElementById("preview");
-            preview.appendChild(div);
-          };
-          fr.readAsDataURL(files[i]);
-        })();
-
-        formData.append("file", files[i]);
-      }
-    }, false);
-
-    var postButton = document.getElementById("post");
-    postButton.addEventListener("click", function() {
-      var request = new XMLHttpRequest();
-      request.open("POST", "POST_URL");
-      request.send(formData);
-    });
-    </script>
-

@@ -16,18 +16,17 @@
             <input id="email" name="email" type="text" class="validate" value="<%= @user.email %>">
             <label for="email" class="active">メールアドレス<span class="required">*</span></label>
           </div>
-          <div class="input-field col s12">
-            <label for="image" class="active">画像</label>
-            <div class="input-field col s12">
-              <div class="upload-box">
+          <div class="file-field input-field col s12">
+            <label for="image" class="active">画像（80×80)</label>
+            <div class="btn">
+              <span>アップロード</span>
               <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
-              
-              <div id="drop_zone">
-                画像をドロップするかここをクリックしてアップロードしてください。
-              </div>
-              <div id="preview"></div>
-              </div>
             </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+            
+            <div id="preview" class="user-img"></div>
           </div>
           <!--
           <div class="input-field col s12">

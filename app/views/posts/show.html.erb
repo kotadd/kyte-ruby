@@ -11,18 +11,18 @@
               <div class="post-title">
                 <%= @post.title %>
                 <br>
-                <%= link_to(@user.name, "/users/#{@user.id}") %>
+                <%= link_to(@user.name, "/users/#{@user.id}", {class:"event-owner"}) %>
               </div>
             </div>
              <div class="col s2">
               <% if @post.user_id != @current_user.id %>
                 <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
                   <%= link_to("/members/#{@post.id}/destroy", {method: "post"}) do %>
-                    <span class="waves-effect waves-light btn">参加をやめる</span>
+                    <span class="waves-light btn">参加をやめる</span>
                   <% end %>
                 <% else %>
                   <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
-                    <span class="waves-effect waves-light btn">参加する</span>
+                    <span class="waves-light btn">参加する</span>
                   <% end %>
                 <% end %>
               <% else %>
@@ -63,7 +63,7 @@
                   <p class="post-detail-label">参加者(<%= @members.count %>人)</p>
                     <div class="post-user-img">
                     <% @member_users.each do |member| %>
-                      <img src="<%= "/user_images/#{member.image_name}" %>">
+                      <img class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" src="<%= "/user_images/#{member.image_name}" %>">
                     <% end %>
                     </div>
                 </div>
@@ -93,7 +93,9 @@
             <div class="post-time">
              <%= @post.place %>
             </div>
-            <div id="map-canvas"></div>   
+
+            <!-- 地図は今のところ不要かな -->
+            <!-- <div id="map-canvas"></div>    -->
 
           </div>
         </div>
@@ -119,7 +121,7 @@
           <%= @likes_count %>
           <% if @post.user_id == @current_user.id %>
             <div class="post-menus">
-              <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn"}) %>
+              <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn", "data-turbolinks":"false"}) %>
                 <button data-target="modal" class="waves-effect waves-light btn modal-trigger">削除</button> 
             </div>
           <% end %>

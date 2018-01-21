@@ -35,9 +35,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt'
 # gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'jquery-rails'
+gem 'jquery-mousewheel-rails', '~> 0.0.9'
 # gem 'momentjs-rails', '>= 2.9.0'
 # gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
-# gem 'materialize-sass'
+gem 'materialize-sass'
 gem "font-awesome-rails"
 
 group :development, :test do

@@ -13,7 +13,8 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-//= require jquery/dist/jquery
-//= require jquery-mousewheel/jquery.mousewheel
-//= require materialize-css/dist/js/materialize
+//= require jquery
+//= require jquery.mousewheel
+//= require materialize
+//= require cropperjs/dist/cropper
 

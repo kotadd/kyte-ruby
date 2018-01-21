@@ -2,8 +2,78 @@
   <div class="top-message">
     <h2>新しい経験を</h2>
     <p class="sub-message">自分の世界を広げていこう</p>
-    <a data-target="account-modal" class="waves-effect waves-light btn modal-trigger">アカウントを作る</a> 
+    <!-- <a data-target="account-modal" class="waves-effect waves-light btn modal-trigger">アカウントを作る</a>  -->
+    <%= link_to("アカウントを作る", "/signup", {class: "waves-effect waves-light btn"}) %>
 
   </div>
+
+  <div class="container">
+
+	<div class="section top-recommend-section">
+      <div class="row">
+	  	<p class="top-title">イベント内容をのぞいてみましょう</p>
+        <div class="col s9 m3">
+		  <a class="waves-effect waves-teal btn-empty">スカンクワーク</a>
+        </div>
+
+        <div class="col s9 m3">
+		  <a class="waves-effect waves-teal btn-empty">英語</a>
+        </div>
+
+        <div class="col s9 m3">
+		  <a class="waves-effect waves-teal btn-empty">遊び</a>
+        </div>
+
+        <div class="col s9 m3">
+		  <a class="waves-effect waves-teal btn-empty">その他</a>
+        </div>
+      </div>
+    </div>
+
+	<hr>
+
+    <div class="section latest-event">
+
+      <div class="row">
+        <p>近日開催予定のイベント</p>
+	    <% if @posts.count > 0 %>
+	      <div id="" class="card-flex">
+	        <% @posts.each do |post| %>
+	        <a href="<%= "/posts/#{post.id}" %>">
+	          <section class="card card-clickable">
+	          	<% if post.genre_id == 1 %>
+	              <img class="card-img" src="/genre_images/skunk.png">
+	            <% elsif post.genre_id == 2 %> 
+	              <img class="card-img" src="/genre_images/english.jpg">
+	            <% elsif post.genre_id == 3 %> 
+	              <img class="card-img" src="/genre_images/party.jpg">
+	            <% else %>
+	              <img class="card-img" src="/genre_images/others.png">
+	            <% end %>
+	            <div class="card-container">
+	              <div class="card-text card-text-head">
+	                <%= post.title %>
+	              </div>
+	              <div class="card-date">
+	                <p class="hold-date">開催日時</p>
+	                <%= post.date %> 
+	                <% if post.time_from %>
+                	  <%= post.time_from.strftime('%H:%M') %>
+	                  〜 <%= post.time_to.strftime('%H:%M') %>
+	                <% end %>
+	              </div>
+	            </div>
+	          </section>
+	        </a>
+	        <% end %>
+	      </div>
+	    <% end %>
+	  </div>
+
+    </div>
+  </div>
+
 </div>
+
+
 

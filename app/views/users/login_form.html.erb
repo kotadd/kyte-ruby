@@ -1,0 +1,61 @@
+<div class="main user-login cyan">
+  <div class="container">
+    <div id="login-page" class="row">
+    <div class="col s12 z-depth-4 card-panel">
+      <div class="form-body">
+        <div class="row">
+          <div class="input-field col s12 center">
+            <img src="/logo.png" alt="" class="">
+            <!-- <p class="center create-account-text">アカウントを作る</p> -->
+          </div>
+        </div>
+        <% if @error_message %>
+          <div class="form-error">
+            <%= @error_message %>
+          </div>
+        <% end %>
+
+        <%= form_tag("/login") do %>
+        <div class="row margin">
+          <div class="input-field col s12">
+      <i class="fa fa-envelope prefix" aria-hidden="true"></i>
+            <input id="email_account" name="email" type="text" class="validate" value="<%= @email %>">
+            <label for="email_account" class="active">メールアドレス<span class="required">*</span></label>
+          </div>
+        </div>
+       <div class="row margin">
+          <div class="input-field col s12">
+      <i class="fa fa-lock prefix" aria-hidden="true"></i>
+            <input id="password_account" name="password" type="password" class="validate" value="<%= @password %>">
+            <label for="password_account" class="active">パスワード<span class="required">*</span></label>
+          </div>
+        </div>
+<!--
+        <div class="row">          
+          <div class="input-field col s12 m12 l12  login-text">
+              <input type="checkbox" id="remember-me">
+              <label for="remember-me">Remember me</label>
+          </div>
+        </div>
+-->
+        <div class="row">
+          <div class="input-field col s12">
+          <button class="waves-effect waves-light btn pull-right" type="submit">ログイン</button>
+          </div>
+        </div>
+        <% end %>
+        <div class="row">
+          <div class="input-field col s12">
+            <%= link_to("アカウントをお持ちではないですか？", "/signup") %>
+          </div>
+          <!--
+          <div class="input-field col s6 m6 l6">
+              <p class="margin right-align medium-small"><a href="page-forgot-password.html">Forgot password ?</a></p>
+          </div>    
+          -->      
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

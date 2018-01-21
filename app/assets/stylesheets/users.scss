@@ -1,3 +1,8 @@
+@mixin login-account-format {
+  width: 40%;
+  margin: auto;
+}
+
 /* users/index ================================ */
 .users-heading {
   font-weight: 300;
@@ -128,3 +133,10 @@
   opacity: 0.8;
 }
 
+#create-account-page {
+  @include login-account-format;
+}
+
+#login-page {
+  @include login-account-format;
+}

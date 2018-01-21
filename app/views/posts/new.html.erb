@@ -15,19 +15,35 @@
               <input placeholder="タイトルを入力してください" id="title" name="title" type="text" class="validate" data-length="20" value="<%= @post.title %>">
               <label for="title" class="active">タイトル<span class="required">*</span></label>
             </div>
-            <div class="input-field col s6">
-              <input id="date" name="date" placeholder="2018-01-10" type="text" class="validate datepicker" value="<%= @post.date %>">
-              <!-- <i class="fa fa-calendar" aria-hidden="true"></i> -->
-              <label for="date" class="active">日付<span class="required">*</span></label>
 
+            <div class="input-field col s6">
+              <input id="date" name="date" placeholder="<%= Time.zone.now.strftime("%Y-%m-%d") %>" type="text" class="validate datepicker" value="<%= @post.date %>">
+              <label for="date" class="active">日付<span class="required">*</span></label>
+            </div>
+
+            <div class="input-field col s3">
+              <select name="time_from" id="time_from">
+                <% @time_ranges.each do |time_range| %>
+                  <% if @target_from_time == time_range %>
+                    <option selected="selected" value="<%= time_range %>"><%= time_range %></option>
+                  <% else %>
+                    <option value="<%= time_range %>"><%= time_range %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              <label>何時から</label>
             </div>
             <div class="input-field col s3">
-              <input id="time_from" name="time_from" placeholder="13:00" type="text" class="validate timepicker" value="<%= @time_from %>">
-              <label for="time_from" class="active">何時から</label>
-            </div>
-            <div class="input-field col s3">
-              <input id="time_to" name="time_to" placeholder="15:00" type="text" class="validate timepicker" value="<%= @time_to %>">
-              <label for="time_to" class="active">何時まで</label>
+              <select name="time_to" id="time_to">
+                <% @time_ranges.each do |time_range| %>
+                  <% if @target_to_time == time_range %>
+                    <option selected="selected" value="<%= time_range %>"><%= time_range %></option>
+                  <% else %>
+                    <option value="<%= time_range %>"><%= time_range %></option>
+                  <% end %>
+                <% end %>
+              </select>
+              <label>何時まで</label>
             </div>
 
             <div class="col s12">
@@ -41,17 +57,18 @@
                 <label for="budget" class="active">予算（円）</label>
               </div>
 
-              <label for="image">画像</label>
-              <div class="input-field col s12">
-                <div class="upload-box">
-                <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
-                
-                <div id="drop_zone">
-                  画像をドロップするかここをクリックしてアップロードしてください。
+              <div class="file-field input-field col s12">
+                <label for="image" class="active">画像（781.5×271)</label>
+                <div class="btn modal-trigger">
+                  <span>アップロード</span>
+                  <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
                 </div>
                 <div id="preview"></div>
-                </div>
               </div>
+              <!-- <div class="get-data-area"></div> -->
 
               <div class="input-field col s12">
                 <input id="max_member" name="max_member" placeholder="10" type="number" class="validate" value="<%= @post.max_member %>" min="1" max="100">
@@ -96,3 +113,4 @@
     </div>
   </div>
 </div>
+

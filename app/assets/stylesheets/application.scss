@@ -1,0 +1,168 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ *= require font-awesome
+ *= require cropperjs/dist/cropper
+ *= 
+ */
+
+@import "materialize/components/color";
+$simple-button-color: #66757f;
+$primary-color: color("shades", "white") !default;
+$secondary-color: $simple-button-color !default;
+$dropdown-color: color("blue-grey", "darken-2") !default;
+$element-top-margin: 0;
+$element-bottom-margin: 0;
+@import 'materialize';
+
+@media #{$medium-and-up} {
+  .container {
+    width: 90%;
+  }
+}
+@media #{$large-and-up} {
+  .container {
+    width: 90%;
+  }
+}
+
+
+
+/* 共通レイアウト ================================ */
+html {
+  font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
+  line-height: 1.7;
+  letter-spacing: 1px;
+}
+
+ul, li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #2d3133;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+input {
+  background-color: transparent;
+  outline-width: 0;
+}
+
+form input[type="submit"] {
+  border: none;
+  cursor: pointer;
+}
+
+body {
+  color: black;
+  background-color: #f5f8fa;
+  margin: 0;
+  min-height: 1vh;
+
+}
+
+.main {
+  position: absolute;
+  // top: 80px;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+}
+
+.container {
+  // max-width: 600px;
+  margin: 80px auto;
+  // padding-left: 15px;
+  // padding-right: 15px;
+  // clear: both;
+  // position: relative;
+  // top: 80px;
+}
+
+
+
+
+
+
+
+
+
+html {
+
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+
+    header {
+      ul {
+        li {
+          a {
+            color: black;
+          }
+        }
+      }
+    }
+  }
+
+  
+}
+
+
+
+
+
+
+.icon-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; }
+
+
+main {
+  flex: 1 0 auto; }
+
+footer.page-footer {
+  z-index: 0;
+  background-color: #64b5f6;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 0;
+  width: 100%;
+  padding-top: 0; }
+
+#map-canvas {
+  width: 100%;
+  height: 400px;
+}
+.dropdown {
+  z-index: 3;
+}
+.btn-floating:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.text-black {
+  color: black;
+}
+
