@@ -6,7 +6,7 @@
         <div class="col s12">
         <% @future_posts.each do |post| %>
         <a href="<%= "/posts/#{post.id}" %>">
-          <section class="card card-clickable">
+          <div class="l-card card-clickable">
             <% if post.genre_id == 1 %>
               <img class="card-img" src="/genre_images/skunk.png">
             <% elsif post.genre_id == 2 %> 
@@ -29,7 +29,7 @@
                 <% end %>
               </div>
             </div>
-          </section>
+          </div>
         </a>
         <% end %>
         </div>

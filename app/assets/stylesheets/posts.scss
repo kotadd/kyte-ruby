@@ -1,3 +1,5 @@
+$color: #4cc48e;
+
 /* posts/index ================================ */
 .posts-index {
   .container.list-container {
@@ -143,19 +145,107 @@
 .hashtag {
   font-size: 17px;
   color: #7f7f7f;
-  // margin-top: 16px;
 }
 
-.card {
+.l-card {
   min-width: 200px;
   max-width: 200px;
   min-height: 300px;
   max-height: 300px;
-  box-shadow: 0 2px 5px #ccc;
   overflow: hidden;
   float: left;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1), 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0;
+  // margin: 24px auto;
+  background: #fff;
+  &:hover {
+    .thumbnail-wrapper {
+      img {
+        filter: grayscale(0);
+      }
+    }
+    .more-text {
+      opacity: 0.9;
+      transform: translateX(0);
+    }
+  }
 }
+.l-thumbnail {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  border: 0.3px solid rgba(0, 0, 0, 0.1);
 
+}
+.thumbnail-wrapper {
+  display: block;
+  margin: 0;
+  padding: 0;
+  img {
+    transition: 0.5s;
+    display: block;
+    max-width: 100%;
+    filter: grayscale(100%);
+  }
+}
+.more-text {
+  transition: 0.5s;
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  transform: translateX(-5%);
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  opacity: 0;
+}
+.text-content {
+  // padding: 16px;
+  position: relative;
+  .title {
+    // margin: 0 0 12px 0;
+    font-size: 20px;
+    color: $color;
+    font-weight: bold;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    line-height: 1.2;
+  }
+  .caption {
+    // margin: 0 0 12px 0;
+    font-size: 14px;
+    color: #555;
+    font-weight: lighter;
+  }
+}
+.content-meta {
+  overflow: hidden;
+  width: 100%;
+  font-size: 12px;
+  position: absolute;
+  top: 96px;
+  left: 16px;
+  .date {
+    float: left;
+    color: #aaa;
+  }
+  .like {
+    display: inline-block;
+    float: right;
+    color: $color;
+    .material-icons {
+      vertical-align: middle;     
+      font-size: 16px;
+    }
+  }
+}
 .card.card-prof {
   min-width: 180px;
   max-width: 180px;
@@ -163,10 +253,6 @@
   max-height: 270px;
   box-shadow: 0 2px 5px #ccc;
   overflow: hidden;
-}
-
-.card-clickable:hover {
-  opacity: 0.8;
 }
 
 .card-img {
