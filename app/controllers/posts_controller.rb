@@ -29,7 +29,6 @@ class PostsController < ApplicationController
       @posts.push(Post.where(genre_id: genre.id).order(date: :asc, time_from: :asc))
     end
 
-
     # カードが全て表示されるか確認
     # @posts.each do |posts|
     #   posts.each do |post|
@@ -41,6 +40,7 @@ class PostsController < ApplicationController
     # @posts_english = Post.where(genre_id: 2).order(date: :asc, time_from: :asc)
     # @posts_party = Post.where(genre_id: 3).order(date: :asc, time_from: :asc)
     # @posts_others = Post.where(genre_id: 4).order(date: :asc, time_from: :asc)
+
 
   end
   
