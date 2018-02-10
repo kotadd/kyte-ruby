@@ -29,6 +29,8 @@ class UsersController < ApplicationController
     else
       # flash.now[:notice] = "すでに登録されているユーザーです"
       @error_message = "ユーザー名またはメールアドレスが間違っています"
+      @name = params[:name]
+      @email = params[:email]
       render("users/new")
     end
   end
@@ -72,7 +74,6 @@ class UsersController < ApplicationController
     else
       @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
-      @password = params[:password]
       render("users/login_form")
     end
   end
