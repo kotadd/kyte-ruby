@@ -41,7 +41,7 @@
                     <%= link_to("ユーザー一覧", "/users/index") %>
                   </li>
                   <li>
-                    <%= link_to("ジャンル一覧", "/genre") %>
+                    <%= link_to("ジャンル一覧", "/genres/index") %>
                   </li>
                 <% end %>
                 <li>
@@ -104,9 +104,15 @@
 
       <% if session[:user_id] && !@new_button %>
         <div class="fixed-action-btn">
-          <a class="tooltipped btn-floating btn-large red" data-position="top" data-tooltip="イベントを作る" href="<%= "/posts/new" %>">
-            <i class="large material-icons">add</i>
-          </a>
+          <% if @genre_create %>
+            <a class="tooltipped btn-floating btn-large green" data-position="top" data-tooltip="ジャンルを作る" href="<%= "/genres/create" %>">
+              <i class="large material-icons">add</i>
+            </a>
+          <% else %>
+            <a class="tooltipped btn-floating btn-large red" data-position="top" data-tooltip="イベントを作る" href="<%= "/posts/new" %>">
+              <i class="large material-icons">add</i>
+            </a>
+          <% end %>
         </div>
       <% end %>
 

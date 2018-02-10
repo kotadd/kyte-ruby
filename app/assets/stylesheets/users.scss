@@ -20,6 +20,7 @@ $color: #4cc48e;
   box-shadow: 0 2px 6px #c1ced7;
   display: table;
   width: 100%;
+  color: black;
 }
 
 .user-left img {
@@ -30,6 +31,9 @@ $color: #4cc48e;
   object-fit: cover;
 }
 
+.user-list-name {
+  font-size: 17px;
+}
 .user-name a {
   font-weight: 600;
 }
@@ -49,6 +53,20 @@ $color: #4cc48e;
   text-align: left;
   display: table-cell;
   vertical-align: middle;
+}
+
+.user-right-height {
+  height: 50px;
+}
+
+.user-first-column {
+  float: left;
+  width: 78px;
+}
+
+.user-second-column {
+  float: left;
+  margin-left: 16px;
 }
 
 /* users/show ================================ */

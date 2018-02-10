@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   post "members/:post_id/create" => "members#create"
   post "members/:post_id/destroy" => "members#destroy"
 
+  post "genres/:id/update" => "genres#update"
+  get "genres/:id/edit" => "genres#edit"
+  post 'genres/create' => 'genres#create'
+  get 'genres/create' => 'genres#new'
+  get 'genres/index' => 'genres#index'
+
   post "users/:id/update" => "users#update"
   get "users/:id/edit" => "users#edit"
   post "users/create" => "users#create"
@@ -30,7 +36,7 @@ Rails.application.routes.draw do
 
   get "/" => "pages#top"
   get 'about' => 'pages#about'
-  get 'contact' => 'pages#contact'
-  get 'genre' => 'pages#genre'
+  # get 'contact' => 'pages#contact'
+
 
 end

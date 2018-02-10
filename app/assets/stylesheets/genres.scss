@@ -1,0 +1,35 @@
+.genre-first-column {
+	float: left;
+	width: 14px;
+}
+
+.genre-second-column {
+	float: left;
+	margin-left: 16px;
+}
+
+.genres-index-item {
+  padding: 16px 16px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+  color: black;
+}
+
+.genre-header {
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+}
+
+.genre-left {
+  float: left;
+  width: 10%;
+}
+
+.genre-right {
+  float: left;
+  width: 90%;
+  padding-left: 25px;
+  text-align: left;
+}

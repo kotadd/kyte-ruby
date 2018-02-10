@@ -2,7 +2,7 @@ class PagesController < ApplicationController
 
   before_action :forbid_login_user, {only: [:top]}
   def about   
-	@user = User.new
+	 @user = User.new
   end
 
   def top
@@ -32,7 +32,4 @@ class PagesController < ApplicationController
     # @card_count = 0
   end
 
-  def genre
-    @genre = Genre.all
-  end
 end
