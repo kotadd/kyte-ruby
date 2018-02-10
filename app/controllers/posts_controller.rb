@@ -35,7 +35,7 @@ class PostsController < ApplicationController
     @genre_id = params[:id].to_i
     if @genre_id == 0
       @future_posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
-      @genre_title = "開催日時の近い順"
+      @genre_title = "開催日時の近い順（全てのポスト）"
     else
       @future_posts = Post.where(genre_id: @genre_id).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
       @genre_title = Genre.find_by(id: @genre_id).title

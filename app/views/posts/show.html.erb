@@ -11,7 +11,9 @@
               <div class="post-title">
                 <%= @post.title %>
                 <br>
+                <div class="padding-top-4"><span class="contributor">投稿者：</span>
                 <%= link_to(@user.name, "/users/#{@user.id}", {class:"event-owner"}) %>
+                </div>
               </div>
             </div>
              <div class="col s2">
@@ -32,7 +34,7 @@
               <% if @post.max_member %>
                 <div class="post-lest">残り<%= @post.max_member - @members.count %> 人</div>
               <% else %>
-                何名でも参加可能です
+                <div class="padding-top-4">何名でも参加可能です</div>
               <% end %>
             </div>     
           </div>
@@ -54,7 +56,7 @@
                 <div class="post-detail">
                   <p class="post-detail-label">詳細</p>
                   <p>
-                    <%= @post.content %>
+                    <%= simple_format(@post.content) %>
                   </p>
                     
                 </div>

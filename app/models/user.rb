@@ -11,4 +11,12 @@ class User < ApplicationRecord
     return Post.where(user_id: self.id)
   end
   
+  def likes
+    return Like.where(user_id: self.id)
+  end
+
+  def joins
+    return Member.where(user_id: self.id)
+  end
+
 end

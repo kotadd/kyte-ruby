@@ -35,7 +35,8 @@ $element-bottom-margin: 0;
   }
 }
 
-
+$kyte_color: #00e5ff;
+$hover_color: #eceff1;
 
 /* 共通レイアウト ================================ */
 html {
@@ -96,7 +97,18 @@ body {
   // top: 80px;
 }
 
+#dropdown {
+  li {
+    padding-left: 0px;
 
+    &:hover {
+      background-color: $hover_color;
+    }
+  }
+  a {
+    width: 100%;
+  }
+}
 
 
 

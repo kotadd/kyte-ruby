@@ -9,6 +9,10 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find_by(id: params[:id])
+    @posts = @user.posts
+    @likes = @user.likes
+    @joins = @user.joins
+
   end
     
   def create
@@ -81,14 +85,16 @@ class UsersController < ApplicationController
   
   def likes
     @user = User.find_by(id: params[:id])
-    @likes = Like.where(user_id: @user.id)
-    @likes_count = @likes.count
+    @posts = @user.posts
+    @likes = @user.likes
+    @joins = @user.joins
   end
 
   def joins
     @user = User.find_by(id: params[:id])
-    @joins = Member.where(user_id: @user.id)
-    @joins_count = @joins.count
+    @posts = @user.posts
+    @likes = @user.likes
+    @joins = @user.joins
   end
   
   def ensure_correct_user

@@ -17,25 +17,35 @@
       
       <div class="col s10">
       <ul class="user-tabs">
-        <li><%= link_to("マイポスト", "/users/#{@user.id}") %></li>
-        <li><%= link_to("参加予定", "/users/#{@user.id}/joins") %></li>
-        <li class="active"><%= link_to("いいね", "/users/#{@user.id}/likes") %></li>
+        <li><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
+        <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定<span class="badge tab-badge"><%= @joins.count%></span></a></li>
+        <li class="active"><a href="<%="/users/#{@user.id}/likes "%>">いいね<span class="badge tab-badge"><%= @likes.count%></span></a></li>
       </ul>
       
       <% @likes.each do |like| %>
         <% post = Post.find_by(id: like.post_id) %>
         
-        <div class="posts-index-item">
-          <div class="post-left">
-            <img src="<%= "/user_images/#{post.user.image_name}" %>">
-          </div>
-          <div class="post-right">
-            <div class="post-user-name">
-              <%= link_to(post.user.name, "/users/#{post.user.id}") %>
+        <a href="<%=" /posts/#{post.id} "%>" >
+          <div class="posts-index-item">
+            <div class="col s9">
+              <div class="post-left">
+                <img src="<%= "/user_images/#{post.user.image_name}" %>">
+              </div>
+              <div class="post-right">
+                <div class="post-user-name">
+                  <div><%= post.title %></div>
+                  <div><%= post.content %></div>
+                </div>
+              </div>
             </div>
-            <%= link_to(post.title, "/posts/#{post.id}") %>
+            <div class="col s3 user-created-date">
+                <div class="post-right">
+                  <div><%= post.created_at.strftime("%Y年%m月%d日") %>に作成</div>
+                </div>
+            </div>
           </div>
-        </div>
+        </a>
+
       <% end %>
     </div>
   </div>
