@@ -17,7 +17,7 @@ class GenresController < ApplicationController
     
     if @genre.save
       flash[:notice] = "ジャンルの追加が完了しました"
-      redirect_to("/index")
+      redirect_to("/genres/index")
     else
       if Genre.find_by(title: @genre.title) != nil
         @error_message = "すでに登録されているジャンルです"

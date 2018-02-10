@@ -5,6 +5,7 @@ ja:
     email: "メールアドレス"
     title: "タイトル"
     date: "日付"
+    password: "パスワード"
   activerecord:
     errors:
       messages:
