@@ -10,7 +10,12 @@ class PostsController < ApplicationController
     # 上のロジックをスッキリさせたものが下
     range = Date.today.beginning_of_day..Date.today.since(7.days).end_of_day
     post = Post.where(date: range).order(date: :asc, time_from: :asc)
-    @first_post = true
+
+    if post.count > 0
+      @first_post = true
+    else
+      @first_post = false
+    end
 
     @posts.push(post)
     # @posts_skunk = Post.where(genre_id: 1).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
