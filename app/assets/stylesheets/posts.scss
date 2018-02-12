@@ -29,6 +29,12 @@ $color: #4cc48e;
     z-index: 101;
 }
 
+.main {
+  .list-box {
+    margin-top: 16px;
+  }
+}
+
 /* posts/index ================================ */
 .posts-index {
   .container.list-container {
@@ -160,7 +166,7 @@ $color: #4cc48e;
     text-decoration: underline;
     font-size: 14px;
     */
-}
+  }
 
 }
 
@@ -328,7 +334,7 @@ $color: #4cc48e;
 
 .card-flex {
   display:flex;
-  max-width: 1122px;
+  // max-width: 1122px;
   overflow-x: scroll;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;

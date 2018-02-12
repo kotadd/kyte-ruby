@@ -152,10 +152,10 @@
     </script>
 
     <script>
-    // card枚数が5枚を超えたら横スクロールする
+    // card枚数が7枚を超えたら横スクロールする
     $(document).ready(function() {
       $('.card-flex').each(function(i){
-        if ($('.card-flex:eq('+i+') a').length > 5) {
+        if ($('.card-flex:eq('+i+') a').length > 7) {
           $('#cards-'+i).mousewheel(function(e, delta) {
               this.scrollLeft -= (delta * 1);
               e.preventDefault();

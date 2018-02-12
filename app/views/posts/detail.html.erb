@@ -1,46 +1,48 @@
 <div class="main posts-detail">
-  <div class="container list-container">
+  <div class="container">
     <% if @future_posts.count > 0 %>
-      <%= link_to("#"+ @genre_title, "/posts/#{@genre_id}/index", {class: "hashtag"}) %>
-      <div class="row">
-        <div class="col s12">
-        <% @future_posts.each do |post| %>
-        <a href="<%= "/posts/#{post.id}" %>">
-          <div class="l-card">
-            <div class="l-thumbnail">
-              <figure class="thumbnail-wrapper">
-                <% if post.genre_id == 1 %>
-                  <img class="card-img" src="/genre_images/skunk_0.png">
-                <% elsif post.genre_id == 2 %> 
-                  <img class="card-img" src="/genre_images/english_0.png">
-                <% elsif post.genre_id == 3 %> 
-                  <img class="card-img" src="/genre_images/play_0.png">
-                <% else %>
-                  <img class="card-img" src="/genre_images/others_0.png">
-                <% end %>
-              </figure>
-              <span class="more-text">
-                Read More
-              </span>
-            </div>
-            <div class="text-content">
-              <div class="title">
-                <%= post.title %>
-              </div>
-              <div class="content-meta">
-                <span class="date">
-                  開催日時<br>
-                  <%= post.date %> 
-                  <% if post.time_from %>
-                    <%= post.time_from.strftime('%H:%M') %>
-                    〜 <%= post.time_to.strftime('%H:%M') %>
+      <div class="list-box">
+        <%= link_to("#"+ @genre_title, "/posts/#{@genre_id}/index", {class: "hashtag"}) %>
+        <div class="row">
+          <div class="col s12">
+          <% @future_posts.each do |post| %>
+          <a href="<%= "/posts/#{post.id}" %>">
+            <div class="l-card">
+              <div class="l-thumbnail">
+                <figure class="thumbnail-wrapper">
+                  <% if post.genre_id == 1 %>
+                    <img class="card-img" src="/genre_images/skunk_0.png">
+                  <% elsif post.genre_id == 2 %> 
+                    <img class="card-img" src="/genre_images/english_0.png">
+                  <% elsif post.genre_id == 3 %> 
+                    <img class="card-img" src="/genre_images/play_0.png">
+                  <% else %>
+                    <img class="card-img" src="/genre_images/others_0.png">
                   <% end %>
+                </figure>
+                <span class="more-text">
+                  Read More
                 </span>
               </div>
-              </div>
+              <div class="text-content">
+                <div class="title">
+                  <%= post.title %>
+                </div>
+                <div class="content-meta">
+                  <span class="date">
+                    開催日時<br>
+                    <%= post.date %> 
+                    <% if post.time_from %>
+                      <%= post.time_from.strftime('%H:%M') %>
+                      〜 <%= post.time_to.strftime('%H:%M') %>
+                    <% end %>
+                  </span>
+                </div>
+                </div>
+            </div>
+          </a>
+          <% end %>
           </div>
-        </a>
-        <% end %>
         </div>
       </div>
     <% end %>

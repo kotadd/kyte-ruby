@@ -24,6 +24,16 @@ $element-top-margin: 0;
 $element-bottom-margin: 0;
 @import 'materialize';
 
+.main {
+  .container {
+    margin-top: 16px;
+    max-width: 1680px;
+  }  
+  .container.before-login {
+    margin-top: 0;
+  }
+
+}
 @media #{$medium-and-up} {
   .container {
     width: 90%;
@@ -81,20 +91,9 @@ body {
 
 .main {
   position: absolute;
-  // top: 80px;
   width: 100%;
   height: auto;
   min-height: 100%;
-}
-
-.container {
-  // max-width: 600px;
-  margin: 80px auto;
-  // padding-left: 15px;
-  // padding-right: 15px;
-  // clear: both;
-  // position: relative;
-  // top: 80px;
 }
 
 #dropdown {
@@ -149,7 +148,10 @@ html {
 
 
 main {
-  flex: 1 0 auto; }
+  flex: 1 0 auto; 
+  top: 64px;
+  position: relative;
+}
 
 footer.page-footer {
   z-index: 0;

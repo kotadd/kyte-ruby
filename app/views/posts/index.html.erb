@@ -1,7 +1,8 @@
 <div class="main posts-index">
-  <div class="container list-container">
+  <div class="container">
     <% @posts.each do |posts| %>
     <% if posts.count > 0 %>
+      <div class="list-box">
       <% if @first_post %>
         <%= link_to("#開催日時の近い順（近日1週間）", "/posts/0/index", {class: "hashtag"}) %>
       <% else %>
@@ -61,6 +62,6 @@
       </div>
       <% end %>
     <% end %>
-
+  </div>
   </div>
 </div>
