@@ -7,8 +7,8 @@ class PagesController < ApplicationController
 
   def top
     @genre = Genre.all
-	  @user = User.new
-    @posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).limit(5)
+	@user = User.new
+    @posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).limit(10)
 
     # strftime('%H:%M')で全部解決だった。
     # @time_from_arr = []

@@ -8,8 +8,9 @@ class PostsController < ApplicationController
     @posts = []
     # @posts = Post.where('date >= ?', Date.today).where('date < ?', Time.current.since(5.days)).order(date: :asc, time_from: :asc)
     # 上のロジックをスッキリさせたものが下
-    range = Date.today.beginning_of_day..Date.today.since(7.days).end_of_day
-    post = Post.where(date: range).order(date: :asc, time_from: :asc)
+    # range = Date.today.beginning_of_day..Date.today.since(7.days).end_of_day
+    # post = Post.where(date: range).order(date: :asc, time_from: :asc);
+    post = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).limit(10);
 
     if post.count > 0
       @first_post = true

@@ -4,7 +4,7 @@
     <% if posts.count > 0 %>
       <div class="list-box">
       <% if @first_post %>
-        <%= link_to("#開催日時の近い順（近日1週間）", "/posts/0/index", {class: "hashtag"}) %>
+        <%= link_to("#開催日時の近い順", "/posts/0/index", {class: "hashtag"}) %>
       <% else %>
         <%= link_to("#"+ posts[0].genre.title, "/posts/#{posts[0].genre_id}/index", {class: "hashtag"}) %>
       <% end %>
