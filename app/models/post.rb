@@ -20,6 +20,6 @@ class Post < ApplicationRecord
     errors.add(:time_to, "End time should be later than start time.") unless
     if self.time_from
 	    self.time_from < self.time_to
-	end
-  end 
+  	end
+  end
 end

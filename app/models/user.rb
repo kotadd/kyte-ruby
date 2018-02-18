@@ -5,8 +5,9 @@ class User < ApplicationRecord
   
   validates :name, {presence: true, uniqueness: true}
   validates :email, {presence: true, uniqueness: true, format: { with: VALID_EMAIL_REGEX }}
+  # validates :password, presence: true, length: {minimum: 8, maximum: 20, allow_blank: true}
+  # validates :password, presence: true, on: :update
 
-  
   def posts
     return Post.where(user_id: self.id)
   end

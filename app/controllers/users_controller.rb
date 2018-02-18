@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
-  before_action :ensure_correct_user, {only: [:edit, :update]}
+  before_action :ensure_correct_user, {only: [:edit, :update, :password, :update_password]}
   
   def index
     @users = User.all
@@ -43,6 +43,10 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
   
+  def password
+    @user = User.find_by(id: params[:id])
+  end
+
   def update
     @user = User.find_by(id: params[:id])
     @user.name = params[:name]
@@ -56,9 +60,33 @@ class UsersController < ApplicationController
     
     if @user.save
       flash[:notice] = "ユーザー情報を編集しました"
-      redirect_to("/users/#{@user.id}")
+      redirect_to("/users/#{@user.id}/edit")
     else
       render("users/edit")
+    end
+  end
+
+  def update_password
+    @user = User.find_by(id: params[:id])
+    if @user && @user.authenticate(params[:current_password])
+      if params[:new_password] != params[:confirm_password]
+       @error_message = "新しく入力されたパスワードが一致していません"
+        render("users/password")
+      elsif params[:new_password].length < 8
+       @error_message = "パスワードは8文字以上で入力してください"
+        render("users/password")        
+      else
+        @user.password = params[:new_password]    
+        if @user.save
+          flash[:notice] = "パスワードを更新しました"
+          redirect_to("/users/#{@user.id}/password")
+        else
+          render("users/password")
+        end
+      end
+    else
+       @error_message = "現在のパスワードが間違っています"        
+        render("users/password")
     end
   end
     
