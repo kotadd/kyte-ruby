@@ -1,25 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* The way to develop on this project.  
 
-Things you may want to cover:
+[remote(GitLab)]
+1. Create issues first on GitLab.  
+2. Create branch on an issue page.  
 
-* Ruby version
+[local]
+1. `git fetch origin` on your local Kyte project. 
+2. `git checkout <your issue branch>`.
+3. develop your feature. 
+4. `git add <your featured files>`. 
+5. `git cz`. 
+6. `git push origin <your issue branch>` . 
 
-* System dependencies
+[remote(GitLab)]
+1. 
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
 
 * commit rule (refer to: https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#type)  
 
@@ -40,4 +37,5 @@ refactor: A code change that neither fixes a bug nor adds a feature
 perf: A code change that improves performance  
 test: Adding missing or correcting existing tests  
 chore: Changes to the build process or auxiliary tools and libraries such as documentation generation  
+
 
