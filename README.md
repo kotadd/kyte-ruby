@@ -11,14 +11,14 @@
 2. `git checkout <your issue branch>`.
 3. develop your feature. 
 4. `git add <your featured files>`. 
-5. `git cz`. 
+5. `git cz`. *1
 6. `git push origin <your issue branch>` . 
 
 [remote(GitLab)]
-1. 
+1. Create merge request from your issue page. 
 
 
-* commit rule (refer to: https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#type)  
+*1 commit rule (refer to: https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#type)  
 
 Please conduct the below commands in your local environment. (https://github.com/commitizen/cz-cli)
 
