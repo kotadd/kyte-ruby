@@ -67,7 +67,10 @@
             <ul class="side-nav" id="mobile-demo">
               <% if @current_user %>
                 <li>
-                  <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+                  <img class="icon-img" src="<%= "/user_images/#{@current_user.image_name}" %>">
+                </li>
+                <li>
+                  <%= link_to("ダッシュボード", "/users/#{@current_user.id}") %>
                 </li>
                 <li>
                   <%= link_to("イベントを作る", "/posts/new") %>
