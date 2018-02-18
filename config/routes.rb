@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get 'genres/index' => 'genres#index'
 
   post "users/:id/update" => "users#update"
+  get "users/:id/update" => "users#edit"
+  post "users/:id/update_password" => "users#update_password"
+  get "users/:id/update_password" => "users#password"
+  get "users/:id/password" => "users#password"
   get "users/:id/edit" => "users#edit"
   post "users/create" => "users#create"
   get "users/create" => "users#new"

@@ -187,3 +187,9 @@ $color: #4cc48e;
 #login-page {
   @include login-account-format;
 }
+
+.password-link {
+  padding-left: 10.5px;
+  position: relative;
+  top: -16px;
+}

@@ -1,41 +1,43 @@
 <div class="main users-edit">
   <div class="container">
-    <div class="form users-form">
-      <div class="form-body">
-        <% @user.errors.full_messages.each do |message| %>
-          <div class="form-error">
-            <%= message %>
-          </div>
-        <% end %>     
-        <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
-          <div class="input-field col s12">
-            <input id="name" name="name" type="text" class="validate" value="<%= @user.name %>">
-            <label for="name" class="active">ユーザー名<span class="required">*</span></label>
-          </div>
-          <div class="input-field col s12">
-            <input id="email" name="email" type="text" class="validate" value="<%= @user.email %>">
-            <label for="email" class="active">メールアドレス<span class="required">*</span></label>
-          </div>
-          <div class="file-field input-field col s12">
-            <label for="image" class="active">画像（80×80)</label>
-            <div class="btn">
-              <span>アップロード</span>
-              <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+    <div class="row">
+      <div class="col s3">
+        <div class="collection">
+          <a href="<%=" /users/#{@user.id}/edit "%>" class="collection-item active">ユーザー情報</a>
+          <a href="<%=" /users/#{@user.id}/password "%>" class="collection-item">パスワード</a>
+        </div>
+
+      </div>
+      <div class="form users-form col s9">
+        <div class="form-body">
+          <% @user.errors.full_messages.each do |message| %>
+            <div class="form-error">
+              <%= message %>
             </div>
-            <div class="file-path-wrapper">
-              <input class="file-path validate" type="text">
+          <% end %>     
+          <%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %>
+            <div class="input-field col s12">
+              <input id="name" name="name" type="text" class="validate" value="<%= @user.name %>">
+              <label for="name" class="active">ユーザー名<span class="required">*</span></label>
             </div>
-            
-            <div id="preview" class="user-img"></div>
-          </div>
-          <!--
-          <div class="input-field col s12">
-            <input id="password" name="password" type="password" class="validate" value="">
-            <label for="password" class="active">パスワード<span class="required">*</span></label>
-          </div>
-        -->
-          <button class="waves-effect waves-light btn pull-right" type="submit">保存</button>
-        <% end %>
+            <div class="input-field col s12">
+              <input id="email" name="email" type="text" class="validate" value="<%= @user.email %>">
+              <label for="email" class="active">メールアドレス<span class="required">*</span></label>
+            </div>
+            <div class="file-field input-field col s12">
+              <label for="image" class="active">画像（80×80)</label>
+              <div class="btn">
+                <span>アップロード</span>
+                <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+              <div id="preview" class="user-img"></div>
+            </div>
+            <button class="waves-effect waves-light btn pull-right" type="submit">保存</button>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
