@@ -45,24 +45,17 @@ class PostsController < ApplicationController
   end
 
   # def change_date
-  #   puts params[:datepicker]
+  #   puts params[:search_date]
   # end
 
   def date
-    @posts = []
-    post = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).limit(10);
+    @posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).group(:date);
 
-    if post.count > 0
-      @first_post = true
-    else
-      @first_post = false
-    end
+    # @posts.each do |post|
+    #   puts "here it is!!!!!!!!!!!!"
+    #   puts post.date
+    # end
 
-    @posts.push(post)
-    @genre = Genre.all
-    @genre.each do |genre|
-      @posts.push(Post.where(genre_id: genre.id).where('date >= ?', Date.today).order(date: :asc, time_from: :asc))
-    end
   end
 
   def detail
