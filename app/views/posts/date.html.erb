@@ -1,18 +1,14 @@
-<div class="main posts-index">
+<div class="main posts-date">
   <div class="container">
-    <% @posts.each do |posts| %>
-    <% if posts.count > 0 %>
+    <div class="row">
+
+    <div class="col s12">
+    <% @posts.each do |post| %>
       <div class="list-box">
-      <%= link_to("2/25(仮）", "", {class: "hashtag"}) %>
+        <div class="hashtag"><%= post.date %></div>
       <div class="row">
         <div class="col s12">
-          <% if @first_post %>
-            <div id="cards-0" class="card-flex">
-            <% @first_post = false %>
-          <% else %>
-            <div id="cards-<%= posts[0].genre_id %>" class="card-flex">
-          <% end %>
-            <% posts.each do |post| %>
+          <div id="cards-<%= post.genre_id %>" class="card-flex">
             <% if session[:user_id] == post.user.id%>
               <a class="triangle" href="<%= "/posts/#{post.id}" %>">
             <% else %>
@@ -52,12 +48,12 @@
                   </div>
               </div>
             </a>
-            <% end %>
           </div>
         </div>
       </div>
       <% end %>
-    <% end %>
   </div>
+  </div>
+</div>
   </div>
 </div>

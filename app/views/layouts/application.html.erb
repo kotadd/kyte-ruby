@@ -16,8 +16,9 @@
       <% if @current_user %>
         <ul id="dropdown-post" class="dropdown-content">
           <li><%= link_to("ジャンルで探す", "/posts/index") %></li>
-          <li><%= link_to("日付で探す", "", {class: "datepicker"}) %></li>
+          <li><%= link_to("日付で探す", "/posts/date") %></li>
         </ul>
+
         <ul id="dropdown-user" class="dropdown-content">
           <li><%= link_to("ダッシュボード", "/users/#{@current_user.id}") %></li>
           <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
