@@ -87,19 +87,6 @@ form input[type="submit"] {
   min-height: 100%;
 }
 
-#dropdown {
-  li {
-    padding-left: 0px;
-
-    &:hover {
-      background-color: $hover_color;
-    }
-  }
-  a {
-    width: 100%;
-  }
-}
-
 html {
   font: 100%/1.5 'Avenir Next', 'Hiragino Sans', sans-serif;
   line-height: 1.7;
@@ -123,10 +110,22 @@ html {
     min-height: 1vh;
 
     header {
-      height: 64px;
+      height: 5.92vh;
       position: absolute;
       width: 100%;
 
+      ul.dropdown-content {
+        li {
+          padding-left: 0px;
+
+          &:hover {
+            background-color: $hover_color;
+          }
+        }
+        a {
+          width: 100%;
+        }
+      }
       .header-logo {
         float: left;
         padding-left: 20px;
@@ -145,13 +144,12 @@ html {
         li {
           float: left;
           line-height: 64px;
-          font-size: 13px;
           color: black;
           padding-left: 15px;
         }
         a {
           float: left;
-          font-size: 13px;
+          font-size: 1.01vw;
           color: black;
         }
         .fa {

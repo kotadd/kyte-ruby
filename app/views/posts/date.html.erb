@@ -1,0 +1,63 @@
+<div class="main posts-index">
+  <div class="container">
+    <% @posts.each do |posts| %>
+    <% if posts.count > 0 %>
+      <div class="list-box">
+      <%= link_to("2/25(仮）", "", {class: "hashtag"}) %>
+      <div class="row">
+        <div class="col s12">
+          <% if @first_post %>
+            <div id="cards-0" class="card-flex">
+            <% @first_post = false %>
+          <% else %>
+            <div id="cards-<%= posts[0].genre_id %>" class="card-flex">
+          <% end %>
+            <% posts.each do |post| %>
+            <% if session[:user_id] == post.user.id%>
+              <a class="triangle" href="<%= "/posts/#{post.id}" %>">
+            <% else %>
+              <a class="" href="<%= "/posts/#{post.id}" %>">
+            <% end %>    
+              <div class="l-card">
+                <div class="l-thumbnail">
+                  <figure class="thumbnail-wrapper">
+                    <% if post.genre_id == 1 %>
+                      <img class="card-img" src="/genre_images/skunk_0.png">
+                    <% elsif post.genre_id == 2 %> 
+                      <img class="card-img" src="/genre_images/english_0.png">
+                    <% elsif post.genre_id == 3 %> 
+                      <img class="card-img" src="/genre_images/play_0.png">
+                    <% else %>
+                      <img class="card-img" src="/genre_images/others_0.png">
+                    <% end %>
+                  </figure>
+                  <span class="more-text">
+                    Read More
+                  </span>
+                </div>
+                <div class="text-content">
+                  <div class="title">
+                    <%= post.title %>
+                  </div>
+                  <div class="content-meta">
+                    <span class="date">
+                      開催日時<br>
+                      <%= post.date %> 
+                      <% if post.time_from %>
+                        <%= post.time_from.strftime('%H:%M') %>
+                        〜 <%= post.time_to.strftime('%H:%M') %>
+                      <% end %>
+                    </span>
+                  </div>
+                  </div>
+              </div>
+            </a>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+  </div>
+</div>

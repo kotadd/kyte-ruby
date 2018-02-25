@@ -42,9 +42,29 @@ class PostsController < ApplicationController
     # @posts_party = Post.where(genre_id: 3).order(date: :asc, time_from: :asc)
     # @posts_others = Post.where(genre_id: 4).order(date: :asc, time_from: :asc)
 
-
   end
-  
+
+  # def change_date
+  #   puts params[:datepicker]
+  # end
+
+  def date
+    @posts = []
+    post = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).limit(10);
+
+    if post.count > 0
+      @first_post = true
+    else
+      @first_post = false
+    end
+
+    @posts.push(post)
+    @genre = Genre.all
+    @genre.each do |genre|
+      @posts.push(Post.where(genre_id: genre.id).where('date >= ?', Date.today).order(date: :asc, time_from: :asc))
+    end
+  end
+
   def detail
     @genre_id = params[:id].to_i
     if @genre_id == 0

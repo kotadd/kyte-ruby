@@ -28,8 +28,10 @@ Rails.application.routes.draw do
   get "users/:id/likes" => "users#likes"
 
   get "posts/:id/index" => "posts#detail"
+  get "posts/date" => "posts#date"
   get "posts/index" => "posts#index"
   get "posts/new" => "posts#new"
+  # post "posts/change_date" => "posts#change_date"
   post "posts/create" => "posts#create"
   get "posts/:id/edit" => "posts#edit"
   post "posts/:id/update" => "posts#update"
