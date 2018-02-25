@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     # TODO 一旦消えていくのが面倒なので。過去ログの取り扱い決まったら上のロジックに切り替え
     @genre = Genre.all
     @genre.each do |genre|
-      @posts.push(Post.where(genre_id: genre.id).order(date: :asc, time_from: :asc))
+      @posts.push(Post.where(genre_id: genre.id).where('date >= ?', Date.today).order(date: :asc, time_from: :asc))
     end
 
     # カードが全て表示されるか確認
@@ -42,9 +42,22 @@ class PostsController < ApplicationController
     # @posts_party = Post.where(genre_id: 3).order(date: :asc, time_from: :asc)
     # @posts_others = Post.where(genre_id: 4).order(date: :asc, time_from: :asc)
 
+  end
+
+  # def change_date
+  #   puts params[:search_date]
+  # end
+
+  def date
+    @posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).group(:date);
+
+    # @posts.each do |post|
+    #   puts "here it is!!!!!!!!!!!!"
+    #   puts post.date
+    # end
 
   end
-  
+
   def detail
     @genre_id = params[:id].to_i
     if @genre_id == 0
@@ -218,8 +231,7 @@ class PostsController < ApplicationController
   end
   
   def time_scheduler
-    # white企業なので右の時間は不要ですね "0:00", "0:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", 
-    @time_ranges = ["9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30","17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"]
+    @time_ranges = ["0:00", "0:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30","17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"]
     @current_time = DateTime.now
     @current_hour = @current_time.hour
     @current_minute = @current_time.minute

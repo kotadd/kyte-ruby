@@ -1,0 +1,59 @@
+<div class="main posts-date">
+  <div class="container">
+    <div class="row">
+
+    <div class="col s12">
+    <% @posts.each do |post| %>
+      <div class="list-box">
+        <div class="hashtag"><%= post.date %></div>
+      <div class="row">
+        <div class="col s12">
+          <div id="cards-<%= post.genre_id %>" class="card-flex">
+            <% if session[:user_id] == post.user.id%>
+              <a class="triangle" href="<%= "/posts/#{post.id}" %>">
+            <% else %>
+              <a class="" href="<%= "/posts/#{post.id}" %>">
+            <% end %>    
+              <div class="l-card">
+                <div class="l-thumbnail">
+                  <figure class="thumbnail-wrapper">
+                    <% if post.genre_id == 1 %>
+                      <img class="card-img" src="/genre_images/skunk_0.png">
+                    <% elsif post.genre_id == 2 %> 
+                      <img class="card-img" src="/genre_images/english_0.png">
+                    <% elsif post.genre_id == 3 %> 
+                      <img class="card-img" src="/genre_images/play_0.png">
+                    <% else %>
+                      <img class="card-img" src="/genre_images/others_0.png">
+                    <% end %>
+                  </figure>
+                  <span class="more-text">
+                    Read More
+                  </span>
+                </div>
+                <div class="text-content">
+                  <div class="title">
+                    <%= post.title %>
+                  </div>
+                  <div class="content-meta">
+                    <span class="date">
+                      開催日時<br>
+                      <%= post.date %> 
+                      <% if post.time_from %>
+                        <%= post.time_from.strftime('%H:%M') %>
+                        〜 <%= post.time_to.strftime('%H:%M') %>
+                      <% end %>
+                    </span>
+                  </div>
+                  </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
+  </div>
+</div>
+  </div>
+</div>

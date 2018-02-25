@@ -6,7 +6,11 @@
         <div class="row">
           <div class="col s12">
           <% @future_posts.each do |post| %>
-          <a href="<%= "/posts/#{post.id}" %>">
+            <% if session[:user_id] == post.user.id%>
+              <a class="triangle" href="<%= "/posts/#{post.id}" %>">
+            <% else %>
+              <a class="" href="<%= "/posts/#{post.id}" %>">
+            <% end %>    
             <div class="l-card">
               <div class="l-thumbnail">
                 <figure class="thumbnail-wrapper">
