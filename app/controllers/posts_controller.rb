@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   # end
 
   def date
-    @posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).group(:date);
+    @posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).group(:date)
 
     # @posts.each do |post|
     #   puts "here it is!!!!!!!!!!!!"
