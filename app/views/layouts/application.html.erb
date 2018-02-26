@@ -21,7 +21,7 @@
 
         <ul id="dropdown-user" class="dropdown-content">
           <li><%= link_to("ダッシュボード", "/users/#{@current_user.id}") %></li>
-          <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D">フィードバック</a></li>
+          <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D" target="_blank">フィードバック</a></li>
           <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
         </ul>
       <% end %>

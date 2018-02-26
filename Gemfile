@@ -32,7 +32,10 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'bcrypt'
+# gem 'bcrypt'
+# for windows
+gem 'bcrypt', '~> 3.1.11'
+
 # gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'jquery-rails'
 gem 'jquery-mousewheel-rails', '~> 0.0.9'
