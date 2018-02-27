@@ -21,7 +21,7 @@
 
         <ul id="dropdown-user" class="dropdown-content">
           <li><%= link_to("ダッシュボード", "/users/#{@current_user.id}") %></li>
-          <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D" target="_blank">フィードバック</a></li>
+          <!-- <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D" target="_blank">フィードバック</a></li> -->
           <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
         </ul>
       <% end %>
@@ -162,10 +162,26 @@
     </script>
 
     <script>
-    // card枚数が7枚を超えたら横スクロールする
+    // card枚数が8枚になったら横スクロールする
+    const displayWidth = $(window).width();
+    const LARGE_SIZE = 1552;
+    const MIDDLE_SIZE = 1330;
+    const SMALL_SIZE = 1110;
+    var cardNum = 8;
+
+    if (displayWidth > LARGE_SIZE) {
+      cardNum = 8;
+    } else if (displayWidth > MIDDLE_SIZE) {
+      cardNum = 7;
+    } else if (displayWidth > SMALL_SIZE) {
+      cardNum = 6;
+    } else {
+      cardNum = 5;
+    }
+
     $(document).ready(function() {
       $('.card-flex').each(function(i){
-        if ($('.card-flex:eq('+i+') a').length > 7) {
+        if ($('.card-flex:eq('+i+') a').length >= cardNum) {
           $('#cards-'+i).mousewheel(function(e, delta) {
               this.scrollLeft -= (delta * 1);
               e.preventDefault();
@@ -207,7 +223,6 @@
       clear: "クリア",
       close: "閉じる",
       format: "yyyy-mm-dd",
-      minDate: new Date(),
       selectMonths: true, // Creates a dropdown to control month
       selectYears: 15, // Creates a dropdown of 15 years to control year,
       closeOnSelect: true // Close upon selecting a date,
