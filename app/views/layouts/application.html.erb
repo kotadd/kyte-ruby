@@ -169,6 +169,7 @@
     const MIDDLE_SIZE = 1330;
     const SMALL_SIZE = 1110;
     var cardNum = 9;
+    var speed = 30;
 
     if (displayWidth > LARGEST_SIZE) {
       cardNum = 9;
@@ -186,7 +187,7 @@
       $('.card-flex').each(function(i){
         if ($('.card-flex:eq('+i+') a').length >= cardNum) {
           $('#cards-'+i).mousewheel(function(e, delta) {
-              this.scrollLeft -= (delta * 1);
+              this.scrollLeft -= (delta * speed);
               e.preventDefault();
           });       
         }
