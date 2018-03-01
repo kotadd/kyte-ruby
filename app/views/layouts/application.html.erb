@@ -32,7 +32,8 @@
             <% if @current_user %>
               <%= link_to("Kyte", "/posts/index") %>
             <% else %>
-              <a href="/" data-turbolinks="false">Kyte</a>
+              <!-- <a href="/" data-turbolinks="false">Kyte</a> -->
+              <%= link_to("Kyte", "/") %>
             <% end %>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           </div>
@@ -59,7 +60,8 @@
                 </li>
               <% else %>
                 <li>
-                  <a href="/about" data-turbolinks="false">Kyteとは</a>
+                  <!-- <a href="/about" data-turbolinks="false">Kyteとは</a> -->
+                  <%= link_to("Kyteとは", "/about") %>
                 </li>
                 <li>
                   <%= link_to("アカウントを作る", "/signup") %>
@@ -95,7 +97,8 @@
                 </li>
               <% else %>
                 <li>
-                  <a href="/about" data-turbolinks="false">Kyteとは</a>
+                  <!-- <a href="/about" data-turbolinks="false">Kyteとは</a> -->
+                 <%= link_to("Kyteとは", "/about") %>
                 </li>
                 <li>
                   <%= link_to("アカウントを作る", "/signup") %>
