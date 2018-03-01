@@ -3,9 +3,9 @@
 #about-picture {
   position: absolute;
   width: 100%;
-  height: auto;
-  max-height: 600px;
-  min-height: 600px;
+  height: 100%;
+  /*max-height: 600px;*/
+  /*min-height: 600px;*/
   background-color: #fafafa;
   background-repeat: no-repeat;
   background-position: center 50%;
@@ -114,6 +114,10 @@
 .about-message {
   position: relative;
   top: 4px;
+
+  p {
+    text-shadow: 0 1px 0 #999;
+  }
 }
 /* フォーム================================ */
 .form {
