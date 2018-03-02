@@ -43,6 +43,8 @@
                   <div class="title">
                     <%= post.title %>
                   </div>
+                  <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="<%= post.user.name %>" src="<%= "/user_images/#{post.user.image_name}" %>">
+
                   <div class="content-meta">
                     <span class="date">
                       開催日時<br>
