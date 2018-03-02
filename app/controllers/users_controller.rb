@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @posts = @user.posts
     @likes = @user.likes
     @joins = @user.joins
-
+    @joined = @user.joined
   end
     
   def create
@@ -117,6 +117,7 @@ class UsersController < ApplicationController
     @posts = @user.posts
     @likes = @user.likes
     @joins = @user.joins
+    @joined = @user.joined
   end
 
   def joins
@@ -124,8 +125,17 @@ class UsersController < ApplicationController
     @posts = @user.posts
     @likes = @user.likes
     @joins = @user.joins
+    @joined = @user.joined
   end
   
+  def joined
+    @user = User.find_by(id: params[:id])
+    @posts = @user.posts
+    @likes = @user.likes
+    @joins = @user.joins
+    @joined = @user.joined
+  end
+
   def ensure_correct_user
     if @current_user.id != params[:id].to_i
       flash[:notice] = "権限がありません"

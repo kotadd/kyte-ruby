@@ -19,8 +19,9 @@
       <div class="col s10">
         <ul class="user-tabs">
           <li class="active"><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
-          <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定<span class="badge tab-badge"><%= @joins.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/likes "%>">いいね<span class="badge tab-badge"><%= @likes.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定<span class="badge tab-badge"><%= @joins.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id}/joined "%>">参加済<span class="badge tab-badge"><%= @joined.count%></span></a></li>
         </ul>     
         <% @user.posts.each do |post| %>
           <a href="<%=" /posts/#{post.id} "%>" >
@@ -34,7 +35,7 @@
                   <div><%= post.content %></div>
                 </div>
               </div>
-              <div class="col s3 user-created-date">
+              <div class="col s3 user-held-date">
                   <div class="post-right">
                     <div><%= post.created_at.strftime("%Y年%m月%d日") %>に作成</div>
                   </div>
