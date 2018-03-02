@@ -17,7 +17,30 @@ class User < ApplicationRecord
   end
 
   def joins
-    return Member.where(user_id: self.id)
+    members = Member.where(user_id: self.id)
+    joins = []
+    members.each do |member|
+      post = Post.where(id: member.post_id).where('date >= ?', Date.today)
+      if post.count > 0
+        puts "joins!"
+        joins.push(member)
+      end
+    end
+    return joins
   end
+  
+  def joined
+    members = Member.where(user_id: self.id)
+    joined = []
+    members.each do |member|
+      post = Post.where(id: member.post_id).where('date < ?', Date.today)
+      if post.count > 0
+        puts "joined!"
+        joined.push(member)
+      end
+    end
+    return joined
+  end
+
 
 end

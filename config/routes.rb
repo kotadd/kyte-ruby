@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   post "logout" => "users#logout"
   get "login" => "users#login_form"
   get "users/:id/joins" => "users#joins"
+  get "users/:id/joined" => "users#joined"
   get "users/:id/likes" => "users#likes"
 
   get "posts/:id/index" => "posts#detail"

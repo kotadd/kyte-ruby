@@ -18,13 +18,14 @@
       <div class="col s10">
       <ul class="user-tabs">
         <li><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
-        <li class="active"><a href="<%="/users/#{@user.id}/likes "%>">いいね<span class="badge tab-badge"><%= @likes.count%></span></a></li>
+        <li><a href="<%="/users/#{@user.id}/likes "%>">いいね<span class="badge tab-badge"><%= @likes.count%></span></a></li>
         <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定<span class="badge tab-badge"><%= @joins.count%></span></a></li>
-        <li><a href="<%="/users/#{@user.id}/joined "%>">参加済<span class="badge tab-badge"><%= @joined.count%></span></a></li>
+        <li class="active"><a href="<%="/users/#{@user.id}/joined "%>">参加済<span class="badge tab-badge"><%= @joined.count%></span></a></li>
       </ul>
       
-      <% @likes.each do |like| %>
-        <% post = Post.find_by(id: like.post_id) %>
+      <% @joined.each do |join| %>
+        <% post = Post.find_by(id: join.post_id) %>
+        <% puts post %>
         <a href="<%=" /posts/#{post.id} "%>" >
           <div class="posts-index-item">
             <div class="col s9">
@@ -40,12 +41,12 @@
             </div>
             <div class="col s3 user-held-date">
                 <div class="post-right">
-                  <div><%= post.created_at.strftime("%Y年%m月%d日") %>に作成</div>
+                  <div><%= post.date.strftime("%Y年%m月%d日") %>に開催済</div>
                 </div>
             </div>
           </div>
         </a>
-
+        
       <% end %>
     </div>
   </div>
