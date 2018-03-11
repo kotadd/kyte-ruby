@@ -13,23 +13,23 @@
 
   <body>
     <header>
-      <% if @current_user %>
+      <% if user_signed_in? %>
         <ul id="dropdown-post" class="dropdown-content">
           <li><%= link_to("ジャンルで探す", "/posts/index") %></li>
           <li><%= link_to("日付で探す", "/posts/date") %></li>
         </ul>
 
         <ul id="dropdown-user" class="dropdown-content">
-          <li><%= link_to("ダッシュボード", "/users/#{@current_user.id}") %></li>
+          <li><%= link_to("ダッシュボード", "/users/#{current_user.id}") %></li>
           <!-- <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D" target="_blank">フィードバック</a></li> -->
-          <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
+          <li><%= link_to("ログアウト", destroy_user_session_path, method: :delete) %></li>
         </ul>
       <% end %>
 
       <nav>
         <div class="nav-wrapper">
           <div class="header-logo">
-            <% if @current_user %>
+            <% if user_signed_in? %>
               <%= link_to("Kyte", "/posts/index") %>
             <% else %>
               <!-- <a href="/" data-turbolinks="false">Kyte</a> -->
@@ -39,13 +39,13 @@
           </div>
           <div class="header-menus">
             <ul class="right hide-on-med-and-down">
-              <% if @current_user %>
+              <% if user_signed_in? %>
                 <li>
                   <a class="dropdown-button" href="/posts/index" data-activates="dropdown-post">
                     <div>イベントを探す</div>
                   </a>
                 </li>
-                <% if @current_user.name == 'admin' %>                
+                <% if current_user.name == 'admin' %>                
                   <li>
                     <%= link_to("ユーザー一覧", "/users/index") %>
                   </li>
@@ -54,8 +54,8 @@
                   </li>
                 <% end %>
                 <li>
-                  <a class="dropdown-button" href="<%= "/users/#{@current_user.id} "%>" data-activates="dropdown-user">
-                    <img class="icon-img" src="<%= "/user_images/#{@current_user.image_name}" %>">
+                  <a class="dropdown-button" href="<%= "/users/#{current_user.id} "%>" data-activates="dropdown-user">
+                    <img class="icon-img" src="<%= "/user_images/#{current_user.image_name}" %>">
                   </a>
                 </li>
               <% else %>
@@ -64,22 +64,22 @@
                   <%= link_to("Kyteとは", "/about") %>
                 </li>
                 <li>
-                  <%= link_to("アカウントを作る", "/signup") %>
+                  <%= link_to "アカウントを作る", new_user_registration_path %>
                   <!-- <a data-target="account-modal" class="modal-trigger">アカウントを作る</a>  -->
                 </li>
                 <li>
-                  <%= link_to("ログイン", "/login") %>
+                  <%= link_to("ログイン", new_user_session_path) %>
                   <!-- <a data-target="login-modal" class="modal-trigger">ログイン</a>  -->
                 </li>
               <% end %>
             </ul>
             <ul class="side-nav" id="mobile-demo">
-              <% if @current_user %>
+              <% if user_signed_in? %>
                 <li>
-                  <img class="icon-img" src="<%= "/user_images/#{@current_user.image_name}" %>">
+                  <img class="icon-img" src="<%= "/user_images/#{current_user.image_name}" %>">
                 </li>
                 <li>
-                  <%= link_to("ダッシュボード", "/users/#{@current_user.id}") %>
+                  <%= link_to("ダッシュボード", "/users/#{current_user.id}") %>
                 </li>
                 <li>
                   <%= link_to("イベントを作る", "/posts/new") %>
@@ -87,13 +87,13 @@
                 <li>
                   <%= link_to("イベントを探す", "/posts/index") %>
                 </li>
-                <% if @current_user.name == 'admin' %>
+                <% if current_user.name == 'admin' %>
                   <li>
                     <%= link_to("ユーザー一覧", "/users/index") %>
                   </li>
                 <% end %>
                 <li>
-                  <%= link_to("ログアウト", "/logout", {method: :post}) %>
+                  <%= link_to("ログアウト", destroy_user_session_path, method: :delete) %>
                 </li>
               <% else %>
                 <li>
@@ -101,11 +101,11 @@
                  <%= link_to("Kyteとは", "/about") %>
                 </li>
                 <li>
-                  <%= link_to("アカウントを作る", "/signup") %>
+                  <%= link_to "アカウントを作る", new_user_registration_path %>
                   <!-- <a data-target="account-modal" class="modal-trigger">アカウントを作る</a>  -->
                 </li>
                 <li>
-                  <%= link_to("ログイン", "/login") %>
+                  <%= link_to("ログイン", new_user_session_path) %>
                   <!-- <a data-target="login-modal" class="modal-trigger">ログイン</a>  -->
                 </li>
               <% end %>
@@ -134,6 +134,8 @@
           <%= flash[:notice] %>
         </div>
       <% end %>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
     <main>
         <%= yield %>    
@@ -202,11 +204,11 @@
       $(".dropdown-button").dropdown({ hover: true, constrainWidth: false, belowOrigin: true });
 
       // flashがずっと出ているのがうざいので、0.7秒で消す
-      $('document').ready(function() {
-        setTimeout(function() {
-          $('.flash').slideUp();
-        }, 700);
-      });
+      // $('document').ready(function() {
+      //   setTimeout(function() {
+      //     $('.flash').slideUp();
+      //   }, 700);
+      // });
     </script>
 
     <script>

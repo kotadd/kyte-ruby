@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: { 
+    :omniauth_callbacks => "omniauth_callbacks", 
+    :sessions => 'users/sessions', 
+    :registrations => 'users/registrations'
+  }
+  root 'pages#top'
+  root to: 'posts#index'
+
   post "likes/:post_id/create" => "likes#create"
   post "likes/:post_id/destroy" => "likes#destroy"
   post "members/:post_id/create" => "members#create"

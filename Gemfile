@@ -44,6 +44,11 @@ gem 'jquery-mousewheel-rails', '~> 0.0.9'
 gem 'materialize-sass'
 gem "font-awesome-rails"
 
+gem 'devise'
+gem 'omniauth-twitter'
+gem 'omniauth-line'
+gem 'omniauth-facebook'
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
