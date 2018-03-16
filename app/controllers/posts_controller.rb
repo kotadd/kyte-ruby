@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user, {only: [:new, :edit, :create, :update, :destroy]}
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
   before_action :time_scheduler, {only: [:new, :edit, :create, :update]}
   
@@ -105,7 +105,7 @@ class PostsController < ApplicationController
   end
   
   def create
-    puts params[:time_from]
+    # puts params[:time_from]
 
     if params[:time_from]
       @time_from = params[:time_from]
@@ -127,8 +127,8 @@ class PostsController < ApplicationController
       user_id: @current_user.id
     )
 
-    puts "check*********"
-    puts @post.time_from
+    # puts "check*********"
+    # puts @post.time_from
 
 
     if params[:image]

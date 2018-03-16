@@ -15,18 +15,20 @@
               </div>
             </div>
              <div class="col s2">
-              <% if @post.user_id != @current_user.id %>
-                <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
-                  <%= link_to("/members/#{@post.id}/destroy", {method: "post"}) do %>
-                    <span class="waves-light btn">参加をやめる</span>
+              <% if @current_user != nil %>
+                <% if @post.user_id != @current_user.id %>
+                  <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
+                    <%= link_to("/members/#{@post.id}/destroy", {method: "post"}) do %>
+                      <span class="waves-light btn">参加をやめる</span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
+                      <span class="waves-light btn">参加する</span>
+                    <% end %>
                   <% end %>
                 <% else %>
-                  <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
-                    <span class="waves-light btn">参加する</span>
-                  <% end %>
+                  あなたが主催者です
                 <% end %>
-              <% else %>
-                あなたが主催者です
               <% end %>
               <br>
               <% if @post.max_member %>
@@ -109,23 +111,24 @@
               <%= @post.updated_at %>
           </div>
 
-          <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
-            <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
-              <span class="fa fa-thumbs-up">いいね！を取り消す</span>
+          <% if @current_user != nil %>
+            <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
+              <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+                <span class="fa fa-thumbs-up">いいね！を取り消す</span>
+              <% end %>
+            <% else %>
+              <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+                <span class="fa fa-thumbs-o-up">いいね！</span>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
-              <span class="fa fa-thumbs-o-up">いいね！</span>
+            <%= @likes_count %>
+            <% if @post.user_id == @current_user.id %>
+              <div class="post-menus">
+                <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn", "data-turbolinks":"false"}) %>
+                  <button data-target="modal" class="waves-effect waves-light btn modal-trigger">削除</button> 
+              </div>
             <% end %>
           <% end %>
-          <%= @likes_count %>
-          <% if @post.user_id == @current_user.id %>
-            <div class="post-menus">
-              <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn", "data-turbolinks":"false"}) %>
-                <button data-target="modal" class="waves-effect waves-light btn modal-trigger">削除</button> 
-            </div>
-          <% end %>
-
         </div>       
       </div>
 
