@@ -105,7 +105,7 @@ class PostsController < ApplicationController
   end
   
   def create
-    puts params[:time_from]
+    # puts params[:time_from]
 
     if params[:time_from]
       @time_from = params[:time_from]
@@ -127,8 +127,8 @@ class PostsController < ApplicationController
       user_id: @current_user.id
     )
 
-    puts "check*********"
-    puts @post.time_from
+    # puts "check*********"
+    # puts @post.time_from
 
 
     if params[:image]

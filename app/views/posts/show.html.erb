@@ -15,22 +15,20 @@
               </div>
             </div>
              <div class="col s2">
-              <% if @current_user == nil %>
-                <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
-                  <span class="waves-light btn">参加する</span>
-                <% end %>
-              <% elsif @post.user_id != @current_user.id %>
-                <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
-                  <%= link_to("/members/#{@post.id}/destroy", {method: "post"}) do %>
-                    <span class="waves-light btn">参加をやめる</span>
+              <% if @current_user != nil %>
+                <% if @post.user_id != @current_user.id %>
+                  <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
+                    <%= link_to("/members/#{@post.id}/destroy", {method: "post"}) do %>
+                      <span class="waves-light btn">参加をやめる</span>
+                    <% end %>
+                  <% else %>
+                    <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
+                      <span class="waves-light btn">参加する</span>
+                    <% end %>
                   <% end %>
                 <% else %>
-                  <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
-                    <span class="waves-light btn">参加する</span>
-                  <% end %>
+                  あなたが主催者です
                 <% end %>
-              <% else %>
-                あなたが主催者です
               <% end %>
               <br>
               <% if @post.max_member %>
