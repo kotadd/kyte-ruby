@@ -14,6 +14,12 @@
             <%= message %>
           </div>
         <% end %>
+        <% if @error_message %>
+          <div class="form-error">
+            <%= @error_message %>
+          </div>
+        <% end %>
+
 
         <%= form_tag("/users/create") do %>
         <div class="row margin">
@@ -35,6 +41,13 @@
             <i class="fa fa-lock prefix" aria-hidden="true"></i>
             <input id="password_account" name="password" type="password" class="validate" value="">
             <label for="password_account" class="active">パスワード<span class="required">*</span></label>
+          </div>
+        </div>
+       <div class="row margin">
+          <div class="input-field col s12">
+            <i class="fa fa-lock prefix" aria-hidden="true"></i>
+            <input id="password_confirmation_account" name="password_confirmation" type="password" class="validate" value="">
+            <label for="password_confirmation_account" class="active">パスワードの確認<span class="required">*</span></label>
           </div>
         </div>
 <!--

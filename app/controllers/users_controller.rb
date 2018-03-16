@@ -22,13 +22,18 @@ class UsersController < ApplicationController
       image_name: "default_user.jpg",
       password: params[:password]
     )
-    if @user.save
+    if params[:password] != params[:password_confirmation] 
+      @error_message = "パスワードと確認用のパスワードが一致していません"
+      @name = params[:name]
+      @email = params[:email]
+      render("users/new")
+    elsif @user.save
       session[:user_id] = @user.id
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")
     else
       # flash.now[:notice] = "すでに登録されているユーザーです"
-      @error_message = "ユーザー名またはメールアドレスが間違っています"
+      # @error_message = "ユーザー名またはメールアドレスが間違っています"
       @name = params[:name]
       @email = params[:email]
       render("users/new")
