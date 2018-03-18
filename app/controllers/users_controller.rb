@@ -22,21 +22,33 @@ class UsersController < ApplicationController
       image_name: "default_user.jpg",
       password: params[:password]
     )
-    if params[:password] != params[:password_confirmation] 
-      @error_message = "パスワードと確認用のパスワードが一致していません"
-      @name = params[:name]
-      @email = params[:email]
-      render("users/new")
-    elsif @user.save
-      session[:user_id] = @user.id
-      flash[:notice] = "ユーザー登録が完了しました"
-      redirect_to("/users/#{@user.id}")
-    else
-      # flash.now[:notice] = "すでに登録されているユーザーです"
-      # @error_message = "ユーザー名またはメールアドレスが間違っています"
-      @name = params[:name]
-      @email = params[:email]
-      render("users/new")
+    respond_to do |format|
+      if params[:password] != params[:password_confirmation] 
+        @error_message = "パスワードと確認用のパスワードが一致していません"
+        @name = params[:name]
+        @email = params[:email]
+        format.html { render action: 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+        # render("users/new")
+      elsif @user.save
+        session[:user_id] = @user.id
+
+        # TODO 登録を行った人にメールを送る場合はここを有効化する
+        # UserMailer.welcome_email(@user).deliver_later
+ 
+        format.html { redirect_to("/users/#{@user.id}", notice: 'ユーザー登録が完了しました') }
+        format.json { render json: @user, status: :created, location: @user }
+        # flash[:notice] = "ユーザー登録が完了しました"
+        # redirect_to("/users/#{@user.id}")
+      else
+        # flash.now[:notice] = "すでに登録されているユーザーです"
+        # @error_message = "ユーザー名またはメールアドレスが間違っています"
+        @name = params[:name]
+        @email = params[:email]
+        format.html { render action: 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+        # render("users/new")
+      end
     end
   end
   
