@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   post "users/create" => "users#create"
   get "users/create" => "users#new"
   get "signup" => "users#new"
+  get "forgot_password" => "users#forgot_password_form"
+  post "forgot_password" => "users#forgot_password"
+
+  get "reset_password" => "users#reset_password_form"
+  post "reset_password" => "users#reset_password"
+  
   get "users/index" => "users#index"
   get "users/:id" => "users#show"
   post "login" => "users#login"
