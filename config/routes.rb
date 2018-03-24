@@ -22,9 +22,6 @@ Rails.application.routes.draw do
   get "forgot_password" => "users#forgot_password_form"
   post "forgot_password" => "users#forgot_password"
 
-  get "reset_password" => "users#reset_password_form"
-  post "reset_password" => "users#reset_password"
-  
   get "users/index" => "users#index"
   get "users/:id" => "users#show"
   post "login" => "users#login"

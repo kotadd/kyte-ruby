@@ -81,19 +81,14 @@ class UsersController < ApplicationController
         # rescue ActiveSupport::MessageVerifier::InvalidSignature
         # invalid token
       else
+        @error_message = 'このメールアドレスは登録されていません'
         format.html { render action: 'forgot_password_form' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: 'このメールアドレスは登録されていません', status: :unprocessable_entity }
 
       end
 
     end
 
-  end
-
-  def reset_password_form
-  end
-
-  def reset_password
   end
 
   def update
