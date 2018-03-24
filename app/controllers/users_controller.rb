@@ -64,6 +64,33 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
+  def forgot_password_form
+  end
+
+  def forgot_password
+    @user = User.find_by(email: params[:email])
+    respond_to do |format|
+
+      if @user
+        # user_id, expire_at = Rails.application.message_verifier(:password_reset).verify(params[:token])
+
+        UserMailer.reset_password(@user).deliver_later
+        format.html { redirect_to("/login", notice: 'パスワード変更用のメールが送信されました') }
+        format.json { render json: @user, status: :unprocessable_entity }
+
+        # rescue ActiveSupport::MessageVerifier::InvalidSignature
+        # invalid token
+      else
+        @error_message = 'このメールアドレスは登録されていません'
+        format.html { render action: 'forgot_password_form' }
+        format.json { render json: 'このメールアドレスは登録されていません', status: :unprocessable_entity }
+
+      end
+
+    end
+
+  end
+
   def update
     @user = User.find_by(id: params[:id])
     @user.name = params[:name]
