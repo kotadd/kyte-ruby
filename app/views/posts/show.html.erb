@@ -48,9 +48,9 @@
             <div class="row">
 
               <div class="col s12">
-                <% if @post.image_name %>
+                <% if @post.image %>
                   <div class="post-img">
-                    <img src="<%= "/post_images/#{@post.image_name}" %>">
+                　　<%= image_tag @post.image.url %>
                   </div>
                 <% end %>
                 <div class="post-detail">
@@ -65,14 +65,15 @@
                   <p class="post-detail-label">参加者(<%= @members.count %>人)</p>
                     <div class="post-user-img">
                     <% @member_users.each do |member| %>
-                      <img class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" src="<%= "/user_images/#{member.image_name}" %>">
+                      <% if !member.avatar.blank? %>
+                        <img src="<%= member.avatar %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
+                      <% else %>
+                        <img src="<%= "/user_images/default_user.jpg" %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
+                      <% end %>
                     <% end %>
                     </div>
                 </div>
-                
               </div>
-
-
 
             </div>
           </div>
@@ -108,7 +109,7 @@
         <div class="col s9">
           <!-- 更新日時-->
           <div class="post-time">
-              <%= @post.updated_at %>
+            <%= @post.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>に最終更新されました
           </div>
 
           <% if @current_user != nil %>
@@ -138,8 +139,8 @@
         <p>この操作は元に戻せません。本当によろしいですか？</p>
       </div>
       <div class="modal-footer">
-        <button class="modal-action modal-close waves-effect waves-green btn-flat">キャンセル</button>
         <%= link_to("はい", "/posts/#{@post.id}/destroy", {method: "post", class: "modal-action modal-close waves-effect waves-green btn-flat"}) %>
+        <button class="modal-action modal-close waves-effect waves-green btn-flat">キャンセル</button>
       </div>
     </div>
 

@@ -24,6 +24,11 @@ $element-top-margin: 0;
 $element-bottom-margin: 0;
 @import 'materialize';
 
+@media only screen and (max-width: 1580px) {
+  .container {
+    width: 80%;
+  }
+}
 .main {
   .container {
     margin-top: 16px;
@@ -34,15 +39,14 @@ $element-bottom-margin: 0;
   }
 
 }
-@media #{$medium-and-up} {
-  .container {
-    width: 90%;
-  }
+* {
+  word-wrap:break-word;
 }
-@media #{$large-and-up} {
-  .container {
-    width: 90%;
-  }
+.overflow {
+  // width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -190,11 +194,9 @@ html {
 
 
 
-
-
 .icon-img {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%; 
 }
 

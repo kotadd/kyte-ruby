@@ -55,7 +55,11 @@
                 <% end %>
                 <li>
                   <a class="dropdown-button" href="<%= "/users/#{@current_user.id} "%>" data-activates="dropdown-user">
-                    <img class="icon-img" src="<%= "/user_images/#{@current_user.image_name}" %>">
+                    <% if !@current_user.avatar.blank? %>
+                      <img class="icon-img" src="<%= @current_user.avatar %>">
+                    <% else %>
+                      <img class="icon-img" src="<%= "/user_images/default_user.jpg" %>">
+                    <% end %>
                   </a>
                 </li>
               <% else %>
@@ -76,7 +80,11 @@
             <ul class="side-nav" id="mobile-demo">
               <% if @current_user %>
                 <li>
-                  <img class="icon-img" src="<%= "/user_images/#{@current_user.image_name}" %>">
+                  <% if !@current_user.avatar.blank? %>
+                    <img class="icon-img" src="<%= @current_user.avatar %>">
+                  <% else %>
+                    <img class="icon-img" src="<%= "/user_images/default_user.jpg" %>">
+                  <% end %>
                 </li>
                 <li>
                   <%= link_to("ダッシュボード", "/users/#{@current_user.id}") %>
@@ -165,7 +173,7 @@
     </script>
 
     <script>
-    // card枚数が8枚になったら横スクロールする
+    // card枚数がx枚になったら横スクロールする
     const displayWidth = $(window).width();
     const LARGEST_SIZE = 1777;
     const LARGE_SIZE = 1552;
@@ -243,16 +251,32 @@
     </script>
 
     <script>
-      // TODO クロッピングうまくできねーーーー
+       if ($('.already-img').length) {
+          $('#preview').css('margin-bottom', '24px');
+       }
+
+      // プレビューに写真を出す
        $('#image').change(function() {
         var fr = new FileReader();
         fr.onload = function() {
           var img = $('<img>').attr('src', fr.result);
           img.attr('class', 'added-img');
-          if ($('.added-img')) {
+          if ($('.added-img').length) {
             $('.added-img').remove();
+            $('.direction-img').remove();
+            $('.direction-avt').remove();
           }
           $('#preview').append(img);
+          $('#preview').css('margin-bottom', '24px');
+          if ($('.already-img').length) {
+            $('.added-img').before("<div class='direction-img'></div>");
+            $('.added-img').css('margin-left', "84px");
+            $('.already-img').css('filter', 'brightness(50%)');
+          } else if ($('.already-avt').length) {
+            $('.added-img').before("<div class='direction-avt'></div>");
+            $('.added-img').css('margin-left', "84px");
+            $('.already-avt').css('filter', 'brightness(50%)');
+          }
   //         $('.get-data-area').append('<a id="getData" class="btn">crop</a>')
 
   //         var croppedImage = document.querySelector('#preview > img');

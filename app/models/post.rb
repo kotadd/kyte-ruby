@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   # validates :time_to, {presence: true}
   validate :time_check
   validate :date_check
+  mount_uploader :image, ImageUploader
 
   def user
     return User.find_by(id: self.user_id)

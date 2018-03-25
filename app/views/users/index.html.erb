@@ -24,7 +24,11 @@
               <div class="col s9">
                 <div class="user-left">
                   <div class="user-first-column">
-                    <img src="<%= "/user_images/#{user.image_name}" %>">
+                    <% if user.avatar %>
+                      <img src="<%= user.avatar %>">
+                    <% else %>
+                      <img src="<%= "/user_images/default_user.jpg" %>">
+                    <% end %>
                   </div>
                 </div>
                 <div class="user-right user-right-height">

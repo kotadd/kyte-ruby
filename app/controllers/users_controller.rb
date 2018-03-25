@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(
       name: params[:name],
       email: params[:email],
-      image_name: "default_user.jpg",
+      # image_name: "default_user.jpg",
       password: params[:password]
     )
     respond_to do |format|
@@ -30,6 +30,13 @@ class UsersController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
         # render("users/new")
+      elsif params[:password].length < 8
+       @error_message = "パスワードは8文字以上で入力してください"
+        @name = params[:name]
+        @email = params[:email]
+        format.html { render action: 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+
       elsif @user.save
         session[:user_id] = @user.id
 
@@ -97,9 +104,11 @@ class UsersController < ApplicationController
     @user.email = params[:email]
     
     if params[:image]
-      @user.image_name = "#{@user.id}.jpg"
-      image = params[:image]
-      File.binwrite("public/user_images/#{@user.image_name}", image.read)
+      # @user.image_name = "#{@user.id}.jpg"
+      # image = params[:image]
+      # File.binwrite("public/user_images/#{@user.image_name}", image.read)
+      
+      @user.avatar = params[:image]
     end
     
     if @user.save

@@ -33,7 +33,11 @@
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
               </div>
-              <div id="preview" class="user-img"></div>
+              <div id="preview" class="user-img">
+                <% if @user.avatar? %>
+              　　<%= image_tag @user.avatar.url, :class => "already-avt" %>
+              　<% end %>
+              </div>
             </div>
             <button class="waves-effect waves-light btn pull-right" type="submit">保存</button>
           <% end %>
