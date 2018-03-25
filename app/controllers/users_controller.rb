@@ -30,6 +30,13 @@ class UsersController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
         # render("users/new")
+      elsif params[:password].length < 8
+       @error_message = "パスワードは8文字以上で入力してください"
+        @name = params[:name]
+        @email = params[:email]
+        format.html { render action: 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+
       elsif @user.save
         session[:user_id] = @user.id
 

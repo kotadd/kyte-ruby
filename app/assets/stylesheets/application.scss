@@ -34,16 +34,6 @@ $element-bottom-margin: 0;
   }
 
 }
-@media #{$medium-and-up} {
-  .container {
-    width: 90%;
-  }
-}
-@media #{$large-and-up} {
-  .container {
-    width: 90%;
-  }
-}
 
 
 /* Variables ============================*/
@@ -193,8 +183,8 @@ html {
 
 
 .icon-img {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%; 
 }
 

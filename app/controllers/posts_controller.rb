@@ -131,13 +131,17 @@ class PostsController < ApplicationController
     # puts @post.time_from
 
 
+
     if params[:image]
       # 画像名称思いつかないので、一旦UUIDで
-      @post.image_name = SecureRandom.uuid.to_s + ".jpg"
-      image = params[:image]
-      File.binwrite("public/post_images/#{@post.image_name}", image.read)
-    end
+      # @post.image_name = SecureRandom.uuid.to_s + ".jpg"
+      # image = params[:image]
+      # File.binwrite("public/post_images/#{@post.image_name}", image.read)
+      # uploader = ImageUploader.new
+      # uploader.store!(params[:image])
+      @post.image = params[:image]
 
+    end
 
     if @post.save
       flash[:notice] = "投稿を作成しました"
@@ -187,9 +191,9 @@ class PostsController < ApplicationController
     @post.user_id = @current_user.id
 
     
-    puts "*********ここをチェックする**********"
-    puts @post.time_from
-    puts "*********ここをチェックする**********"
+    # puts "*********ここをチェックする**********"
+    # puts @post.time_from
+    # puts "*********ここをチェックする**********"
 
     if @post.time_from
       @time_from = @post.time_from.hour.to_s + ":" + @post.time_from.min.to_s
@@ -200,9 +204,12 @@ class PostsController < ApplicationController
 
     if params[:image]
       # 画像名称思いつかないので、一旦UUIDで
-      @post.image_name = SecureRandom.uuid.to_s + ".jpg"
-      image = params[:image]
-      File.binwrite("public/post_images/#{@post.image_name}", image.read)
+      # @post.image_name = SecureRandom.uuid.to_s + ".jpg"
+      # image = params[:image]
+      # File.binwrite("public/post_images/#{@post.image_name}", image.read)
+
+      @post.image = params[:image]
+
     end
 
     if @post.save

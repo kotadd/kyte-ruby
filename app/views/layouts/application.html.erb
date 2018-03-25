@@ -165,7 +165,7 @@
     </script>
 
     <script>
-    // card枚数が8枚になったら横スクロールする
+    // card枚数がx枚になったら横スクロールする
     const displayWidth = $(window).width();
     const LARGEST_SIZE = 1777;
     const LARGE_SIZE = 1552;
@@ -243,16 +243,27 @@
     </script>
 
     <script>
-      // TODO クロッピングうまくできねーーーー
+       if ($('.already-img').length) {
+          $('#preview').css('margin-bottom', '24px');
+       }
+
+      // プレビューに写真を出す
        $('#image').change(function() {
         var fr = new FileReader();
         fr.onload = function() {
           var img = $('<img>').attr('src', fr.result);
           img.attr('class', 'added-img');
-          if ($('.added-img')) {
+          if ($('.added-img').length) {
             $('.added-img').remove();
+            $('.direction').remove();
           }
           $('#preview').append(img);
+          $('#preview').css('margin-bottom', '24px');
+          if ($('.already-img').length) {
+            $('.added-img').before("<div class='direction'></div>");
+            $('.added-img').css('margin-left', "84px");
+            $('.already-img').css('filter', 'brightness(50%)');
+          }
   //         $('.get-data-area').append('<a id="getData" class="btn">crop</a>')
 
   //         var croppedImage = document.querySelector('#preview > img');

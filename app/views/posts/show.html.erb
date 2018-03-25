@@ -48,9 +48,9 @@
             <div class="row">
 
               <div class="col s12">
-                <% if @post.image_name %>
+                <% if @post.image %>
                   <div class="post-img">
-                    <img src="<%= "/post_images/#{@post.image_name}" %>">
+                　　<%= image_tag @post.image.url %>
                   </div>
                 <% end %>
                 <div class="post-detail">
@@ -138,8 +138,8 @@
         <p>この操作は元に戻せません。本当によろしいですか？</p>
       </div>
       <div class="modal-footer">
-        <button class="modal-action modal-close waves-effect waves-green btn-flat">キャンセル</button>
         <%= link_to("はい", "/posts/#{@post.id}/destroy", {method: "post", class: "modal-action modal-close waves-effect waves-green btn-flat"}) %>
+        <button class="modal-action modal-close waves-effect waves-green btn-flat">キャンセル</button>
       </div>
     </div>
 

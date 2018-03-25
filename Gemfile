@@ -43,6 +43,8 @@ gem 'jquery-mousewheel-rails', '~> 0.0.9'
 # gem 'bootstrap3-datetimepicker-rails', '~> 4.14.30'
 gem 'materialize-sass'
 gem "font-awesome-rails"
+gem 'carrierwave'
+gem 'rmagick'
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
