@@ -263,14 +263,19 @@
           img.attr('class', 'added-img');
           if ($('.added-img').length) {
             $('.added-img').remove();
-            $('.direction').remove();
+            $('.direction-img').remove();
+            $('.direction-avt').remove();
           }
           $('#preview').append(img);
           $('#preview').css('margin-bottom', '24px');
           if ($('.already-img').length) {
-            $('.added-img').before("<div class='direction'></div>");
+            $('.added-img').before("<div class='direction-img'></div>");
             $('.added-img').css('margin-left', "84px");
             $('.already-img').css('filter', 'brightness(50%)');
+          } else if ($('.already-avt').length) {
+            $('.added-img').before("<div class='direction-avt'></div>");
+            $('.added-img').css('margin-left', "84px");
+            $('.already-avt').css('filter', 'brightness(50%)');
           }
   //         $('.get-data-area').append('<a id="getData" class="btn">crop</a>')
 

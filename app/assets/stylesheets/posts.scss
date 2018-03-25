@@ -410,7 +410,7 @@ $color: #4cc48e;
   object-fit: cover;
 }
 
-.direction  {
+.direction-img  {
   display:inline-block;
   height:40px;
   width:80px;
@@ -418,7 +418,7 @@ $color: #4cc48e;
   position:relative;
   top:40px;
 }
-.direction:before {
+.direction-img:before {
   position:absolute;
   content:"";
   width:0;
@@ -429,6 +429,24 @@ $color: #4cc48e;
   top:-37px;
 }
 
+.direction-avt  {
+  display:inline-block;
+  height:28px;
+  width:80px;
+  background-color:#5bc0de;
+  position:relative;
+  top:12px;
+}
+.direction-avt:before {
+  position:absolute;
+  content:"";
+  width:0;
+  height:0;
+  border:36px solid transparent;
+  border-left:36px solid #5bc0de;
+  left:80px;
+  top:-22px;
+}
 
 
 
