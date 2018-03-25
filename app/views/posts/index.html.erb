@@ -25,14 +25,18 @@
               <div class="l-card">
                 <div class="l-thumbnail">
                   <figure class="thumbnail-wrapper">
-                    <% if post.genre_id == 1 %>
-                      <img class="card-img" src="/genre_images/skunk_0.png">
-                    <% elsif post.genre_id == 2 %> 
-                      <img class="card-img" src="/genre_images/english_0.png">
-                    <% elsif post.genre_id == 3 %> 
-                      <img class="card-img" src="/genre_images/play_0.png">
+                    <% if !post.image.blank? %>
+                  　　 <%= image_tag post.image.thumb.url %>
                     <% else %>
-                      <img class="card-img" src="/genre_images/others_0.png">
+                      <% if post.genre_id == 1 %>
+                        <img class="card-img" src="/genre_images/skunk_0.png">
+                      <% elsif post.genre_id == 2 %> 
+                        <img class="card-img" src="/genre_images/english_0.png">
+                      <% elsif post.genre_id == 3 %> 
+                        <img class="card-img" src="/genre_images/play_0.png">
+                      <% else %>
+                        <img class="card-img" src="/genre_images/others_0.png">
+                      <% end %>
                     <% end %>
                   </figure>
                   <span class="more-text">
@@ -43,7 +47,7 @@
                   <div class="title">
                     <%= post.title %>
                   </div>
-                  <% if post.user.avatar %>
+                  <% if !post.user.avatar.blank? %>
                     <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="<%= post.user.name %>" src="<%= post.user.avatar %>">
                   <% else %>
                     <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="<%= post.user.name %>" src="<%= "/user_images/default_user.jpg" %>">

@@ -33,8 +33,8 @@
           <div class="posts-index-item">
             <div class="col s8">
               <div class="user-left col s2">
-                <% if join.user.avatar %>
-                  <img src="<%= join.user.avatar %>">
+                <% if !post.user.avatar.blank? %>
+                  <img src="<%= post.user.avatar %>">
                 <% else %>
                   <img src="<%= "/user_images/default_user.jpg" %>">
                 <% end %>
