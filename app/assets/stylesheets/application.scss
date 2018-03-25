@@ -24,6 +24,11 @@ $element-top-margin: 0;
 $element-bottom-margin: 0;
 @import 'materialize';
 
+@media only screen and (max-width: 1580px) {
+  .container {
+    width: 80%;
+  }
+}
 .main {
   .container {
     margin-top: 16px;
@@ -33,6 +38,15 @@ $element-bottom-margin: 0;
     margin-top: 0;
   }
 
+}
+* {
+  word-wrap:break-word;
+}
+.overflow {
+  // width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -176,8 +190,6 @@ html {
     }
   }
 }
-
-
 
 
 

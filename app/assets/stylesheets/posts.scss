@@ -295,6 +295,10 @@ $color: #4cc48e;
     top: 16px;
     left: 16px;
     line-height: 1.2;
+    width: 166px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .caption {
     // margin: 0 0 12px 0;

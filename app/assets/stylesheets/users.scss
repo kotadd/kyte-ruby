@@ -53,6 +53,7 @@ $color: #4cc48e;
   text-align: left;
   display: table-cell;
   vertical-align: middle;
+  margin-top: 4px;
 }
 
 .user-right-height {
@@ -157,6 +158,11 @@ $color: #4cc48e;
     position: relative;
     top: 8px;
   }
+}
+
+.user-date {
+  text-align: right;
+  margin-top: 4px;
 }
 
 /* users/new, users/edit ================================ */

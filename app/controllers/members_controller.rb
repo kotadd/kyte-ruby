@@ -2,11 +2,9 @@ class MembersController < ApplicationController
   before_action :authenticate_user
 
   def create
-    if !Post.find_by(user_id: @current_user.id, post_id: params[:post_id])
-      @member = Member.new(user_id: @current_user.id, post_id: params[:post_id])
-      @member.save
-      redirect_to("/posts/#{params[:post_id]}")
-    end
+    @member = Member.new(user_id: @current_user.id, post_id: params[:post_id])
+    @member.save
+    redirect_to("/posts/#{params[:post_id]}")
   end
 
   def destroy

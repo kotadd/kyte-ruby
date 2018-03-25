@@ -8,6 +8,7 @@ ja:
     time_from: "開始時刻"
     time_to: "終了時刻"
     password: "パスワード"
+    content: "詳細"
   activerecord:
     errors:
       messages:

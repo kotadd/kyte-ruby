@@ -5,7 +5,7 @@
           <div class="card card-prof">
             <div class="card-container card-prof-container">
               <div class="user">
-                <% if @user.avatar %>
+                <% if !@user.avatar.blank? %>
                   <img src="<%= @user.avatar %>">
                 <% else %>
                   <img src="<%= "/user_images/default_user.jpg" %>">
@@ -32,25 +32,25 @@
         <% puts post %>
         <a href="<%=" /posts/#{post.id} "%>" >
           <div class="posts-index-item">
-            <div class="col s9">
-              <div class="post-left">
+            <div class="col s8">
+              <div class="user-left col s2">
                 <% if join.user.avatar %>
                   <img src="<%= join.user.avatar %>">
                 <% else %>
                   <img src="<%= "/user_images/default_user.jpg" %>">
                 <% end %>
               </div>
-              <div class="post-left">
+              <div class="user-right col s10">
                 <div class="post-user-name">
                   <div><%= post.title %></div>
-                  <div><%= post.content %></div>
+                  <div class="overflow"><%= post.content %></div>
                 </div>
               </div>
             </div>
-            <div class="col s3 user-held-date">
-                <div class="post-right">
-                  <div><%= post.date.strftime("%Y年%m月%d日") %>に開催済</div>
-                </div>
+            <div class="col s4 user-held-date">
+              <div class="user-date">
+                <div><%= post.date.strftime("%Y年%m月%d日") %>に開催済</div>
+              </div>
             </div>
           </div>
         </a>

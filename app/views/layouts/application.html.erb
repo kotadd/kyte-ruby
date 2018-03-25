@@ -55,7 +55,7 @@
                 <% end %>
                 <li>
                   <a class="dropdown-button" href="<%= "/users/#{@current_user.id} "%>" data-activates="dropdown-user">
-                    <% if @current_user.avatar %>
+                    <% if !@current_user.avatar.blank? %>
                       <img class="icon-img" src="<%= @current_user.avatar %>">
                     <% else %>
                       <img class="icon-img" src="<%= "/user_images/default_user.jpg" %>">
@@ -80,7 +80,7 @@
             <ul class="side-nav" id="mobile-demo">
               <% if @current_user %>
                 <li>
-                  <% if @current_user.avatar %>
+                  <% if !@current_user.avatar.blank? %>
                     <img class="icon-img" src="<%= @current_user.avatar %>">
                   <% else %>
                     <img class="icon-img" src="<%= "/user_images/default_user.jpg" %>">
