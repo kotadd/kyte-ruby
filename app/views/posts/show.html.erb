@@ -109,7 +109,7 @@
         <div class="col s9">
           <!-- 更新日時-->
           <div class="post-time">
-              <%= @post.updated_at %>
+            <%= @post.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>に最終更新されました
           </div>
 
           <% if @current_user != nil %>
