@@ -65,7 +65,11 @@
                   <p class="post-detail-label">参加者(<%= @members.count %>人)</p>
                     <div class="post-user-img">
                     <% @member_users.each do |member| %>
-                      <img class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" src="<%= "/user_images/#{member.image_name}" %>">
+                      <% if member.avatar %>
+                        <img src="<%= member.avatar %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
+                      <% else %>
+                        <img src="<%= "/user_images/default_user.jpg" %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
+                      <% end %>
                     <% end %>
                     </div>
                 </div>

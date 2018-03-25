@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325034443) do
+ActiveRecord::Schema.define(version: 20180325085447) do
 
   create_table "genres", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(version: 20180325034443) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_name"
     t.string "password_digest"
     t.integer "favorite1"
     t.integer "favorite2"
     t.integer "favorite3"
+    t.string "avatar"
   end
 
 end

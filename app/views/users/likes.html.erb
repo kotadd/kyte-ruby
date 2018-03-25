@@ -5,7 +5,11 @@
           <div class="card card-prof">
             <div class="card-container card-prof-container">
               <div class="user">
-                <img src="<%= "/user_images/#{@user.image_name}" %>">
+                <% if @user.avatar %>
+                  <img src="<%= @user.avatar %>">
+                <% else %>
+                  <img src="<%= "/user_images/default_user.jpg" %>">
+                <% end %>
                 <h2><%= @user.name %></h2>
                 <% if @user.id == @current_user.id %>
                   <%= link_to("編集", "/users/#{@user.id}/edit", {class: "btn-empty"}) %>
@@ -29,7 +33,11 @@
           <div class="posts-index-item">
             <div class="col s9">
               <div class="post-left">
-                <img src="<%= "/user_images/#{post.user.image_name}" %>">
+                <% if like.user.avatar %>
+                  <img src="<%= like.user.avatar %>">
+                <% else %>
+                  <img src="<%= "/user_images/default_user.jpg" %>">
+                <% end %>
               </div>
               <div class="post-left">
                 <div class="post-user-name">

@@ -214,7 +214,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:notice] = "投稿を編集しました"
-      redirect_to("/posts/index")
+      redirect_to("/posts/#{@post.id}")
     else
       @genre = Genre.all
       @new_button = true

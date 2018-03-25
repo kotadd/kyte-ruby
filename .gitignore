@@ -24,3 +24,6 @@
 
 # Ignore vendor folder
 vendor/bundle
+
+# Ignore public folder
+

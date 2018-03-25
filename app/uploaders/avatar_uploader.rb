@@ -1,4 +1,4 @@
-class ImageUploader < CarrierWave::Uploader::Base
+class AvatarUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -7,7 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
-  process :resize_to_limit => [800, 600]
+  process :resize_to_limit => [80, 80]
   process :convert => 'jpg'
 
   # Override the directory where uploaded files will be stored.
@@ -15,12 +15,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-
-# cache dir
-  # def cache_dir
-  #   'tmp/post_images'
-  # end
-
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url(*args)
@@ -39,7 +33,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process resize_to_fit: [200, 150]
+    process resize_to_fit: [56, 56]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -59,6 +53,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
-  #   SecureRandom.uuid.to_s + ".jpg" if original_filename
+  #   "something.jpg" if original_filename
   # end
 end
