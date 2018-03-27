@@ -40,19 +40,23 @@
               <div class="l-card">
                 <div class="l-thumbnail">
                   <figure class="thumbnail-wrapper">
-                    <% if post.genre_id == 1 %>
-                      <img class="card-img" src="/genre_images/skunk_0.png">
-                    <% elsif post.genre_id == 2 %> 
-                      <img class="card-img" src="/genre_images/english_0.png">
-                    <% elsif post.genre_id == 3 %> 
-                      <img class="card-img" src="/genre_images/play_0.png">
+                    <% if !post.image.blank? %>
+                      <img class="card-img" src="<%= post.image.thumb.url %>">
                     <% else %>
-                      <img class="card-img" src="/genre_images/others_0.png">
+                      <% if post.genre_id == 1 %>
+                        <img class="card-img" src="/genre_images/skunk_0.png">
+                      <% elsif post.genre_id == 2 %> 
+                        <img class="card-img" src="/genre_images/english_0.png">
+                      <% elsif post.genre_id == 3 %> 
+                        <img class="card-img" src="/genre_images/play_0.png">
+                      <% else %>
+                        <img class="card-img" src="/genre_images/others_0.png">
+                      <% end %>
                     <% end %>
                   </figure>
-                  <span class="more-text">
+                  <!-- <span class="more-text">
                     Read More
-                  </span>
+                  </span> -->
                 </div>
                 <div class="text-content">
                   <div class="title">

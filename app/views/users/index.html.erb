@@ -7,7 +7,7 @@
           <div class="col s9">
             <div class="user-right">
               <div class="user-first-column white-text">photo</div>
-              <div class="user-second-column">タイトル</div>
+              <div class="user-second-column">ユーザー名称</div>
             </div>
           </div>
           <div class="col s3">
@@ -24,7 +24,7 @@
               <div class="col s9">
                 <div class="user-left">
                   <div class="user-first-column">
-                    <% if user.avatar %>
+                    <% if !user.avatar.blank? %>
                       <img src="<%= user.avatar %>">
                     <% else %>
                       <img src="<%= "/user_images/default_user.jpg" %>">

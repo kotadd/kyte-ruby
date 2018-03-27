@@ -26,7 +26,7 @@
                 <div class="l-thumbnail">
                   <figure class="thumbnail-wrapper">
                     <% if !post.image.blank? %>
-                  　　 <%= image_tag post.image.thumb.url %>
+                      <img class="card-img" src="<%= post.image.thumb.url %>">
                     <% else %>
                       <% if post.genre_id == 1 %>
                         <img class="card-img" src="/genre_images/skunk_0.png">
@@ -39,9 +39,9 @@
                       <% end %>
                     <% end %>
                   </figure>
-                  <span class="more-text">
+                  <!-- <span class="more-text">
                     Read More
-                  </span>
+                  </span> -->
                 </div>
                 <div class="text-content">
                   <div class="title">
