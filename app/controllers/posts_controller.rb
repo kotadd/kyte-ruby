@@ -95,6 +95,7 @@ class PostsController < ApplicationController
         @time_to = @post.time_to.hour.to_s + ":" + @post.time_to.min.to_s
       end
     end
+    @new_button = true
 
   end
   

@@ -48,7 +48,7 @@
             <div class="row">
 
               <div class="col s12">
-                <% if @post.image %>
+                <% if !@post.image.blank? %>
                   <div class="post-img">
                 　　<%= image_tag @post.image.url %>
                   </div>
@@ -133,7 +133,7 @@
         </div>       
       </div>
 
-    <div id="modal" class="modal modal-fixed-footer">
+    <div id="modal" class="modal modal-fixed-footer delete-modal">
       <div class="modal-content">
         <h4>この投稿を削除します</h4>
         <p>この操作は元に戻せません。本当によろしいですか？</p>

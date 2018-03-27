@@ -30,10 +30,10 @@
         <div class="nav-wrapper">
           <div class="header-logo">
             <% if @current_user %>
-              <%= link_to("Kyte", "/posts/index") %>
+              <%= link_to image_tag("/logo.png"), "/posts/index" %>
             <% else %>
               <!-- <a href="/" data-turbolinks="false">Kyte</a> -->
-              <%= link_to("Kyte", "/") %>
+              <%= link_to image_tag("/logo.png"), "/" %>
             <% end %>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           </div>
