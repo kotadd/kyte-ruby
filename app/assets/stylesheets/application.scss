@@ -24,9 +24,9 @@ $element-top-margin: 0;
 $element-bottom-margin: 0;
 @import 'materialize';
 
-@media only screen and (max-width: 1580px) {
+@media only screen and (max-width: 1280px) {
   .container {
-    width: 80%;
+    width: 90%;
   }
 }
 .main {
@@ -49,11 +49,10 @@ $element-bottom-margin: 0;
   text-overflow: ellipsis;
 }
 
-
 /* Variables ============================*/
 $kyte_color: #00e5ff;
 $hover_color: #eceff1;
-$side_nav_width: 200px;
+$side_nav_width: 300px;
 
 
 
@@ -118,6 +117,11 @@ html {
       position: absolute;
       width: 100%;
 
+      #dropdown-user {
+        .fa {
+          color: #777;
+        }
+      }
       ul.dropdown-content {
         li {
           padding-left: 0px;
@@ -145,6 +149,9 @@ html {
       .header-menus {
         float: right;
         padding-right: 20px;
+        .right {
+
+        }
         li {
           float: left;
           line-height: 64px;
@@ -153,7 +160,8 @@ html {
         }
         a {
           float: left;
-          font-size: 1.01vw;
+          // font-size: 1.01vw;
+          font-size: 17px;
           color: #777;
         }
         .fa {
@@ -178,6 +186,12 @@ html {
             }
           }
         }
+        #mobile-demo {
+          .material-icons {
+            margin-right: 16px;
+          }
+        }
+
         input[type="submit"] {
           padding: 0 20px;
           float: left;
