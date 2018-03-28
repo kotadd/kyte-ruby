@@ -20,9 +20,15 @@
         </ul>
 
         <ul id="dropdown-user" class="dropdown-content">
-          <li><%= link_to("ダッシュボード", "/users/#{@current_user.id}") %></li>
-          <!-- <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D" target="_blank">フィードバック</a></li> -->
-          <li><%= link_to("ログアウト", "/logout", {method: :post}) %></li>
+          <li>
+            <a href="<%=" /users/#{@current_user.id} "%>"><i class="fa fa-home fa-w-18 fa-2x"></i>ダッシュボード</a>
+          </li>
+          <!-- <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D" target="_blank"><i class="material-icons dp48">feedback</i>フィードバック</a></li> -->
+          <li>
+            <%= link_to '/logout', :method => :post do %>
+              <i class="fa fa-sign-out fa-w-18 fa-2x"></i> ログアウト
+            <% end %>
+          </li>
         </ul>
       <% end %>
 
@@ -38,7 +44,7 @@
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
           </div>
           <div class="header-menus">
-            <ul class="right hide-on-med-and-down">
+            <ul class="right">
               <% if @current_user %>
                 <li>
                   <a class="dropdown-button" href="/posts/index" data-activates="dropdown-post">
@@ -85,35 +91,35 @@
                   <% else %>
                     <img class="icon-img" src="<%= "/user_images/default_user.jpg" %>">
                   <% end %>
+                    <img src="<%= "/logo.png" %>">                  
                 </li>
                 <li>
-                  <%= link_to("ダッシュボード", "/users/#{@current_user.id}") %>
+                  <a href="<%=" /users/#{@current_user.id} "%>"><i class="fa fa-home fa-w-18 fa-2x"></i>ダッシュボード</a>
                 </li>
                 <li>
-                  <%= link_to("イベントを作る", "/posts/new") %>
-                </li>
-                <li>
-                  <%= link_to("イベントを探す", "/posts/index") %>
+                  <a href="<%=" /posts/index "%>"><i class="fa fa-search fa-w-18 fa-2x"></i>イベントを探す</a>
                 </li>
                 <% if @current_user.name == 'admin' %>
                   <li>
-                    <%= link_to("ユーザー一覧", "/users/index") %>
+                    <a href="<%=" /users/index "%>"><i class="fa fa-users fa-w-18 fa-2x"></i>ユーザー一覧</a>
+                  </li>
+                  <li>
+                    <a href="<%=" /genres/index "%>"><i class="fa fa-cog fa-w-18 fa-2x"></i>ジャンル一覧</a>
                   </li>
                 <% end %>
-                <li>
-                  <%= link_to("ログアウト", "/logout", {method: :post}) %>
-                </li>
+
               <% else %>
+                <li><img src="<%= "/logo.png" %>"></li>
                 <li>
                   <!-- <a href="/about" data-turbolinks="false">Kyteとは</a> -->
-                 <%= link_to("Kyteとは", "/about") %>
+                  <a href="<%=" /about "%>"><i class="fa fa-info-circle fa-w-18 fa-2x"></i>Kyteとは</a>
                 </li>
                 <li>
-                  <%= link_to("アカウントを作る", "/signup") %>
+                  <a href="<%=" /signup/ "%>"><i class="fa fa-user-plus fa-w-18 fa-2x"></i>アカウントを作る</a>
                   <!-- <a data-target="account-modal" class="modal-trigger">アカウントを作る</a>  -->
                 </li>
                 <li>
-                  <%= link_to("ログイン", "/login") %>
+                  <a href="<%=" /login/ "%>"><i class="fa fa-sign-in fa-w-18 fa-2x"></i>ログイン</a>
                   <!-- <a data-target="login-modal" class="modal-trigger">ログイン</a>  -->
                 </li>
               <% end %>
