@@ -1,8 +1,8 @@
 <div class="main user-show">
-  <div class="container">
+  <div class="dashboard-container">
 
-    <div class="row">
-      <div class="col s2">
+    <div class="dashboard">
+      <div class="dashboard-profile">
           <div class="card card-prof">
             <div class="card-container card-prof-container">
               <div class="user">
@@ -20,30 +20,31 @@
           </div>
       </div>
 
-      <div class="col s10">
+      <div class="dashboard-content">
         <ul class="user-tabs">
           <li class="active"><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/likes "%>">いいね<span class="badge tab-badge"><%= @likes.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定<span class="badge tab-badge"><%= @joins.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/joined "%>">参加済<span class="badge tab-badge"><%= @joined.count%></span></a></li>
-        </ul>     
+        </ul>
+
         <% @user.posts.each do |post| %>
           <a href="<%=" /posts/#{post.id} "%>" >
             <div class="posts-index-item">
-              <div class="col s8">
-                <div class="user-left col s2">
+              <div class="content-left">
+                <div class="user-left content-img">
                   <% if !post.user.avatar.blank? %>
                     <img src="<%= post.user.avatar %>">
                   <% else %>
                     <img src="<%= "/user_images/default_user.jpg" %>">
                   <% end %>
                 </div>
-                <div class="user-right col s10">
+                <div class="user-right content-detail">
                   <div><%= post.title %></div>
                   <div class="overflow"><%= post.content %></div>
                 </div>
               </div>
-              <div class="col s4 user-held-date">
+              <div class="content-right user-held-date">
                 <div class="user-date">
                   <div><%= post.created_at.strftime("%Y年%m月%d日") %>に作成</div>
                 </div>

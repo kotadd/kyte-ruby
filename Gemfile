@@ -44,7 +44,8 @@ gem 'jquery-mousewheel-rails', '~> 0.0.9'
 gem 'materialize-sass'
 gem "font-awesome-rails"
 gem 'carrierwave'
-gem 'rmagick'
+# gem 'rmagick'
+gem "mini_magick"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
