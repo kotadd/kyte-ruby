@@ -43,7 +43,7 @@ class UsersController < ApplicationController
         # TODO 登録を行った人にメールを送る場合はここを有効化する
         # UserMailer.welcome_email(@user).deliver_later
  
-        format.html { redirect_to("/users/#{@user.id}", notice: 'ユーザー登録が完了しました') }
+        format.html { redirect_to("/posts/index", notice: 'ユーザー登録が完了しました') }
         format.json { render json: @user, status: :created, location: @user }
         # flash[:notice] = "ユーザー登録が完了しました"
         # redirect_to("/users/#{@user.id}")

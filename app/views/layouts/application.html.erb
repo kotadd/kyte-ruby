@@ -28,7 +28,7 @@
             <a href="<%=" /users/#{@current_user.id} "%>"><i class="fa fa-home fa-w-18 fa-2x"></i>ダッシュボード</a>
           </li>
           <!-- <li><a href="https://workshuebt.slack.com/messages/C9FLCKA5D" target="_blank"><i class="material-icons dp48">feedback</i>フィードバック</a></li> -->
-          <li>
+          <li data-no-instant>
             <%= link_to '/logout', :method => :post do %>
               <i class="fa fa-sign-out fa-w-18 fa-2x"></i> ログアウト
             <% end %>
