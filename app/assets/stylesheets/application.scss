@@ -24,9 +24,11 @@ $element-top-margin: 0;
 $element-bottom-margin: 0;
 @import 'materialize';
 
-@media only screen and (max-width: 1280px) {
-  .container {
-    width: 90%;
+@media only screen and (max-width: 992px) {
+  .header-menus {
+    .toggled-header-menus {
+      display: none;
+    }
   }
 }
 .main {
@@ -47,6 +49,9 @@ $element-bottom-margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.fa {
+  color: #777;
 }
 
 /* Variables ============================*/
@@ -96,6 +101,8 @@ html {
   letter-spacing: 1px;
   
   nav {
+    height: 64px !important;
+    line-height: 64px !important;
     .button-collapse {
       i {
         height: 64px;
@@ -117,12 +124,10 @@ html {
       position: absolute;
       width: 100%;
 
-      #dropdown-user {
+      ul.dropdown-content {
         .fa {
           color: #777;
         }
-      }
-      ul.dropdown-content {
         li {
           padding-left: 0px;
 
