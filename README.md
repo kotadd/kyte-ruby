@@ -4,7 +4,7 @@
 
 [remote(GitLab)]
 1. Create issues first on GitLab.  
-2. Create branch on an issue page.  
+2. Create merge request with specified name on the issue page.  
 
 [local]
 1. `git fetch origin` on your local Kyte project. 
@@ -15,7 +15,7 @@
 6. `git push origin <your issue branch>` . 
 
 [remote(GitLab)]
-1. Create merge request from your issue page. 
+1. remove "WIP:" from your issue's merge request if your implementation finished. 
 
 
 *1 commit rule (refer to: https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#type)  
