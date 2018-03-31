@@ -63,10 +63,11 @@
               </div>
 
               <div class="file-field input-field col s12">
-                <label for="image" class="active">画像（800×600)</label>
+                <label for="image" class="active">画像</label>
                 <div class="btn modal-trigger">
                   <span>アップロード</span>
                   <input id="image" name="image" type="file" class="validate"  accept="image/*,.png,.jpg,.jpeg,.gif">
+                  <%= hidden_field_tag :"image_cache", @post.image.cache_name %>
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text">
