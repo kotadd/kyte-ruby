@@ -48,7 +48,7 @@ class PostsController < ApplicationController
   #   puts params[:search_date]
   # end
 
-  def date_from
+  def date
     @posts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).group(:id, :date_from)
 
     # @posts.each do |post|

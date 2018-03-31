@@ -8,12 +8,19 @@ $color: #4cc48e;
     // border: #eee 1px solid;
     // margin: 0 auto;
     position: relative;
+    &:hover {
+      .thumbnail-wrapper {
+        img {
+          filter: grayscale(0);
+        }
+      }
+    }
 }
 /* ラベル部分 右上に表示 */
 .triangle::before {
     content: "";
-    top: 0;
-    right: 0;
+    top: 1px;
+    right: 1px;
     border-bottom: 4em solid transparent;
     border-right: 4em solid $color; /* ラベルの色はここで変更 */
     position: absolute;
@@ -256,10 +263,10 @@ $color: #4cc48e;
         filter: grayscale(0);
       }
     }
-    .more-text {
-      opacity: 0.9;
-      transform: translateX(0);
-    }
+    // .more-text {
+    //   opacity: 0.9;
+    //   transform: translateX(0);
+    // }
   }
 }
 .l-thumbnail {
@@ -308,7 +315,11 @@ $color: #4cc48e;
     left: 16px;
     line-height: 1.2;
     width: 166px;
-    white-space: nowrap;
+    // white-space: nowrap;
+    // white-spaceだと1行のみなので、下の3つのプロパティで2行の制約に変更
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
   }
