@@ -141,6 +141,8 @@ class PostsController < ApplicationController
       # uploader = ImageUploader.new
       # uploader.store!(params[:image])
       @post.image = params[:image]
+    elsif !params[:image_cache].blank?
+      @post.image.retrieve_from_cache! params[:image_cache]
 
     end
 
@@ -150,6 +152,7 @@ class PostsController < ApplicationController
       @member.save
       redirect_to("/posts/index")
     else
+      # validationに引っかかったときに、undefined method `map' for nil:NilClassが出るのを防ぐため
       @genre = Genre.all
       @new_button = true
       render("posts/new")
@@ -203,20 +206,24 @@ class PostsController < ApplicationController
       @time_to = @post.time_to.hour.to_s + ":" + @post.time_to.min.to_s
     end
 
-    if params[:image]
+    if !params[:image].blank?
       # 画像名称思いつかないので、一旦UUIDで
       # @post.image_name = SecureRandom.uuid.to_s + ".jpg"
       # image = params[:image]
       # File.binwrite("public/post_images/#{@post.image_name}", image.read)
-
       @post.image = params[:image]
-
+    elsif !params[:image_cache].blank?
+      @post.image.retrieve_from_cache! params[:image_cache]
     end
+
+    # puts "@post.image.cache!"
+    # puts @post.image.cache!
 
     if @post.save
       flash[:notice] = "投稿を編集しました"
       redirect_to("/posts/#{@post.id}")
     else
+      # validationに引っかかったときに、undefined method `map' for nil:NilClassが出るのを防ぐため
       @genre = Genre.all
       @new_button = true
       render("posts/edit")

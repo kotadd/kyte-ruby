@@ -23,4 +23,7 @@
 .byebug_history
 
 # Ignore vendor folder
-vendor/bundle
+vendor/bundle/
+
+# Ignore Uploads
+/public/uploads/
