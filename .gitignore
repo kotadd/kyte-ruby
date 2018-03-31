@@ -17,7 +17,9 @@
 !/log/.keep
 !/tmp/.keep
 
-/node_modules
+# Ignore node_modules
+node_modules/
+
 /yarn-error.log
 
 .byebug_history
