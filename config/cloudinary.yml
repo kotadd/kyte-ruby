@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: hi3vk4tdb
+  api_key: '114571553638456'
+  api_secret: DL1mb2DyU0QovyBZyQ7v7UGvsVc
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: hi3vk4tdb
+  api_key: '114571553638456'
+  api_secret: DL1mb2DyU0QovyBZyQ7v7UGvsVc
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: hi3vk4tdb
+  api_key: '114571553638456'
+  api_secret: DL1mb2DyU0QovyBZyQ7v7UGvsVc
+  enhance_image_tag: true
+  static_image_support: false
