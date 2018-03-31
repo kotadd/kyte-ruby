@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   validates :content, {length: {maximum: 400}}
   validates :title, {presence: true, length: {maximum: 20}}
   validates :place, {length: {maximum: 50}}
-  # validates :date, {presence: true}
+  # validates :date_from, {presence: true}
   validates :user_id, {presence: true}
   # validates :time_from, {presence: true}
   # validates :time_to, {presence: true}
@@ -26,9 +26,9 @@ class Post < ApplicationRecord
   end
 
   def date_check
-    errors.add(:date, "は本日以降にしてください") unless
-    if self.date
-      Date.today <= self.date
+    errors.add(:date_from, "は本日以降にしてください") unless
+    if self.date_from
+      Date.today <= self.date_from
     end
 
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180325085447) do
+ActiveRecord::Schema.define(version: 20180331070058) do
 
   create_table "genres", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20180325085447) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.string "title"
-    t.date "date"
+    t.date "date_from"
     t.time "time_from"
     t.time "time_to"
     t.string "place"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20180325085447) do
     t.integer "max_member"
     t.integer "genre_id"
     t.string "image"
+    t.date "date_to"
   end
 
   create_table "users", force: :cascade do |t|

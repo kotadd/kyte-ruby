@@ -4,7 +4,6 @@ $color: #4cc48e;
   width: 460px;
   margin: 64px auto;
 }
-
 .dashboard-container {
   .dashboard {
     margin: 16px auto;
@@ -34,6 +33,39 @@ $color: #4cc48e;
       }
     }
   }
+}
+
+@media only screen and (max-width: 1280px) {
+    .dashboard-container {
+      .dashboard {
+        margin: 16px auto;
+        width: 1000px;
+        .dashboard-profile {
+          float: left;
+          width: 200px;
+        }
+        .dashboard-content {
+          float: left;
+          width: 800px;
+          .content-left {
+            width: 560px;
+            float: left;
+            .content-img {
+              width: 54px;
+              float: left;
+            }
+            .content-detail {
+              width: 500px;
+              float: left;
+            }
+          }
+          .content-right {
+            width: 200px;
+            float: left;
+          }
+        }
+      }
+    }
 }
 .user-login {
   // width: 100%;
