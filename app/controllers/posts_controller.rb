@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     # 上のロジックをスッキリさせたものが下
     # range = Date.today.beginning_of_day..Date.today.since(7.days).end_of_day
     # post = Post.where(date: range).order(date: :asc, time_from: :asc);
-    post = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).limit(10);
+    post = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).limit(10);
 
     if post.count > 0
       @first_post = true
@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     # TODO 一旦消えていくのが面倒なので。過去ログの取り扱い決まったら上のロジックに切り替え
     @genre = Genre.all
     @genre.each do |genre|
-      @posts.push(Post.where(genre_id: genre.id).where('date >= ?', Date.today).order(date: :asc, time_from: :asc))
+      @posts.push(Post.where(genre_id: genre.id).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc))
     end
 
     # カードが全て表示されるか確認
@@ -48,8 +48,8 @@ class PostsController < ApplicationController
   #   puts params[:search_date]
   # end
 
-  def date
-    @posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc).group(:id, :date)
+  def date_from
+    @posts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).group(:id, :date_from)
 
     # @posts.each do |post|
     #   puts "here it is!!!!!!!!!!!!"
@@ -61,10 +61,10 @@ class PostsController < ApplicationController
   def detail
     @genre_id = params[:id].to_i
     if @genre_id == 0
-      @future_posts = Post.where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
+      @future_posts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc)
       @genre_title = "開催日時の近い順（全てのポスト）"
     else
-      @future_posts = Post.where(genre_id: @genre_id).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
+      @future_posts = Post.where(genre_id: @genre_id).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc)
       @genre_title = Genre.find_by(id: @genre_id).title << "（全てのポスト）"
    end
   end
@@ -117,7 +117,8 @@ class PostsController < ApplicationController
 
     @post = Post.new(
       title: params[:title],
-      date: params[:date],
+      date_from: params[:date_from],
+      date_to: params[:date_from],
       time_from: params[:time_from],
       time_to: params[:time_to],
       place: params[:place],
@@ -183,7 +184,8 @@ class PostsController < ApplicationController
     @post = Post.find_by(id: params[:id])
 
     @post.title = params[:title]
-    @post.date = params[:date]
+    @post.date_from = params[:date_from]
+    @post.date_to = params[:date_from]
     @post.place = params[:place]
 
     @post.time_from = params[:time_from]

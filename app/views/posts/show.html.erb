@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col s12">
           <div class="posts-show-item">
-            <div class="col s10">
+            <div class="col s9 post-title-left-container">
               <div class="post-title">
                 <%= @post.title %>
                 <br>
@@ -14,7 +14,7 @@
                 </div>
               </div>
             </div>
-             <div class="col s2" data-no-instant>
+             <div class="col s3 post-title-right-container" data-no-instant>
               <% if @current_user != nil %>
                 <% if @post.user_id != @current_user.id %>
                   <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
@@ -84,7 +84,7 @@
 
             <label>日時</label>
             <div class="post-time">
-             <%= @post.date %> 
+             <%= @post.date_from %> <br>
              <%= @time_from %>
              <% if @time_from && @time_to %>
                〜

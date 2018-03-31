@@ -5,7 +5,7 @@
     <div class="col s12">
     <% @posts.each do |post| %>
       <div class="list-box">
-        <div class="hashtag"><%= post.date %></div>
+        <div class="hashtag"><%= post.date_from %></div>
       <div class="row">
         <div class="col s12">
           <div id="cards-<%= post.genre_id %>" class="card-flex">
@@ -38,7 +38,7 @@
                   <div class="content-meta">
                     <span class="date">
                       開催日時<br>
-                      <%= post.date %> 
+                      <%= post.date_from %> 
                       <% if post.time_from %>
                         <%= post.time_from.strftime('%H:%M') %>
                         〜 <%= post.time_to.strftime('%H:%M') %>

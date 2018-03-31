@@ -122,7 +122,13 @@ $color: #4cc48e;
     background-color: white;
     box-shadow: 0 2px 6px #c1ced7;
     overflow: hidden;
-
+    
+    // .col.post-title-left-container {
+    //   width: 662px;
+    // }
+    .col.post-title-right-container {
+      padding-left: 50px;
+    }
     .post-img {
       // text-align: center;
 
