@@ -33,7 +33,7 @@
               <% end %>
               <br>
               <% if @post.max_member %>
-                <div class="post-lest">残り<%= @post.max_member - @members.count %> 人</div>
+                <div class="post-lest">参加者：<%= @members.count %>/<%= @post.max_member %> 人</div>
               <% else %>
                 <div class="padding-top-4">何名でも参加可能です</div>
               <% end %>
@@ -124,7 +124,7 @@
             </div>
 
             <!-- 地図は今のところ不要かな -->
-            <div id="map-canvas"></div>   
+            <!-- <div id="map-canvas"></div>    -->
 
           </div>
         </div>
