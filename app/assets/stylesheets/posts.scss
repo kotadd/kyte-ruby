@@ -150,6 +150,14 @@ $color: #4cc48e;
       }
     }
 
+    .post-menus {
+      .fa {
+        font-size: 2em;
+        color: #8899a6;
+        margin-right: 8px;
+      }
+    }
+
     .post-user-img img {
       width: 50px;
       height: 50px;
@@ -195,6 +203,12 @@ $color: #4cc48e;
   }
 
   .post-time {
+    color: #8899a6;
+    margin-bottom: 10px;
+    float: right;
+  }
+
+  .held-time {
     color: #8899a6;
     margin-bottom: 10px;
   }
