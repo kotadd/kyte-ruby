@@ -285,8 +285,8 @@ $color: #4cc48e;
 .l-thumbnail {
   position: relative;
   overflow: hidden;
-  width: 100%;
-  height: auto;
+  width: 200px;
+  height: 150px;
   border: 0.3px solid rgba(0, 0, 0, 0.1);
 
   .count-favorites {
@@ -328,6 +328,8 @@ $color: #4cc48e;
 .text-content {
   // padding: 16px;
   position: relative;
+  width: 200px;
+  height: 150px;
   .title {
     // margin: 0 0 12px 0;
     font-size: 20px;
