@@ -1,40 +1,39 @@
 $color: #4cc48e;
 
-
 .triangle {
-    // background: #fafafa;
-    // width: 250px;
-    // height: 250px;
-    // border: #eee 1px solid;
-    // margin: 0 auto;
-    position: relative;
-    &:hover {
-      .thumbnail-wrapper {
-        img {
-          filter: grayscale(0);
-        }
+  // background: #fafafa;
+  // width: 250px;
+  // height: 250px;
+  // border: #eee 1px solid;
+  // margin: 0 auto;
+  position: relative;
+  &:hover {
+    .thumbnail-wrapper {
+      img {
+        filter: grayscale(0);
       }
     }
+  }
 }
 /* ラベル部分 右上に表示 */
 .triangle::before {
-    content: "";
-    top: 1px;
-    right: 1px;
-    border-bottom: 4em solid transparent;
-    border-right: 4em solid $color; /* ラベルの色はここで変更 */
-    position: absolute;
-    z-index: 100;
+  content: "";
+  top: 0;
+  right: 0;
+  border-bottom: 4em solid transparent;
+  border-right: 4em solid $color; /* ラベルの色はここで変更 */
+  position: absolute;
+  z-index: 100;
 }
 .triangle::after {
-    content: "You!";
-    display: block;
-    top: 5px;
-    transform: rotate(45deg);
-    color: #fff; /* 文字色はここで変更 */
-    right: 0;
-    position: absolute;
-    z-index: 101;
+  content: "You!";
+  display: block;
+  top: 5px;
+  transform: rotate(45deg);
+  color: #fff; /* 文字色はここで変更 */
+  right: 0;
+  position: absolute;
+  z-index: 101;
 }
 
 .main {
@@ -220,6 +219,20 @@ $color: #4cc48e;
     */
   }
 
+  .image-container {
+    position: relative;
+    .count-favorites {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: #ff03f1;
+      .fa {
+        color: #ff03f1;
+        font-size: 2em;
+      }
+    }
+  }
+
 }
 
 
@@ -276,6 +289,16 @@ $color: #4cc48e;
   height: auto;
   border: 0.3px solid rgba(0, 0, 0, 0.1);
 
+  .count-favorites {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    color: #ff03f1;
+    .fa {
+      color: #ff03f1;
+      font-size: 2em;
+    }
+  }
 }
 .thumbnail-wrapper {
   display: block;

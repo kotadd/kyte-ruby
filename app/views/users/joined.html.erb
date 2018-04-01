@@ -23,9 +23,9 @@
       <div class="dashboard-content">
         <ul class="user-tabs">
           <li><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
-          <li><a href="<%="/users/#{@user.id}/likes "%>">いいね<span class="badge tab-badge"><%= @likes.count%></span></a></li>
-          <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定<span class="badge tab-badge"><%= @joins.count%></span></a></li>
-          <li class="active"><a href="<%="/users/#{@user.id}/joined "%>">参加済<span class="badge tab-badge"><%= @joined.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id}/likes "%>">お気に入り<span class="badge tab-badge"><%= @likes.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定のイベント<span class="badge tab-badge"><%= @joins.count%></span></a></li>
+          <li class="active"><a href="<%="/users/#{@user.id}/joined "%>">参加済のイベント<span class="badge tab-badge"><%= @joined.count%></span></a></li>
         </ul>
       
       <% @joined.each do |join| %>
@@ -49,7 +49,7 @@
             </div>
             <div class="content-right user-held-date">
               <div class="user-date">
-                <div><%= post.date.strftime("%Y年%m月%d日") %>に開催済</div>
+                <div><%= post.date_from.strftime("%Y年%m月%d日") %>に開催済</div>
               </div>
             </div>
           </div>

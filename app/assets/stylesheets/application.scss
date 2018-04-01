@@ -23,6 +23,7 @@ $dropdown-color: color("blue-grey", "darken-2") !default;
 $element-top-margin: 0;
 $element-bottom-margin: 0;
 @import 'materialize';
+@import "font-awesome";
 
 @media only screen and (max-width: 992px) {
   .header-menus {

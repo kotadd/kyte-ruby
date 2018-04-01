@@ -16,6 +16,7 @@
             </div>
              <div class="col s3 post-title-right-container" data-no-instant>
               <% if @current_user != nil %>
+
                 <% if @post.user_id != @current_user.id %>
                   <% if Member.find_by(user_id: @current_user.id, post_id: @post.id) %>
                     <%= link_to("/members/#{@post.id}/destroy", {method: "post"}) do %>
@@ -46,8 +47,21 @@
         <div class="col s9">
           <div class="posts-show-item">
             <div class="row">
+              <div class="col s12 image-container">
+                <% if @current_user != nil %>
+                  <div class="count-favorites" data-no-instant>
+                    <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
+                      <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+                        <i class="fa fa-heart fa-w-18 fa-2x" ></i>
+                      <% end %>
+                    <% else %>
+                      <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+                        <i class="fa fa-heart-o fa-w-18 fa-2x"></i>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
 
-              <div class="col s12">
                 <% if !@post.image.blank? %>
                   <div class="post-img">
                 　　<%= image_tag @post.image.url %>
@@ -84,7 +98,7 @@
 
             <label>日時</label>
             <div class="post-time">
-             <%= @post.date_from %> <br>
+             <%= @post.date_from.strftime("%Y年%m月%d日") %> <br>
              <%= @time_from %>
              <% if @time_from && @time_to %>
                〜
@@ -113,18 +127,6 @@
           </div>
 
           <% if @current_user != nil %>
-            <div data-no-instant>
-              <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
-                <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
-                  <span class="fa fa-thumbs-up">いいね！を取り消す</span>
-                <% end %>
-              <% else %>
-                <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
-                  <span class="fa fa-thumbs-o-up">いいね！</span>
-                <% end %>
-              <% end %>
-              <%= @likes_count %>
-            </div>
             <% if @post.user_id == @current_user.id %>
               <div class="post-menus">
                 <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn", "data-turbolinks":"false"}) %>
