@@ -47,6 +47,18 @@
         <div class="col s9">
           <div class="posts-show-item">
             <div class="row">
+              <% if @current_user != nil %>
+                <% if @post.user_id == @current_user.id %>
+                  <div class="post-menus">
+                    <a href="<%=" /posts/#{@post.id}/edit "%>" class="tooltipped" data-position="top" data-tooltip="この投稿を編集します" >
+                      <i class="fa fa-edit fa-w-18 fa-2x" ></i>
+                    </a>
+                    <a href="#modal" data-target="modal" class="modal-trigger tooltipped" data-position="top" data-tooltip="この投稿を削除します">
+                      <i class="fa fa-trash fa-w-18 fa-2x" ></i>
+                    </a>
+                  </div>
+                <% end %>
+              <% end %>
               <div class="col s12 image-container">
                 <% if @current_user != nil %>
                   <div class="count-favorites" data-no-instant>
@@ -97,7 +109,7 @@
           <div class="posts-show-item">
 
             <label>日時</label>
-            <div class="post-time">
+            <div class="held-time">
              <%= @post.date_from.strftime("%Y年%m月%d日") %> <br>
              <%= @time_from %>
              <% if @time_from && @time_to %>
@@ -107,12 +119,12 @@
              <%= @time_to %>
             </div>
             <label>場所</label>
-            <div class="post-time">
+            <div class="held-time">
              <%= @post.place %>
             </div>
 
             <!-- 地図は今のところ不要かな -->
-            <!-- <div id="map-canvas"></div>    -->
+            <div id="map-canvas"></div>   
 
           </div>
         </div>
@@ -126,14 +138,6 @@
             <%= @post.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>に最終更新されました
           </div>
 
-          <% if @current_user != nil %>
-            <% if @post.user_id == @current_user.id %>
-              <div class="post-menus">
-                <%= link_to("編集", "/posts/#{@post.id}/edit", {class: "waves-effect waves-light btn", "data-turbolinks":"false"}) %>
-                  <button data-target="modal" class="waves-effect waves-light btn modal-trigger">削除</button> 
-              </div>
-            <% end %>
-          <% end %>
         </div>       
       </div>
 
