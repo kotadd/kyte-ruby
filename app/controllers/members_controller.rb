@@ -2,9 +2,16 @@ class MembersController < ApplicationController
   before_action :authenticate_user
 
   def create
-    @member = Member.new(user_id: @current_user.id, post_id: params[:post_id])
-    @member.save
-    redirect_to("/posts/#{params[:post_id]}")
+    post = Post.find_by(id: params[:post_id])
+    members = Member.where(post_id: params[:post_id])
+
+    if members.count < post.max_member
+      @member = Member.new(user_id: @current_user.id, post_id: params[:post_id])
+      @member.save
+    else 
+      flash[:notice] = "参加可能最大人数に達しました"
+    end
+      redirect_to("/posts/#{params[:post_id]}")
   end
 
   def destroy
