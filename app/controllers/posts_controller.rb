@@ -19,6 +19,20 @@ class PostsController < ApplicationController
     end
 
     @posts.push(post)
+
+    userPosts = Post.where(user_id: @current_user.id)
+    @favPosts = []
+    userPosts.each do |favPost|
+      @favPosts.push(Like.find_by(user_id: favPost.user_id))
+    end
+
+    if @favPosts.count > 0
+      @first_fav_post = true
+    else
+      @first_fav_post = false
+    end
+
+
     # @posts_skunk = Post.where(genre_id: 1).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
     # @posts_english = Post.where(genre_id: 2).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
     # @posts_party = Post.where(genre_id: 3).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)

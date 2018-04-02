@@ -3,14 +3,19 @@
     <% @posts.each do |posts| %>
       <% if posts.count > 0 %>
         <div class="list-box">
-        <% if @first_post %>
+        <% if @first_fav_post %>
+          <%= link_to("#あなたのお気に入り", "/posts/00/index", {class: "hashtag"}) %>
+        <% elsif @first_post %>
           <%= link_to("#開催日時の近い順", "/posts/0/index", {class: "hashtag"}) %>
         <% else %>
           <%= link_to("#"+ posts[0].genre.title, "/posts/#{posts[0].genre_id}/index", {class: "hashtag"}) %>
         <% end %>
           <div class="row">
             <div class="col s12">
-            <% if @first_post %>
+            <% if @first_fav_post %>
+              <div id="cards-00" class="card-flex">
+              <% @first_fav_post = false %>
+            <% elsif @first_post %>
               <div id="cards-0" class="card-flex">
               <% @first_post = false %>
             <% else %>
