@@ -30,5 +30,19 @@ class LikesController < ApplicationController
     flash[:notice] = "お気に入りから削除しました"
     redirect_to("/posts/index")
   end
+
+  def create_detail
+    @like = Like.new(user_id: @current_user.id, post_id: params[:post_id])
+    @like.save
+    flash[:notice] = "お気に入りに登録しました"
+    redirect_to("/posts/#{params[:genre_id]}/index")
+  end
+
+  def destroy_detail
+    @like = Like.find_by(user_id: @current_user.id, post_id: params[:post_id])
+    @like.destroy
+    flash[:notice] = "お気に入りから削除しました"
+    redirect_to("/posts/#{params[:genre_id]}/index")
+  end
   
 end
