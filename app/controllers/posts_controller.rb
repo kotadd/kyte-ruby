@@ -4,27 +4,47 @@ class PostsController < ApplicationController
   before_action :time_scheduler, {only: [:new, :edit, :create, :update]}
   
   def index
-    # @posts = Post.all.order(created_at: :desc)
     @posts = []
-    # @posts = Post.where('date >= ?', Date.today).where('date < ?', Time.current.since(5.days)).order(date: :asc, time_from: :asc)
-    # 上のロジックをスッキリさせたものが下
-    # range = Date.today.beginning_of_day..Date.today.since(7.days).end_of_day
-    # post = Post.where(date: range).order(date: :asc, time_from: :asc);
-    post = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).limit(10);
 
-    if post.count > 0
+    # お気に入りにしたイベント一覧
+    userFavs = Like.select("post_id").where(user_id: @current_user.id)
+
+    if userFavs.count > 0
+      @first_fav_post = true
+      @posts.push(Post.where('date_from >= ?', Date.today).where(id: userFavs).order(date_from: :asc, time_from: :asc))
+    else
+      @first_fav_post = false
+    end
+
+
+    # 直近3日に作られたイベント一覧
+    recentThreeDays = 2.days.ago.beginning_of_day..Date.today.end_of_day
+    newPosts = Post.where(created_at: recentThreeDays).order(created_at: :asc);
+
+    if newPosts.count > 0
+      @new_post = true
+      @posts.push(newPosts)
+    else
+      @new_post = false
+    end
+
+
+    # 近日開催予定順のイベント一覧
+    recentPosts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc);
+
+    if recentPosts.count > 0
       @first_post = true
+      @posts.push(recentPosts)
     else
       @first_post = false
     end
 
-    @posts.push(post)
     # @posts_skunk = Post.where(genre_id: 1).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
     # @posts_english = Post.where(genre_id: 2).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
     # @posts_party = Post.where(genre_id: 3).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
     # @posts_others = Post.where(genre_id: 4).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
 
-    # TODO 一旦消えていくのが面倒なので。過去ログの取り扱い決まったら上のロジックに切り替え
+    # TODO 一旦消えていくのが面倒なので。過去ログの取り扱い決まったら上のロジックに切り替えよう
     @genre = Genre.all
     @genre.each do |genre|
       @posts.push(Post.where(genre_id: genre.id).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc))
@@ -60,7 +80,15 @@ class PostsController < ApplicationController
 
   def detail
     @genre_id = params[:id].to_i
-    if @genre_id == 0
+    if @genre_id == 101
+      userFavs = Like.select("post_id").where(user_id: @current_user.id)
+      @future_posts = Post.where('date_from >= ?', Date.today).where(id: userFavs).order(date_from: :asc, time_from: :asc)
+      @genre_title = "あなたのお気に入り（全てのポスト）"
+    elsif @genre_id == 102
+      recentThreeDays = 2.days.ago.beginning_of_day..Date.today.end_of_day
+      @future_posts = Post.where(created_at: recentThreeDays).order(created_at: :asc);
+      @genre_title = "新着の投稿（全てのポスト）"
+    elsif @genre_id == 103
       @future_posts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc)
       @genre_title = "開催日時の近い順（全てのポスト）"
     else

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   post "likes/:post_id/destroy" => "likes#destroy"
   post "likes/:post_id/create_index" => "likes#create_index"
   post "likes/:post_id/destroy_index" => "likes#destroy_index"
+  post "likes/:post_id/:genre_id/create_detail" => "likes#create_detail"
+  post "likes/:post_id/:genre_id/destroy_detail" => "likes#destroy_detail"
 
   post "members/:post_id/create" => "members#create"
   post "members/:post_id/destroy" => "members#destroy"
