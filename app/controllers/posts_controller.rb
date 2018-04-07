@@ -10,28 +10,25 @@ class PostsController < ApplicationController
     # 上のロジックをスッキリさせたものが下
     # range = Date.today.beginning_of_day..Date.today.since(7.days).end_of_day
     # post = Post.where(date: range).order(date: :asc, time_from: :asc);
-    post = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).limit(10);
 
-    if post.count > 0
-      @first_post = true
-    else
-      @first_post = false
-    end
+    userFavs = Like.select("post_id").where(user_id: @current_user.id)
 
-    @posts.push(post)
-
-    userPosts = Post.where(user_id: @current_user.id)
-    @favPosts = []
-    userPosts.each do |favPost|
-      @favPosts.push(Like.find_by(user_id: favPost.user_id))
-    end
-
-    if @favPosts.count > 0
+    if userFavs.count > 0
       @first_fav_post = true
+      @posts.push(Post.where('date_from >= ?', Date.today).where(id: userFavs).order(date_from: :asc, time_from: :asc))
     else
       @first_fav_post = false
     end
 
+
+    post = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc);
+
+    if post.count > 0
+      @first_post = true
+      @posts.push(post)
+    else
+      @first_post = false
+    end
 
     # @posts_skunk = Post.where(genre_id: 1).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
     # @posts_english = Post.where(genre_id: 2).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
