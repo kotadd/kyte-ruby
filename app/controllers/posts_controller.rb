@@ -21,11 +21,7 @@ class PostsController < ApplicationController
     recentThreeDays = 2.days.ago.beginning_of_day..Date.today.end_of_day
     newPosts = Post.where(created_at: recentThreeDays).order(created_at: :asc);
 
-    p "newPosts"
-    p newPosts
-
     if newPosts.count > 0
-      p "newPosts.count > 0"
       @new_post = true
       @posts.push(newPosts)
     else
