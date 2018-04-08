@@ -67,11 +67,11 @@
                 <% if @current_user != nil %>
                   <div class="count-favorites" data-no-instant>
                     <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
-                      <%= link_to("/likes/#{@post.id}/destroy", {method: "post"}) do %>
+                      <%= link_to("/likes/#{@post.id}/destroy", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りから削除します", method: "post"}) do %>
                         <i class="fa fa-heart fa-w-18 fa-2x" ></i>
                       <% end %>
                     <% else %>
-                      <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
+                      <%= link_to("/likes/#{@post.id}/create", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りに登録します", method: "post"}) do %>
                         <i class="fa fa-heart-o fa-w-18 fa-2x"></i>
                       <% end %>
                     <% end %>
@@ -108,7 +108,6 @@
                     </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
