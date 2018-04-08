@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+  has_many :posts, dependent: :destroy
+
   has_secure_password
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   # VALID_WORKS_REGEX = /\A[\w+\-.]+@worksap+\.co+\.jp/i
