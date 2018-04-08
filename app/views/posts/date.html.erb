@@ -1,40 +1,74 @@
 <div class="main posts-date">
   <div class="container">
     <div class="row">
-
-    <div class="col s12">
-    <% @posts.each do |post| %>
-      <div class="list-box">
-        <div class="hashtag"><%= post.date_from.strftime('%Y年%m月%d日') %></div>
-      <div class="row">
-        <div class="col s12">
-          <div id="cards-<%= post.genre_id %>" class="card-flex">
-            <% if session[:user_id] == post.user.id%>
-              <a class="triangle" href="<%= "/posts/#{post.id}" %>">
-            <% else %>
-              <a class="" href="<%= "/posts/#{post.id}" %>">
-            <% end %>    
+      <div class="col s12">
+      <% @posts.each do |post| %>
+        <div class="list-box">
+          <div class="hashtag"><%= post.date_from.strftime('%Y年%m月%d日') %></div>
+          <div class="row">
+            <div class="col s12">
               <div class="l-card">
                 <div class="l-thumbnail">
-                  <figure class="thumbnail-wrapper">
-                    <% if post.genre_id == 1 %>
-                      <img class="card-img" src="/genre_images/skunk_0.png">
-                    <% elsif post.genre_id == 2 %> 
-                      <img class="card-img" src="/genre_images/english_0.png">
-                    <% elsif post.genre_id == 3 %> 
-                      <img class="card-img" src="/genre_images/play_0.png">
+                  <a class="" href="<%= "/posts/#{post.id}" %>">
+                    <% if session[:user_id] == post.user.id%>
+                      <figure class="thumbnail-wrapper triangle">
                     <% else %>
-                      <img class="card-img" src="/genre_images/others_0.png">
+                      <figure class="thumbnail-wrapper">
                     <% end %>
-                  </figure>
-                  <span class="more-text">
-                    Read More
-                  </span>
-                </div>
+                      <% if !post.image.blank? %>
+                        <img class="card-img" src="<%= post.image.thumb.url %>">
+                      <% else %>
+                        <% if post.genre_id == 1 %>
+                          <img class="card-img" src="/genre_images/skunk_0.png">
+                        <% elsif post.genre_id == 2 %> 
+                          <img class="card-img" src="/genre_images/english_0.png">
+                        <% elsif post.genre_id == 3 %> 
+                          <img class="card-img" src="/genre_images/play_0.png">
+                        <% else %>
+                          <img class="card-img" src="/genre_images/others_0.png">
+                        <% end %>
+                      <% end %>
+                      </figure>
+                      <!-- <span class="more-text">
+                        Read More
+                      </span> -->
+                  </a>
+
+                  <% if @current_user != nil %>
+                    <div class="count-favorites" data-no-instant>
+                      <% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
+                        <%= link_to("/likes/#{post.id}/#{@genre_id}/destroy_detail", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りから削除します", method: "post"}) do %>
+                          <i class="fa fa-heart fa-w-18 fa-2x" ></i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to("/likes/#{post.id}/#{@genre_id}/create_detail", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りに登録します", method: "post"}) do %>
+                          <i class="fa fa-heart-o fa-w-18 fa-2x"></i>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+
+                </div><!-- .l-thumbnail -->
+
+              <a class="" href="<%= "/posts/#{post.id}" %>">
                 <div class="text-content">
                   <div class="title">
                     <%= post.title %>
                   </div>
+                  <% if !post.user.avatar.blank? %>
+                    <% if post.user == @current_user %>
+                      <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="あなたが主催者です" src="<%= post.user.avatar %>">
+                    <% else %>
+                      <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="<%= post.user.name %> が主催者です" src="<%= post.user.avatar %>">
+                    <% end %>
+                  <% else %>
+                    <% if post.user == @current_user %>
+                    <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="あなたが主催者です" src="<%= "/user_images/default_user.jpg" %>">
+                    <% else %>
+                    <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="<%= post.user.name %> が主催者です" src="<%= "/user_images/default_user.jpg" %>">
+                    <% end %>
+                  <% end %>
+
                   <div class="content-meta">
                     <span class="date">
                       開催日時<br>
@@ -45,15 +79,15 @@
                       <% end %>
                     </span>
                   </div>
-                  </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
+                </div>
+              </a>
+
+            </div><!-- .l-card -->
+          </div><!-- .col s12 -->
+        </div><!-- row -->
+      </div><!-- .list-box -->
       <% end %>
-  </div>
-  </div>
-</div>
-  </div>
-</div>
+      </div><!-- .col s12 -->
+    </div><!-- .row -->
+  </div><!-- .container -->
+</div><!-- .main posts-date -->
