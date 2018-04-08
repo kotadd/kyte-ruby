@@ -124,11 +124,7 @@
             </div>
             <label>場所</label>
             <div class="held-time">
-              <% if !@post.place.blank? %>
-                <%= @post.place %>
-              <% else %>
-                指定されていません
-              <% end %>
+             <%= @post.place %>
             </div>
 
             <!-- 地図は今のところ不要かな -->
