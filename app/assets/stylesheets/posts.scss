@@ -199,6 +199,11 @@ $color: #4cc48e;
     .fa {
       font-size: 16px;
       margin-right: 3px;
+      &:hover {
+        color: $color;
+        transition: 1.0s ;
+      }
+
     }
 
   }

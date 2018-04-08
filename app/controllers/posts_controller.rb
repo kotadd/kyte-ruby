@@ -109,20 +109,21 @@ class PostsController < ApplicationController
       @member_users.push(member.user)
     end
 
-    if @post.time_from
-      if @post.time_from.min == 0
-        @time_from = @post.time_from.hour.to_s + ":" + @post.time_from.min.to_s + "0"
-      else
-        @time_from = @post.time_from.hour.to_s + ":" + @post.time_from.min.to_s
-      end
-    end
-    if @post.time_to
-      if @post.time_to.min == 0
-        @time_to = @post.time_to.hour.to_s + ":" + @post.time_to.min.to_s + "0"
-      else
-        @time_to = @post.time_to.hour.to_s + ":" + @post.time_to.min.to_s
-      end
-    end
+    # strftimeとinitializers/time_formats.rb で事足りた。
+    # if @post.time_from
+    #   if @post.time_from.min == 0
+    #     @time_from = @post.time_from.hour.to_s + ":" + @post.time_from.min.to_s + "0"
+    #   else
+    #     @time_from = @post.time_from.hour.to_s + ":" + @post.time_from.min.to_s
+    #   end
+    # end
+    # if @post.time_to
+    #   if @post.time_to.min == 0
+    #     @time_to = @post.time_to.hour.to_s + ":" + @post.time_to.min.to_s + "0"
+    #   else
+    #     @time_to = @post.time_to.hour.to_s + ":" + @post.time_to.min.to_s
+    #   end
+    # end
     @new_button = true
 
   end

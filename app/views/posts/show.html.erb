@@ -85,9 +85,13 @@
                 <% end %>
                 <div class="post-detail">
                   <p class="post-detail-label">詳細</p>
-                  <p>
-                    <%= simple_format(@post.content) %>
-                  </p>
+                    <% if !@post.content.blank? %>
+                      <p>
+                        <%= simple_format(@post.content) %>
+                      </p>
+                    <% else %>
+                      未記入です。
+                    <% end %>
                     
                 </div>
       
@@ -115,16 +119,30 @@
             <label>日時</label>
             <div class="held-time">
              <%= @post.date_from.strftime("%Y年%m月%d日") %> <br>
-             <%= @time_from %>
-             <% if @time_from && @time_to %>
+             <%= @post.time_from.strftime("%-H時%M分") %>
+             <% if @post.time_from && @post.time_to %>
                〜
              <% end %>
 
-             <%= @time_to %>
+             <%= @post.time_to.strftime("%-H時%M分") %>
             </div>
+
+            <label>予算</label>
+            <div class="held-time">
+              <% if !@post.budget.blank? %>
+                <%= @post.budget %>円 <br>
+              <% else %>
+                指定されていません
+              <% end %>
+            </div>
+
             <label>場所</label>
             <div class="held-time">
-             <%= @post.place %>
+              <% if !@post.place.blank? %>
+                <%= @post.place %>
+              <% else %>
+                指定されていません
+              <% end %>
             </div>
 
             <!-- 地図は今のところ不要かな -->
@@ -139,7 +157,7 @@
         <div class="col s9">
           <!-- 更新日時-->
           <div class="post-time">
-            <%= @post.updated_at.strftime("%Y年%m月%d日 %H:%M:%S") %>に最終更新されました
+            <%= @post.updated_at.strftime("%Y年%m月%d日%-H時%M分") %>に最終更新されました
           </div>
 
         </div>       
