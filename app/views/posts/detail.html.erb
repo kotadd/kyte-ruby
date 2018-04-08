@@ -6,54 +6,53 @@
         <div class="row">
           <div class="col s12">
           <% @future_posts.each do |post| %>
-                <div class="l-card">
-                  <div class="l-thumbnail">
-                    <a class="" href="<%= "/posts/#{post.id}" %>">
-                    <% if session[:user_id] == post.user.id%>
-                      <figure class="thumbnail-wrapper triangle">
+              <div class="l-card">
+                <div class="l-thumbnail">
+                  <a class="" href="<%= "/posts/#{post.id}" %>">
+                  <% if session[:user_id] == post.user.id%>
+                    <figure class="thumbnail-wrapper triangle">
+                  <% else %>
+                    <figure class="thumbnail-wrapper">
+                  <% end %>
+                    <% if !post.image.blank? %>
+                      <img class="card-img" src="<%= post.image.thumb.url %>">
                     <% else %>
-                      <figure class="thumbnail-wrapper">
-                    <% end %>
-                      <% if !post.image.blank? %>
-                        <img class="card-img" src="<%= post.image.thumb.url %>">
+                      <% if post.genre_id == 1 %>
+                        <img class="card-img" src="/genre_images/skunk_0.png">
+                      <% elsif post.genre_id == 2 %> 
+                        <img class="card-img" src="/genre_images/english_0.png">
+                      <% elsif post.genre_id == 3 %> 
+                        <img class="card-img" src="/genre_images/play_0.png">
                       <% else %>
-                        <% if post.genre_id == 1 %>
-                          <img class="card-img" src="/genre_images/skunk_0.png">
-                        <% elsif post.genre_id == 2 %> 
-                          <img class="card-img" src="/genre_images/english_0.png">
-                        <% elsif post.genre_id == 3 %> 
-                          <img class="card-img" src="/genre_images/play_0.png">
-                        <% else %>
-                          <img class="card-img" src="/genre_images/others_0.png">
+                        <img class="card-img" src="/genre_images/others_0.png">
+                      <% end %>
+                    <% end %>
+                    </figure>
+                    <!-- <span class="more-text">
+                      Read More
+                    </span> -->
+                  </a>
+
+                  <% if @current_user != nil %>
+                    <div class="count-favorites" data-no-instant>
+                      <% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
+                        <%= link_to("/likes/#{post.id}/#{@genre_id}/destroy_detail", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りから削除します", method: "post"}) do %>
+                          <i class="fa fa-heart fa-w-18 fa-2x" ></i>
+                        <% end %>
+                      <% else %>
+                        <%= link_to("/likes/#{post.id}/#{@genre_id}/create_detail", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りに登録します", method: "post"}) do %>
+                          <i class="fa fa-heart-o fa-w-18 fa-2x"></i>
                         <% end %>
                       <% end %>
-                      </figure>
-                      <!-- <span class="more-text">
-                        Read More
-                      </span> -->
-                    </a>
+                    </div>
+                  <% end %>
 
-                    <% if @current_user != nil %>
-                      <div class="count-favorites" data-no-instant>
-                        <% if Like.find_by(user_id: @current_user.id, post_id: post.id) %>
-                          <%= link_to("/likes/#{post.id}/#{@genre_id}/destroy_detail", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りから削除します", method: "post"}) do %>
-                            <i class="fa fa-heart fa-w-18 fa-2x" ></i>
-                          <% end %>
-                        <% else %>
-                          <%= link_to("/likes/#{post.id}/#{@genre_id}/create_detail", {:class => "tooltipped", "data-position" => "top", "data-tooltip" => "お気に入りに登録します", method: "post"}) do %>
-                            <i class="fa fa-heart-o fa-w-18 fa-2x"></i>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    <% end %>
-
+                </div><!-- .l-thumbnail -->
+              <a class="" href="<%= "/posts/#{post.id}" %>">
+                <div class="text-content">
+                  <div class="title">
+                    <%= post.title %>
                   </div>
-                <a class="" href="<%= "/posts/#{post.id}" %>">
-
-              <div class="text-content">
-                <div class="title">
-                  <%= post.title %>
-                </div>
                   <% if !post.user.avatar.blank? %>
                     <% if post.user == @current_user %>
                       <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="あなたが主催者です" src="<%= post.user.avatar %>">
@@ -67,26 +66,25 @@
                     <img class="icon-post-img tooltipped" data-position="bottom" data-tooltip="<%= post.user.name %> が主催者です" src="<%= "/user_images/default_user.jpg" %>">
                     <% end %>
                   <% end %>
-                
-                <div class="content-meta">
-                  <span class="date">
-                    開催日時<br>
-                    <%= post.date_from  %> 
-                    <% if post.time_from %>
-                      <%= post.time_from.strftime('%-H:%M') %>
-                      〜 <%= post.time_to.strftime('%-H:%M') %>
-                    <% end %>
-                  </span>
-                </div>
-                </div>
-            </div>
-          </a>
+
+                  <div class="content-meta">
+                    <span class="date">
+                      開催日時<br>
+                      <%= post.date_from  %> 
+                      <% if post.time_from %>
+                        <%= post.time_from.strftime('%-H:%M') %>
+                        〜 <%= post.time_to.strftime('%-H:%M') %>
+                      <% end %>
+                    </span>
+                  </div>
+                </div><!-- .text-content -->
+              </a>
+
+            </div><!-- .l-card -->
           <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
-
-  </div>
-</div>
+          </div><!-- .col s12 -->
+        </div><!-- .row -->
+      </div><!-- .list-box -->
+    <% end %><!-- if @future_posts.count > 0 -->
+  </div><!-- .container -->
+</div><!-- .main posts-detail -->
