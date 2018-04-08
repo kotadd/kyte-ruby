@@ -16,34 +16,3 @@
 //= require jquery.mousewheel
 //= require materialize
 
-// card枚数がx枚になったら横スクロールする
-const displayWidth = $(window).width();
-const LARGEST_SIZE = 1777;
-const LARGE_SIZE = 1552;
-const MIDDLE_SIZE = 1330;
-const SMALL_SIZE = 1110;
-var cardNum = 9;
-var speed = 30;
-
-if (displayWidth > LARGEST_SIZE) {
-  cardNum = 9;
-} else if (displayWidth > LARGE_SIZE) {
-  cardNum = 8;
-} else if (displayWidth > MIDDLE_SIZE) {
-  cardNum = 7;
-} else if (displayWidth > SMALL_SIZE) {
-  cardNum = 6;
-} else {
-  cardNum = 5;
-}
-
-$(document).ready(function() {
-  $('.card-flex').each(function(i){
-    if ($('.card-flex:eq('+i+') a').length >= cardNum) {
-      $('#cards-'+i).mousewheel(function(e, delta) {
-          this.scrollLeft -= (delta * speed);
-          e.preventDefault();
-      });       
-    }
-  })
-});
