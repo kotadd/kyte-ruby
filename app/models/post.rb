@@ -1,4 +1,10 @@
 class Post < ApplicationRecord
+
+  belongs_to :user
+
+  has_many :members, dependent: :destroy
+  has_one :like, dependent: :destroy
+
   validates :content, {length: {maximum: 400}}
   validates :title, {presence: true, length: {maximum: 20}}
   validates :place, {length: {maximum: 50}}
