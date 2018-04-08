@@ -29,4 +29,11 @@ class UserMailer < ApplicationMailer
     end
   end
 
+  def reminder(user)
+    @user = user
+    @url  = 'https://peaceful-harbor-31694.herokuapp.com/login'
+    mail(to: @user.email, subject: '明日、参加予定のイベントがあります')
+  end
+
+
 end
