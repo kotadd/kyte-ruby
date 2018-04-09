@@ -24,7 +24,7 @@
                     <% end %>
                   <% else %>
                     <% if @post.max_member.blank? %>
-                      何名でも参加可能です
+      
                     <% elsif @members.count < @post.max_member%>
                       <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
                         <span class="waves-light btn">参加する</span>
@@ -119,7 +119,7 @@
 
             <label>日時</label>
             <div class="held-time">
-             <%= @post.date_from.strftime("%Y年%m月%d日") %> <br>
+             <%= @post.date_from.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[@post.date_from.wday]})") %> <br>
              <%= @post.time_from.strftime("%-H時%M分") %>
              <% if @post.time_from && @post.time_to %>
                〜
