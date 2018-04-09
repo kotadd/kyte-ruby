@@ -5,7 +5,7 @@ class MembersController < ApplicationController
     post = Post.find_by(id: params[:post_id])
     members = Member.where(post_id: params[:post_id])
 
-    if members.count < post.max_member
+    if members.count < (post.max_member || 10000)
       @member = Member.new(user_id: @current_user.id, post_id: params[:post_id])
       @member.save
     else 
