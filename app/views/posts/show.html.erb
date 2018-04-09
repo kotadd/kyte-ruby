@@ -23,7 +23,9 @@
                       <span class="waves-light btn">参加をやめる</span>
                     <% end %>
                   <% else %>
-                    <% if @members.count < @post.max_member %>
+                    <% if @post.max_member.blank? %>
+                      何名でも参加可能です
+                    <% elsif @members.count < @post.max_member%>
                       <%= link_to("/members/#{@post.id}/create", {method: "post"}) do %>
                         <span class="waves-light btn">参加する</span>
                       <% end %>
