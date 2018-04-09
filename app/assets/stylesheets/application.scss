@@ -209,6 +209,14 @@ html {
       }
     }
   }
+  .fixed-action-btn {
+    position: fixed;
+    right: 40px;
+    bottom: 24px;
+    padding-top: 12px;
+    margin-bottom: 0;
+    z-index: 997;
+  }
 }
 
 
