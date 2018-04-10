@@ -172,29 +172,33 @@
 <script>
     // card枚数がx枚になったら横スクロールする
   const displayWidth = $(window).width();
-  const LARGEST_SIZE = 1777;
-  const LARGE_SIZE = 1552;
-  const MIDDLE_SIZE = 1330;
-  const SMALL_SIZE = 1110;
-  var cardNum = 9;
+  const LARGEST_SIZE = 1714;
+  const LARGE_SIZE = 1430;
+  const MIDDLE_SIZE = 1142;
+  // const SMALL_SIZE = 1110;
+  var cardNum = 7;
   var speed = 30;
 
   if (displayWidth > LARGEST_SIZE) {
-    cardNum = 9;
-  } else if (displayWidth > LARGE_SIZE) {
-    cardNum = 8;
-  } else if (displayWidth > MIDDLE_SIZE) {
     cardNum = 7;
-  } else if (displayWidth > SMALL_SIZE) {
+  } else if (displayWidth > LARGE_SIZE) {
     cardNum = 6;
-  } else {
+  } else if (displayWidth > MIDDLE_SIZE) {
     cardNum = 5;
+  // } else if (displayWidth > SMALL_SIZE) {
+  //   cardNum = 4;
+  } else {
+    cardNum = 4;
   }
 
   $(document).ready(function() {
     $('.card-flex').each(function(i){
-      if ($('.card-flex:eq('+i+') a').length >= cardNum) {
-        $('#cards-'+i).mousewheel(function(e, delta) {
+      if ($('.card-flex:eq('+i+') .l-card').length >= cardNum) {
+        // console.log('the size:' + $('.card-flex:eq('+i+') .l-card').length);
+        // console.log('cardNum:' + cardNum);
+        // console.log('count:' + i);
+        // console.log('#'+$('.card-flex:eq('+i+')').attr('id'));
+        $('#'+$('.card-flex:eq('+i+')').attr('id')).mousewheel(function(e, delta) {
             this.scrollLeft -= (delta * speed);
             e.preventDefault();
         });       
