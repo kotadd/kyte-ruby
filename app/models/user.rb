@@ -26,7 +26,7 @@ class User < ApplicationRecord
     members.each do |member|
       post = Post.where(id: member.post_id).where('date_from >= ?', Date.today)
       if post.count > 0
-        puts "joins!"
+        # puts "joins!"
         joins.push(member)
       end
     end
@@ -39,7 +39,7 @@ class User < ApplicationRecord
     members.each do |member|
       post = Post.where(id: member.post_id).where('date_from < ?', Date.today)
       if post.count > 0
-        puts "joined!"
+        # puts "joined!"
         joined.push(member)
       end
     end
