@@ -35,6 +35,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt'
 # for windows
 gem 'bcrypt', '~> 3.1.11'
+# gem 'wdm', '>= 0.1.0'
 
 # gem 'bootstrap', '~> 4.0.0.beta3'
 gem 'jquery-rails'
