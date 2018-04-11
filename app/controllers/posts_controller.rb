@@ -69,12 +69,12 @@ class PostsController < ApplicationController
   # end
 
   def date
-    @posts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).group(:id, :date_from)
+    @posts = []
+    dates = Post.select('Distinct date_from').where('date_from >= ?', Date.today).order(date_from: :asc).uniq
 
-    # @posts.each do |post|
-    #   puts "here it is!!!!!!!!!!!!"
-    #   puts post.date
-    # end
+    dates.each do |date|
+      @posts.push(Post.where(date_from: date.date_from))
+    end
 
   end
 
