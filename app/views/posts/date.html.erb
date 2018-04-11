@@ -2,11 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col s12">
-      <% @posts.each do |post| %>
+      <% @posts.each do |posts| %>
         <div class="list-box">
-          <div class="hashtag"><%= post.date_from.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[post.date_from.wday]})") %></div>
+          <div class="hashtag"><%= posts[0].date_from.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[posts[0].date_from.wday]})") %></div>
           <div class="row">
             <div class="col s12">
+              <% posts.each do |post| %>
               <div class="l-card">
                 <div class="l-thumbnail">
                   <a class="" href="<%= "/posts/#{post.id}" %>">
@@ -83,6 +84,7 @@
               </a>
 
             </div><!-- .l-card -->
+            <% end %>
           </div><!-- .col s12 -->
         </div><!-- row -->
       </div><!-- .list-box -->
