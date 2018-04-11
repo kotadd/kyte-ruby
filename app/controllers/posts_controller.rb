@@ -6,6 +6,17 @@ class PostsController < ApplicationController
   def index
     @posts = []
 
+    # 参加予定のイベント一覧
+    joinEvents = Member.select("post_id").where(user_id: @current_user.id)
+
+    if joinEvents.count > 0
+      @first_join_post = true
+      @posts.push(Post.where('date_from >= ?', Date.today).where(id: joinEvents).order(date_from: :asc, time_from: :asc))
+    else
+      @first_join_post = false
+    end
+
+
     # お気に入りにしたイベント一覧
     userFavs = Like.select("post_id").where(user_id: @current_user.id)
 
@@ -39,12 +50,6 @@ class PostsController < ApplicationController
       @first_post = false
     end
 
-    # @posts_skunk = Post.where(genre_id: 1).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
-    # @posts_english = Post.where(genre_id: 2).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
-    # @posts_party = Post.where(genre_id: 3).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
-    # @posts_others = Post.where(genre_id: 4).where('date >= ?', Date.today).order(date: :asc, time_from: :asc)
-
-    # TODO 一旦消えていくのが面倒なので。過去ログの取り扱い決まったら上のロジックに切り替えよう
     @genre = Genre.all
     @genre.each do |genre|
       @posts.push(Post.where(genre_id: genre.id).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc))
@@ -56,11 +61,6 @@ class PostsController < ApplicationController
     #     puts post.title
     #   end
     # end
-
-    # @posts_skunk = Post.where(genre_id: 1).order(date: :asc, time_from: :asc)
-    # @posts_english = Post.where(genre_id: 2).order(date: :asc, time_from: :asc)
-    # @posts_party = Post.where(genre_id: 3).order(date: :asc, time_from: :asc)
-    # @posts_others = Post.where(genre_id: 4).order(date: :asc, time_from: :asc)
 
   end
 
@@ -81,14 +81,18 @@ class PostsController < ApplicationController
   def detail
     @genre_id = params[:id].to_i
     if @genre_id == 101
+      joinEvents = Member.select("post_id").where(user_id: @current_user.id)
+      @future_posts = Post.where('date_from >= ?', Date.today).where(id: joinEvents).order(date_from: :asc, time_from: :asc)
+      @genre_title = "参加予定（全てのポスト）"
+    elsif @genre_id == 102
       userFavs = Like.select("post_id").where(user_id: @current_user.id)
       @future_posts = Post.where('date_from >= ?', Date.today).where(id: userFavs).order(date_from: :asc, time_from: :asc)
       @genre_title = "あなたのお気に入り（全てのポスト）"
-    elsif @genre_id == 102
+    elsif @genre_id == 103
       recentThreeDays = 2.days.ago.beginning_of_day..Date.today.end_of_day
       @future_posts = Post.where(created_at: recentThreeDays).order(created_at: :asc);
       @genre_title = "新着の投稿（全てのポスト）"
-    elsif @genre_id == 103
+    elsif @genre_id == 104
       @future_posts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc)
       @genre_title = "開催日時の近い順（全てのポスト）"
     else
@@ -135,8 +139,6 @@ class PostsController < ApplicationController
   end
   
   def create
-    # puts params[:time_from]
-
     if params[:time_from]
       @time_from = params[:time_from]
     end
@@ -157,11 +159,6 @@ class PostsController < ApplicationController
       content: params[:content],
       user_id: @current_user.id
     )
-
-    # puts "check*********"
-    # puts @post.time_from
-
-
 
     if params[:image]
       # 画像名称思いつかないので、一旦UUIDで
@@ -226,10 +223,6 @@ class PostsController < ApplicationController
     @post.user_id = @current_user.id
 
     
-    # puts "*********ここをチェックする**********"
-    # puts @post.time_from
-    # puts "*********ここをチェックする**********"
-
     if @post.time_from
       @time_from = @post.time_from.hour.to_s + ":" + @post.time_from.min.to_s
     end
