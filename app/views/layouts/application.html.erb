@@ -19,7 +19,7 @@
           <li><a href="/posts/index"><i class="fa fa-search fa-w-18 fa-2x"></i>ジャンルで探す</a></li>
           <li><a href="/posts/date"><i class="fa fa-calendar fa-w-18 fa-2x"></i>日付で探す</a></li>
         </ul>
-        <ul id="dropdown-side-post" class="dropdown-content">
+        <ul id="dropdown-side-post" class="dropdown-content"　data-no-instant>
           <li><a href="/posts/index">ジャンルで探す</a></li>
           <li><a href="/posts/date">日付で探す</a></li>
         </ul>
@@ -102,7 +102,7 @@
                   <a href="<%=" /users/#{@current_user.id} "%>"><i class="fa fa-home fa-w-18 fa-2x"></i>ダッシュボード</a>
                 </li>
                 <li>
-                  <a class="dropdown-button" href="/posts/index" data-activates="dropdown-side-post"><i class="fa fa-search fa-w-18 fa-2x"></i>イベントを探す</a>
+                  <a class="dropdown-button" href="/posts/index" data-activates="dropdown-side-post"　data-no-instant><i class="fa fa-search fa-w-18 fa-2x"></i>イベントを探す</a>
                 </li>
                 <% if @current_user.name == 'admin' %>
                   <li>
