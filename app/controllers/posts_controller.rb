@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
     if joinEvents.count > 0
       @first_join_post = true
-      @posts.push(Post.where('date_from >= ?', Date.today).where(id: joinEvents).order(date_from: :asc, time_from: :asc))
+      @posts.push(Post.where('date_from >= ?', Date.today).where(id: joinEvents).order(date_from: :asc, time_from: :asc).limit(20))
     else
       @first_join_post = false
     end
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
     if userFavs.count > 0
       @first_fav_post = true
-      @posts.push(Post.where('date_from >= ?', Date.today).where(id: userFavs).order(date_from: :asc, time_from: :asc))
+      @posts.push(Post.where('date_from >= ?', Date.today).where(id: userFavs).order(date_from: :asc, time_from: :asc).limit(20))
     else
       @first_fav_post = false
     end
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
 
     # 直近3日に作られたイベント一覧
     recentThreeDays = 2.days.ago.beginning_of_day..Date.today.end_of_day
-    newPosts = Post.where(created_at: recentThreeDays).order(created_at: :asc);
+    newPosts = Post.where(created_at: recentThreeDays).order(created_at: :asc).limit(20);
 
     if newPosts.count > 0
       @new_post = true
@@ -41,7 +41,7 @@ class PostsController < ApplicationController
 
 
     # 近日開催予定順のイベント一覧
-    recentPosts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc);
+    recentPosts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).limit(20);
 
     if recentPosts.count > 0
       @first_post = true
@@ -52,15 +52,8 @@ class PostsController < ApplicationController
 
     @genre = Genre.all
     @genre.each do |genre|
-      @posts.push(Post.where(genre_id: genre.id).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc))
+      @posts.push(Post.where(genre_id: genre.id).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc).limit(20))
     end
-
-    # カードが全て表示されるか確認
-    # @posts.each do |posts|
-    #   posts.each do |post|
-    #     puts post.title
-    #   end
-    # end
 
   end
 
@@ -83,21 +76,21 @@ class PostsController < ApplicationController
     if @genre_id == 101
       joinEvents = Member.select("post_id").where(user_id: @current_user.id)
       @future_posts = Post.where('date_from >= ?', Date.today).where(id: joinEvents).order(date_from: :asc, time_from: :asc)
-      @genre_title = "参加予定（全てのポスト）"
+      @genre_title = "参加予定（全てのイベント）"
     elsif @genre_id == 102
       userFavs = Like.select("post_id").where(user_id: @current_user.id)
       @future_posts = Post.where('date_from >= ?', Date.today).where(id: userFavs).order(date_from: :asc, time_from: :asc)
-      @genre_title = "あなたのお気に入り（全てのポスト）"
+      @genre_title = "あなたのお気に入り（全てのイベント）"
     elsif @genre_id == 103
       recentThreeDays = 2.days.ago.beginning_of_day..Date.today.end_of_day
       @future_posts = Post.where(created_at: recentThreeDays).order(created_at: :asc);
-      @genre_title = "新着の投稿（全てのポスト）"
+      @genre_title = "新着の投稿（全てのイベント）"
     elsif @genre_id == 104
       @future_posts = Post.where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc)
-      @genre_title = "開催日時の近い順（全てのポスト）"
+      @genre_title = "開催日時の近い順（全てのイベント）"
     else
       @future_posts = Post.where(genre_id: @genre_id).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc)
-      @genre_title = Genre.find_by(id: @genre_id).title << "（全てのポスト）"
+      @genre_title = Genre.find_by(id: @genre_id).title << "（全てのイベント）"
    end
   end
   
