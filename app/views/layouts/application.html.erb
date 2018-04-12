@@ -15,7 +15,7 @@
   <body>
     <header>
       <% if @current_user %>
-        <ul id="dropdown-post" class="dropdown-content">
+        <ul id="dropdown-post" class="dropdown-content" data-no-instant>
           <li><a href="/posts/index"><i class="fa fa-search fa-w-18 fa-2x"></i>ジャンルで探す</a></li>
           <li><a href="/posts/date"><i class="fa fa-calendar fa-w-18 fa-2x"></i>日付で探す</a></li>
         </ul>
@@ -39,7 +39,7 @@
 
       <nav>
         <div class="nav-wrapper">
-          <div class="header-logo">
+          <div class="header-logo" data-no-instant>
             <% if @current_user %>
               <%= link_to image_tag("/logo.png"), "/posts/index" %>
             <% else %>
@@ -51,7 +51,7 @@
           <div class="header-menus">
             <ul class="right">
               <% if @current_user %>
-                <li class="toggled-header-menus">
+                <li class="toggled-header-menus" data-no-instant>
                   <a class="dropdown-button" href="/posts/index" data-activates="dropdown-post">
                     イベントを探す
                   </a>
