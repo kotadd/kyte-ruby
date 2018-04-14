@@ -13,37 +13,27 @@ class User < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
 
   def posts
-    return Post.where(user_id: self.id)
+    post_ids = Member.where(user_id: self.id).pluck(:post_id)
+    posts = Post.where("id IN (?)", post_ids).order(created_at: :desc)
+    return posts
   end
   
   def likes
-    return Like.where(user_id: self.id)
+    post_ids = Member.where(user_id: self.id).pluck(:post_id)
+    posts = Post.where("id IN (?)", post_ids).order(date_from: :desc, time_from: :desc)
+    return posts
   end
 
   def joins
-    members = Member.where(user_id: self.id)
-    joins = []
-    members.each do |member|
-      post = Post.where(id: member.post_id).where('date_from >= ?', Date.today)
-      if post.count > 0
-        # puts "joins!"
-        joins.push(member)
-      end
-    end
-    return joins
+    post_ids = Member.where(user_id: self.id).pluck(:post_id)
+    posts = Post.where("id IN (?)", post_ids).where('date_from >= ?', Date.today).order(date_from: :asc, time_from: :asc)
+    return posts
   end
   
   def joined
-    members = Member.where(user_id: self.id)
-    joined = []
-    members.each do |member|
-      post = Post.where(id: member.post_id).where('date_from < ?', Date.today)
-      if post.count > 0
-        # puts "joined!"
-        joined.push(member)
-      end
-    end
-    return joined
+    post_ids = Member.where(user_id: self.id).pluck(:post_id)
+    posts = Post.where("id IN (?)", post_ids).where('date_from < ?', Date.today).order(date_from: :desc, time_from: :desc)
+    return posts
   end
 
 

@@ -16,19 +16,22 @@ $color: #4cc48e;
       float: left;
       width: 1000px;
       .content-left {
-        width: 760px;
+        width: 720px;
         float: left;
         .content-img {
           width: 54px;
           float: left;
         }
         .content-detail {
-          width: 700px;
+          width: 660px;
           float: left;
+          .content-detail-title {
+            font-weight: bold;
+          }
         }
       }
       .content-right {
-        width: 200px;
+        width: 248px;
         float: left;
       }
     }

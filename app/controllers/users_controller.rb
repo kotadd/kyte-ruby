@@ -151,7 +151,7 @@ class UsersController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "ログインしました"
-      redirect_to("/posts/index")
+      redirect_to("/users/#{@user.id}/joins")
     else
       @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
@@ -179,6 +179,42 @@ class UsersController < ApplicationController
     @likes = @user.likes
     @joins = @user.joins
     @joined = @user.joined
+
+    # p Date.today.beginning_of_week(:monday)
+    # p Date.today.beginning_of_week(:tuesday) 
+    # p Date.today.beginning_of_week(:wednesday) 
+    # p Date.today.beginning_of_week(:thursday) 
+    # p Date.today.beginning_of_week(:friday) 
+    # p Date.today.beginning_of_week(:saturday) 
+    # p Date.today.beginning_of_week(:sunday)+7
+
+    @today = Date.today
+
+    @weekDaysMap = { 
+      Date.today.beginning_of_week(:monday)     => "今週の月曜日",
+      Date.today.beginning_of_week(:tuesday)    => "今週の火曜日",
+      Date.today.beginning_of_week(:wednesday)  => "今週の水曜日",
+      Date.today.beginning_of_week(:thursday)   => "今週の木曜日",
+      Date.today.beginning_of_week(:friday)     => "今週の金曜日",
+      Date.today.beginning_of_week(:saturday)   => "今週の土曜日",
+      Date.today.beginning_of_week(:sunday)     => "今週の日曜日", 
+
+      Date.today.beginning_of_week(:monday)    + 7   => "来週の月曜日",
+      Date.today.beginning_of_week(:tuesday)   + 7   => "来週の火曜日",
+      Date.today.beginning_of_week(:wednesday) + 7   => "来週の水曜日",
+      Date.today.beginning_of_week(:thursday)  + 7   => "来週の木曜日",
+      Date.today.beginning_of_week(:friday)    + 7   => "来週の金曜日",
+      Date.today.beginning_of_week(:saturday)  + 7   => "来週の土曜日",
+      Date.today.beginning_of_week(:sunday)    + 7   => "来週の日曜日", 
+    }
+
+    # p "--------------------"
+    # p "@today"
+    # p @today
+    # p "weekDaysMap[@today]"
+    # p weekDaysMap[@today-2]
+    # p "--------------------"
+
   end
   
   def joined
