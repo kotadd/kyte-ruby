@@ -22,9 +22,9 @@
 
       <div class="dashboard-content">
         <ul class="user-tabs">
-          <li class="active"><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
-          <li><a href="<%="/users/#{@user.id}/likes "%>">お気に入り<span class="badge tab-badge"><%= @likes.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定のイベント<span class="badge tab-badge"><%= @joins.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id}/likes "%>">お気に入り<span class="badge tab-badge"><%= @likes.count%></span></a></li>
+          <li class="active"><a href="<%="/users/#{@user.id} "%>">自分の投稿<span class="badge tab-badge"><%= @posts.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/joined "%>">参加済のイベント<span class="badge tab-badge"><%= @joined.count%></span></a></li>
         </ul>
 
@@ -40,7 +40,7 @@
                   <% end %>
                 </div>
                 <div class="user-right content-detail">
-                  <div><%= post.title %></div>
+                  <div class="content-detail-title"><%= post.title %></div>
                   <div class="overflow"><%= post.content %></div>
                 </div>
               </div>

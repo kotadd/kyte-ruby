@@ -22,14 +22,13 @@
       
       <div class="dashboard-content">
         <ul class="user-tabs">
-          <li><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
-          <li class="active"><a href="<%="/users/#{@user.id}/likes "%>">お気に入り<span class="badge tab-badge"><%= @likes.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/joins "%>">参加予定のイベント<span class="badge tab-badge"><%= @joins.count%></span></a></li>
+          <li class="active"><a href="<%="/users/#{@user.id}/likes "%>">お気に入り<span class="badge tab-badge"><%= @likes.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id} "%>">自分の投稿<span class="badge tab-badge"><%= @posts.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/joined "%>">参加済のイベント<span class="badge tab-badge"><%= @joined.count%></span></a></li>
         </ul>
       
-      <% @likes.each do |like| %>
-        <% post = Post.find_by(id: like.post_id) %>
+      <% @likes.each do |post| %>
         <a href="<%=" /posts/#{post.id} "%>" >
           <div class="posts-index-item">
             <div class="content-left">
@@ -42,14 +41,20 @@
               </div>
               <div class="user-right content-detail">
                 <div class="post-user-name">
-                  <div><%= post.title %></div>
+                  <div class="content-detail-title"><%= post.title %></div>
                   <div class="overflow"><%= post.content %></div>
                 </div>
               </div>
             </div>
             <div class="content-right user-held-date">
               <div class="user-date">
-                <div><%= post.created_at.strftime("%Y年%m月%d日") %>に作成</div>
+                <div>
+                  <% if post.date_from >= Date.today %>
+                    <%= post.date_from.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[post.date_from.wday]})") %>に開催予定
+                  <% else %>
+                    <%= post.date_from.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[post.date_from.wday]})") %>に開催済
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>

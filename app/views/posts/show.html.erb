@@ -95,18 +95,6 @@
                     
                 </div>
       
-                <div class="post-detail">
-                  <p class="post-detail-label">参加者(<%= @members.count %>人)</p>
-                    <div class="post-user-img">
-                    <% @member_users.each do |member| %>
-                      <% if !member.avatar.blank? %>
-                        <img src="<%= member.avatar %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
-                      <% else %>
-                        <img src="<%= "/user_images/default_user.jpg" %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
-                      <% end %>
-                    <% end %>
-                    </div>
-                </div>
               </div>
             </div>
           </div>
@@ -146,6 +134,19 @@
 
             <!-- 地図は今のところ不要かな -->
             <!-- <div id="map-canvas"></div>    -->
+
+            <div class="post-detail">
+              <p class="post-detail-label">参加者(<%= @members.count %>人)</p>
+                <div class="post-user-img">
+                <% @member_users.each do |member| %>
+                  <% if !member.avatar.blank? %>
+                    <img src="<%= member.avatar %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
+                  <% else %>
+                    <img src="<%= "/user_images/default_user.jpg" %>" class="tooltipped" data-position="bottom" data-tooltip="<%= member.name %>" >
+                  <% end %>
+                <% end %>
+                </div>
+            </div>
 
           </div>
         </div>

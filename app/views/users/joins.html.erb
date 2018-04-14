@@ -22,34 +22,43 @@
       
       <div class="dashboard-content">
         <ul class="user-tabs">
-          <li><a href="<%="/users/#{@user.id} "%>">マイポスト<span class="badge tab-badge"><%= @posts.count%></span></a></li>
-          <li><a href="<%="/users/#{@user.id}/likes "%>">お気に入り<span class="badge tab-badge"><%= @likes.count%></span></a></li>
           <li class="active"><a href="<%="/users/#{@user.id}/joins "%>">参加予定のイベント<span class="badge tab-badge"><%= @joins.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id}/likes "%>">お気に入り<span class="badge tab-badge"><%= @likes.count%></span></a></li>
+          <li><a href="<%="/users/#{@user.id} "%>">自分の投稿<span class="badge tab-badge"><%= @posts.count%></span></a></li>
           <li><a href="<%="/users/#{@user.id}/joined "%>">参加済のイベント<span class="badge tab-badge"><%= @joined.count%></span></a></li>
         </ul>
       
       <% @joins.each do |join| %>
-        <% post = Post.find_by(id: join.post_id) %>
-        <a href="<%=" /posts/#{post.id} "%>" >
+        <a href="<%=" /posts/#{join.id} "%>" >
           <div class="posts-index-item">
             <div class="content-left">
               <div class="user-left content-img">
-                <% if !post.user.avatar.blank? %>
-                  <img src="<%= post.user.avatar %>">
+                <% if !join.user.avatar.blank? %>
+                  <img src="<%= join.user.avatar %>">
                 <% else %>
                   <img src="<%= "/user_images/default_user.jpg" %>">
                 <% end %>
               </div>
               <div class="user-right content-detail">
                 <div class="post-user-name">
-                  <div><%= post.title %></div>
-                  <div class="overflow"><%= post.content %></div>
+                  <div class="content-detail-title"><%= join.title %></div>
+                  <div class="overflow"><%= join.content %></div>
                 </div>
               </div>
             </div>
             <div class="content-right user-held-date">
               <div class="user-date">
-                <div><%= post.date_from.strftime("%Y年%m月%d日") %>に開催予定</div>
+                <div>
+                  <% if (join.date_from - @today).to_i == 0 %>
+                    本日開催予定
+                  <% elsif (join.date_from - @today).to_i == 1 %>
+                    明日開催予定
+                  <% elsif @weekDaysMap[join.date_from] %>
+                    <%= @weekDaysMap[join.date_from] %>(<%= join.date_from.strftime("%-m月%d日") %>)に開催予定
+                  <% else %>
+                    <%= join.date_from.strftime("%Y年%m月%d日(#{%w(日 月 火 水 木 金 土)[join.date_from.wday]})") %>に開催予定
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
