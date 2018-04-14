@@ -302,8 +302,11 @@ $color: #4cc48e;
   &:hover {
     .thumbnail-wrapper {
       img {
-        filter: grayscale(0);
+        // filter: grayscale(0);
       }
+    }
+    .title {
+      color: $color
     }
     // .more-text {
     //   opacity: 0.9;
@@ -342,7 +345,7 @@ $color: #4cc48e;
     transition: 0.5s;
     display: block;
     max-width: 100%;
-    filter: grayscale(100%);
+    // filter: grayscale(100%);
   }
 }
 .more-text {
@@ -367,7 +370,7 @@ $color: #4cc48e;
   .title {
     // margin: 0 0 12px 0;
     font-size: 20px;
-    color: $color;
+    color: #aaa;
     font-weight: bold;
     position: absolute;
     top: 16px;
